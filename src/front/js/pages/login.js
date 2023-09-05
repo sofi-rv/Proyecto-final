@@ -10,14 +10,14 @@ export const Login = () => {
             <div className="login_form">
                 <form className="login_form_content">
                     <h2 className="login_form_title">Login</h2>
-                    <p className="mb-4">¿No tienes una cuenta? <Link to="/" className="form_link">Registrate!</Link></p>
+                    <p className="mb-4">¿No tienes una cuenta? <Link to="/register" className="form_link">Registrate!</Link></p>
                     <input type="email" placeholder="Email de la empresa" className="form_input mb-4"/>
                     <input type="password" placeholder="Contraseña" className="form_input mb-2"/>
 
                     <Link to="/passwordRecover" className="form_link my-2 text-center">¿Olvidaste tu contraseña?</Link>
                     <input type="submit" value="Login" className="form_button my-4"/>
 
-                    <Link to="/" className="form_link text-center text-danger">Ingresar como administrador</Link>
+                    <Link to="/adminLogin" className="form_link text-center text-danger">Ingresar como administrador</Link>
                 </form>
             </div>
             <div className="login_text">
