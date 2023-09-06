@@ -29,8 +29,8 @@ const Layout = () => {
         <ScrollToTop>
           {/*<Navbar />*/}
           <Routes>
-            <Route element={<Home />} path="/" />
-            <Route element={<Login />} path="/login" />
+            <Route element={<Home />} path="/home" />
+            <Route element={<Login />} path="/" />
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<AdminLogin />} path="/adminLogin" />
             <Route element={<Register />} path="/register" />
@@ -43,7 +43,6 @@ const Layout = () => {
       </BrowserRouter>
     </div>
   );
- 
 };
 
 export default injectContext(Layout);
