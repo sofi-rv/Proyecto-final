@@ -1,11 +1,7 @@
 {
     "_meta": {
         "hash": {
-<<<<<<< HEAD
-            "sha256": "dde389dfcb68cf206e53e072573342c36e8bf5f783a967c1ae94306f0f9bb8cd"
-=======
             "sha256": "261927c8055135b1c15a76444ff4e8573b1d82b84ff0fb0cd73361ffda85430f"
->>>>>>> developer
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,8 +24,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==1.12.0"
         },
-<<<<<<< HEAD
-=======
         "bcrypt": {
             "hashes": [
                 "sha256:089098effa1bc35dc055366740a067a2fc76987e8ec75349eb9484061c54f535",
@@ -57,7 +51,6 @@
             "markers": "python_version >= '3.6'",
             "version": "==4.0.1"
         },
->>>>>>> developer
         "blinker": {
             "hashes": [
                 "sha256:4afd3de66ef3a9f8067559fb7a1cbe555c17dcbe15971b05d1b625c3e7abe213",
@@ -114,8 +107,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.6'",
             "version": "==1.6.1"
-<<<<<<< HEAD
-=======
         },
         "flask-bcrypt": {
             "hashes": [
@@ -124,7 +115,6 @@
             ],
             "index": "pypi",
             "version": "==1.0.1"
->>>>>>> developer
         },
         "flask-cors": {
             "hashes": [
@@ -133,8 +123,6 @@
             ],
             "index": "pypi",
             "version": "==4.0.0"
-<<<<<<< HEAD
-=======
         },
         "flask-jwt-extended": {
             "hashes": [
@@ -144,7 +132,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.7' and python_version < '4'",
             "version": "==4.5.2"
->>>>>>> developer
         },
         "flask-migrate": {
             "hashes": [
@@ -467,8 +454,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.6'",
             "version": "==2.9.7"
-<<<<<<< HEAD
-=======
         },
         "pyjwt": {
             "hashes": [
@@ -477,7 +462,6 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.8.0"
->>>>>>> developer
         },
         "python-dotenv": {
             "hashes": [
