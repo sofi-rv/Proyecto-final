@@ -5,9 +5,11 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
-import { PasswordRecover } from "./pages/passwordRecover";
 import { AdminLogin } from "./pages/adminLogin";
+import { PasswordRecover } from "./pages/passwordRecover";
 import { Register } from "./pages/register";
+import { AdminPrincipalPage } from "./pages/adminPrincipalPage";
+import { AddCourse } from "./pages/addCourse";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
@@ -31,9 +33,11 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/home" />
             <Route element={<Login />} path="/" />
-            <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<AdminLogin />} path="/adminLogin" />
+            <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
+            <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
+            <Route element={<AddCourse />} path="/addCourse" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
