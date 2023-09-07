@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 import "../../styles/register.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
   let navigate = useNavigate(""); // useHistory("")
+
   const register = async () => {
     //Sección de verificación
-    if (password == "" || email == "" || name == "") {
+    if (password == "" || email == "" || name == "" || lastname == "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -24,7 +27,8 @@ export const Register = () => {
     }
     //Sección para enviar la data al backend
     let obj = {
-      nombre_completo: name,
+      name: name,
+      lastname: lastname,
       email: email,
       password: password,
     };
@@ -60,9 +64,17 @@ export const Register = () => {
         <h3 className="register_title mb-4">Registro de usuario</h3>
         <input
           type="text"
-          placeholder="Nombre completo"
+          placeholder="Nombre"
           onChange={(e) => {
             setName(e.target.value);
+          }}
+          className="register_input mb-4"
+        />
+        <input
+          type="text"
+          placeholder="Apellidos"
+          onChange={(e) => {
+            setLastname(e.target.value);
           }}
           className="register_input mb-4"
         />
@@ -88,7 +100,7 @@ export const Register = () => {
           className="register_input mb-4"
         />
         <input
-          type="submit"
+          type="button"
           value="Registrarse"
           className="register_button mb-4"
           onClick={register}

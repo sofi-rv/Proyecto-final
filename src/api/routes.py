@@ -20,16 +20,22 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('/signup', methods=["POST"])
+@api.route('/register', methods=["POST"])
 def user_register():
     body = request.get_json()
     email = body["email"]
     password = body["password"]
+    name = body["name"]
+    lastname = body["lastname"]
     is_active = True
     if body is None:
         raise APIException("Body está vacío", status_code=400)
     if email is None or email=="":
         raise APIException("El email es necesario", status_code=400)
+    if name is None or name=="":
+        raise APIException("El nombre es necesario", status_code=400)
+    if lastname is None or lastname=="":
+        raise APIException("Los apellidos son necesarios", status_code=400)
     if password is None or password=="":
         raise APIException("El password es necesario", status_code=400)
     user = User.query.filter_by(email=email).first()
@@ -41,7 +47,9 @@ def user_register():
     password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
     print("password con encriptación:", password)
     new_register = User(email=email,
-                        password=password,
+                        password=password, 
+                        name=name,
+                        lastname=lastname,
                         is_active= is_active)
     try:
         db.session.add(new_register)
@@ -51,11 +59,13 @@ def user_register():
         print(str(error))
         return jsonify({"message":"error al almacenar en BD"}), 500
 
-@api.route("/login", methods=["POST"])
+@api.route("/", methods=["POST"])
 def login():
     body = request.get_json()
+    #ver si se puede hacer un email restringido de empresa
     email = body["email"]
     password = body["password"]
+
     if body is None:
         raise APIException("Body está vacío", status_code=400)
     if email is None or email=="":
