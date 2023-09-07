@@ -1,0 +1,41 @@
+.admin_features {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 3em 0 0;
+    gap: 2em;
+    justify-content: center;
+}
+.admin_feature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(204, 204, 204);
+    border: .4em solid #2d9fd9;
+    padding: 2em;
+    height: auto;
+    width: 22em;
+    font-weight: 700;
+    border-radius: 15px;
+}
+
+.admin_feature_text {
+    width: 8em;
+}
+
+.admin_feature_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(253, 47, 47);
+    height: 2.5em;
+    padding: 0 2em;
+    border-radius: 10em;
+}
+
+.admin_feature_button:hover {
+    color: #2d9fd9;
+}
