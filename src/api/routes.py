@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint , current_app
-from api.models import db, User
+from api.models import db, User, AddCourse
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -59,6 +59,8 @@ def user_register():
         print(str(error))
         return jsonify({"message":"error al almacenar en BD"}), 500
 
+#Aquí termina el registro de usuario
+
 @api.route("/", methods=["POST"])
 def login():
     body = request.get_json()
@@ -80,3 +82,69 @@ def login():
         raise APIException("El usuario o el password son incorrectos", status_code=400)
     access_token = create_access_token(identity=email)
     return jsonify({"token":access_token}), 200
+
+#Aquí termina el login de usuario
+
+@api.route('/addCourse', methods=["POST"])
+def add_course():
+    body = request.get_json()
+    course = body["course"]
+    code = body["code"]
+    category = body["category"]
+    provider = body["provider"]
+    cost = body["cost"]
+    description = body["description"]
+    modality = body["modality"]
+    start_date = body["start_date"]
+    finish_date = body["finish_date"]
+    contents = body["contents"]
+    is_active = True
+    if body is None:
+        raise APIException("Body está vacío", status_code=400)
+    if course is None or course=="":
+        raise APIException("Ingrese el nombre de curso", status_code=400)
+    if code is None or code=="":
+        raise APIException("Ingrese el código", status_code=400)
+    if category is None or category=="":
+        raise APIException("Ingrese la categoría", status_code=400)
+    if provider is None or provider=="":
+        raise APIException("Ingrese el proveedor", status_code=400)
+    if cost is None or cost=="":
+        raise APIException("Ingrese el costo", status_code=400)
+    if description is None or description=="":
+        raise APIException("Digite la descripción", status_code=400)
+    if modality is None or modality=="":
+        raise APIException("Ingrese la modalidad", status_code=400)
+    if start_date is None or start_date=="":
+        raise APIException("Ingrese la fecha de inicio", status_code=400)
+    if finish_date is None or finish_date=="":
+        raise APIException("Ingrese la fecha de finalización de curso", status_code=400)
+    if contents is None or contents=="":
+        raise APIException("Ingrese los contenidos", status_code=400)
+    addcourse = AddCourse.query.filter_by(code=code).first()
+    #se verifica si el curso ya existe en BD
+    if addcourse:
+        raise APIException("El curso ya existe", status_code=400)
+    #debería encriptar el password
+    #print("password sin encriptar:", password)
+    #password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
+    #print("password con encriptación:", password)
+    new_course = AddCourse(course=course,
+                        code=code,
+                        category=category,
+                        provider=provider,
+                        cost=cost,
+                        description=description,
+                        modality=modality,
+                        start_date=start_date,
+                        finish_date=finish_date,
+                        contents=contents)
+    try:
+        db.session.add(new_course)
+        db.session.commit()
+        return jsonify({"message":"curso añadido"}), 201
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message":"error al añadir el curso en BD"}), 500
+
+#Aquí termina el formulario de agregar curso 

@@ -1,5 +1,5 @@
 .addCourse_page {
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
