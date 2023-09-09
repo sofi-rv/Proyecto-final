@@ -8,6 +8,7 @@ import { Login } from "./pages/login";
 import { AdminLogin } from "./pages/adminLogin";
 import { PasswordRecover } from "./pages/passwordRecover";
 import { Register } from "./pages/register";
+import { PrincipalPage } from "./pages/principalPage";
 import { AdminPrincipalPage } from "./pages/adminPrincipalPage";
 import { AddCourse } from "./pages/addCourse";
 import { Demo } from "./pages/demo";
@@ -36,6 +37,7 @@ const Layout = () => {
             <Route element={<AdminLogin />} path="/adminLogin" />
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
+            <Route element={<PrincipalPage />} path="/principalPage" />
             <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
             <Route element={<AddCourse />} path="/addCourse" />
             <Route element={<Demo />} path="/demo" />
