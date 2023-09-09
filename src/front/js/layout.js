@@ -8,8 +8,11 @@ import { Login } from "./pages/login";
 import { AdminLogin } from "./pages/adminLogin";
 import { PasswordRecover } from "./pages/passwordRecover";
 import { Register } from "./pages/register";
+import { PrincipalPage } from "./pages/principalPage";
 import { AdminPrincipalPage } from "./pages/adminPrincipalPage";
 import { AddCourse } from "./pages/addCourse";
+import { UserPage } from "./pages/userPage";
+import { Reglament } from "./pages/reglament";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
@@ -36,13 +39,54 @@ const Layout = () => {
             <Route element={<AdminLogin />} path="/adminLogin" />
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
+            <Route element={
+              <>
+                <Navbar links={
+                  [
+                    { "name": "Mi perfil", "path": "/" },
+                    { "name": "Cerrar Sesion", "path": "/" }
+                  ]
+                } />
+                <PrincipalPage />
+                <Footer />
+              </>
+            }
+              path="/principalPage"
+            />
             <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
             <Route element={<AddCourse />} path="/addCourse" />
+            <Route element={
+              <>
+                <Navbar links={
+                  [
+                    { "name": "Mi perfil", "path": "/" },
+                    { "name": "Cerrar Sesion", "path": "/" }
+                  ]
+                } />
+                <Reglament />
+                <Footer />
+              </>
+            }
+              path="/reglament"
+            />
+            <Route element={
+              <>
+                <Navbar links={
+                  [
+                    { "name": "Mi perfil", "path": "/" },
+                    { "name": "Cerrar Sesion", "path": "/" }
+                  ]
+                } />
+                <UserPage />
+                <Footer />
+              </>
+            }
+              path="/userPage"
+            />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
-          {/*<Footer />*/}
         </ScrollToTop>
       </BrowserRouter>
     </div>
