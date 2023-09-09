@@ -40,9 +40,6 @@ class Company_admin(db.Model):
             # do not serialize the password, its a security breach
         }
 
-statement1 = company_admin.insert().values(admin_id=1234, 
-                                   book_name='Old age')
-
 class AddCourse(db.Model):
     __tablename__ = 'addcourse'
     id = db.Column(db.Integer, primary_key=True)
