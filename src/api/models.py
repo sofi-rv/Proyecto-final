@@ -23,6 +23,23 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
+class Company_admin(db.Model):
+    __tablename__ = 'company_admin'
+    id = db.Column(db.Integer, primary_key=True)
+    admin_id = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    
+    def __repr__(self):
+        return f'<Company_admin {self.id}>'
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "admin_id": self.admin_id,
+            # do not serialize the password, its a security breach
+        }
+
 class AddCourse(db.Model):
     __tablename__ = 'addcourse'
     id = db.Column(db.Integer, primary_key=True)
