@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint , current_app
-from api.models import db, User, AddCourse
+from api.models import db, User, AddCourse, Company_admin
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -84,6 +84,30 @@ def login():
     return jsonify({"token":access_token}), 200
 
 #Aquí termina el login de usuario
+
+@api.route("/adminLogin", methods=["POST"])
+def admin_login():
+    body = request.get_json()
+    #ver si se puede hacer un email restringido de empresa
+    admin_id = body["admin_id"]
+    password = body["password"]
+
+    if body is None:
+        raise APIException("Body está vacío", status_code=400)
+    if admin_id is None or admin_id=="":
+        raise APIException("El admin id es necesario", status_code=400)
+    if password is None or password=="":
+        raise APIException("El password es necesario", status_code=400)
+    admin_login = Company_admin.query.filter_by(admin_id=admin_id).first()
+    if admin_login is None:
+        raise APIException("El admin id o el password son incorrectos", status_code=400)
+    coincidencia = current_app.bcrypt.check_password_hash(user.password,password) #si coincide, devuelve True
+    if not coincidencia:
+        raise APIException("El admin id o el password son incorrectos", status_code=400)
+    access_token = create_access_token(identity=email)
+    return jsonify({"token":access_token}), 200
+
+#Aquí termina login administrador
 
 @api.route('/addCourse', methods=["POST"])
 def add_course():
