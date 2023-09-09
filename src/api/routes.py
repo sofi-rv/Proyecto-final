@@ -138,7 +138,8 @@ def add_course():
                         modality=modality,
                         start_date=start_date,
                         finish_date=finish_date,
-                        contents=contents)
+                        contents=contents,
+                        is_active=True)
     try:
         db.session.add(new_course)
         db.session.commit()
