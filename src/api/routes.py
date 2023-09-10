@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint , current_app
-from api.models import db, User, AddCourse, Company_admin
+from api.models import db, User, Course, Company_admin
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -145,7 +145,7 @@ def add_course():
         raise APIException("Ingrese la fecha de finalización de curso", status_code=400)
     if contents is None or contents=="":
         raise APIException("Ingrese los contenidos", status_code=400)
-    addcourse = AddCourse.query.filter_by(code=code).first()
+    addcourse = Course.query.filter_by(code=code).first()
     #se verifica si el curso ya existe en BD
     if addcourse:
         raise APIException("El curso ya existe", status_code=400)
@@ -153,7 +153,7 @@ def add_course():
     #print("password sin encriptar:", password)
     #password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
     #print("password con encriptación:", password)
-    new_course = AddCourse(course=course,
+    new_course = Course(course=course,
                         code=code,
                         category=category,
                         provider=provider,
@@ -173,3 +173,19 @@ def add_course():
         return jsonify({"message":"error al añadir el curso en BD"}), 500
 
 #Aquí termina el formulario de agregar curso 
+###########
+
+#Prueba de borrar curso
+@app.route('/addCourse', methods=['DELETE'])
+def delete_course_id(id):
+    try:
+        
+        search = Course.query.get(id)   
+        db.session.delete(search)
+        db.session.commit()           
+
+        return jsonify({"message":"se eliminó correctamente"}), 200
+
+    except Exception as error:
+        print(error)
+        return jsonify({"message":str(error)}), 500
