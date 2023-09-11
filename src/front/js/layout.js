@@ -12,6 +12,7 @@ import { PrincipalPage } from "./pages/principalPage";
 import { AdminPrincipalPage } from "./pages/adminPrincipalPage";
 import { AddCourse } from "./pages/addCourse";
 import { UserPage } from "./pages/userPage";
+import { Suppliers } from "./pages/suppliers";
 import { Reglament } from "./pages/reglament";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -82,6 +83,20 @@ const Layout = () => {
               </>
             }
               path="/userPage"
+            />
+            <Route element={
+              <>
+                <Navbar links={
+                  [
+                    { "name": "Mi perfil", "path": "/" },
+                    { "name": "Cerrar Sesion", "path": "/" }
+                  ]
+                } />
+                <Suppliers />
+                <Footer />
+              </>
+            }
+              path="/suppliers"
             />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />

@@ -1,0 +1,9 @@
+.suppliers_page {
+    height: 85vh;
+}
+
+.suppliers_list {
+    background-color: rgb(255, 172, 172);
+    padding: 2em;
+    border-radius: 20px;
+}
