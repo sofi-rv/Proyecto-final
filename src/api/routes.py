@@ -176,11 +176,14 @@ def add_course():
 ###########
 
 #Prueba de borrar curso
-@app.route('/addCourse', methods=['DELETE'])
-def delete_course_id(id):
+@api.route('/addCourse', methods=['DELETE'])
+def delete_course_code(code):
+    # body = request.get_json()
+    # code = body["code"]
+    # if code is None or code=="":
+    #     raise APIException("Ingrese el código", status_code=400)
     try:
-        
-        search = Course.query.get(id)   
+        search = Course.query.get(code)   
         db.session.delete(search)
         db.session.commit()           
 
@@ -189,3 +192,30 @@ def delete_course_id(id):
     except Exception as error:
         print(error)
         return jsonify({"message":str(error)}), 500
+
+#Prueba de traer todos los cursos
+@api.route('/addCourse', methods=['GET'])
+def get_course():
+    
+    search = Course.query.all()   
+    
+    search_serialize = list(map(lambda x: x.serialize(), search))   
+    print("valor de search_serialize", search_serialize)       
+    response_body = {
+        "msg": "Hello, this is your GET response"
+    }
+
+    return jsonify(search_serialize), 200
+
+#Prueba de traer un elemento de los cursos
+# @api.route('/addCourse', methods=['GET'])
+# def get_course_code(code):
+#     int:code
+#     search = Course.query.get(code)   
+#     search_serialize = search.serialize() 
+#     print("valor de search_serialize", search_serialize)       
+#     response_body = {
+#         "msg": "Hello, this is your GET response"
+#     }
+
+#     return jsonify(search_serialize), 200
