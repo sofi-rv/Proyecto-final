@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AddCourse = () => {
   const [code, setCode] = useState("");
-  const [course, setCourse] = useState("");
+  const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [provider, setProvider] = useState("");
   const [cost, setCost] = useState("");
@@ -21,7 +21,7 @@ export const AddCourse = () => {
 
   const addcourse = async () => {
     //Sección de verificación
-    if (code == "" || course == "" || description == "" || modality == "") {
+    if (code == "" || name == "" || description == "" || modality == "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -33,7 +33,7 @@ export const AddCourse = () => {
     }
     //Sección para enviar la data al backend
     let obj = {
-      course: course,
+      name: name,
       code: code,
       category: category,
       provider: provider,
@@ -92,7 +92,7 @@ export const AddCourse = () => {
                 type="text"
                 className="addCourse_input"
                 onChange={(e) => {
-                  setCourse(e.target.value);
+                  setName(e.target.value);
                 }}
               />
             </div>

@@ -41,7 +41,7 @@ export const Login = () => {
       });
       actions.activateLoginConfirmation();
       //prueba - pero debe llevar a página principal de usuario
-      navigate("/home"); // history.push("/")
+      navigate("/principalPage"); // history.push("/")
     } else {
       let responseJson = await response.json();
       console.log(responseJson);

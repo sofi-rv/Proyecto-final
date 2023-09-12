@@ -33,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
@@ -47,6 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         //reset the global store
         setStore({ demo: demo });
       },
+
       fetchPromise: async (path, metodo = "GET", data = null) => {
         const BASE_URL = process.env.BACKEND_URL;
         let url = BASE_URL + path;
@@ -70,16 +72,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         let response = await fetch(url, obj);
         return response;
       },
+
       activateLoginConfirmation: () => {
         const store = getStore();
         const actions = getActions();
         setStore({ ...store, loginConfirmation: true });
       },
+
       deactivateLoginConfirmation: () => {
         const store = getStore();
         const actions = getActions();
         setStore({ ...store, loginConfirmation: false });
       },
+
       activateAdminLoginConfirmation: () => {
         const store = getStore();
         const actions = getActions();
@@ -89,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const actions = getActions();
         setStore({ ...store, adminloginConfirmation: false });
-      },     
+      }, 
     },
   };
 };
