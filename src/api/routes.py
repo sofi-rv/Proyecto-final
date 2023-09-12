@@ -112,7 +112,8 @@ def admin_login():
 @api.route('/addCourse', methods=["POST"])
 def add_course():
     body = request.get_json()
-    course = body["course"]
+    print(body)
+    name = body["name"]
     code = body["code"]
     category = body["category"]
     provider = body["provider"]
@@ -125,7 +126,7 @@ def add_course():
     is_active = True
     if body is None:
         raise APIException("Body está vacío", status_code=400)
-    if course is None or course=="":
+    if name is None or name=="":
         raise APIException("Ingrese el nombre de curso", status_code=400)
     if code is None or code=="":
         raise APIException("Ingrese el código", status_code=400)
@@ -153,7 +154,7 @@ def add_course():
     #print("password sin encriptar:", password)
     #password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
     #print("password con encriptación:", password)
-    new_course = Course(course=course,
+    new_course = Course(name=name,
                         code=code,
                         category=category,
                         provider=provider,
@@ -175,47 +176,79 @@ def add_course():
 #Aquí termina el formulario de agregar curso 
 ###########
 
-#Prueba de borrar curso
-@api.route('/addCourse', methods=['DELETE'])
-def delete_course_code(code):
-    # body = request.get_json()
-    # code = body["code"]
-    # if code is None or code=="":
-    #     raise APIException("Ingrese el código", status_code=400)
-    try:
-        search = Course.query.get(code)   
-        db.session.delete(search)
-        db.session.commit()           
-
-        return jsonify({"message":"se eliminó correctamente"}), 200
-
-    except Exception as error:
-        print(error)
-        return jsonify({"message":str(error)}), 500
-
-#Prueba de traer todos los cursos
+#Prueba de traer info de todos los cursos
 @api.route('/addCourse', methods=['GET'])
 def get_course():
+    search = Course.query.all()    
+    search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
+    print("valor de search_serialize ", search_serialize)
     
-    search = Course.query.all()   
-    
-    search_serialize = list(map(lambda x: x.serialize(), search))   
-    print("valor de search_serialize", search_serialize)       
-    response_body = {
-        "msg": "Hello, this is your GET response"
-    }
-
     return jsonify(search_serialize), 200
+
+#Prueba de traer info de un solo curso
+@api.route('/addCourse/<int:id>', methods=['GET'])
+def get_course_id(id):
+    try:
+        search = Course.query.get(id)   
+    
+        search_serialize = search.serialize()  
+        print("valor de search_serialize", search_serialize)       
+
+        return jsonify(search_serialize), 200
+
+    except Exception as error:
+            print(error)
+            return jsonify({"message":str(error)}), 500
+
+#Prueba de borrar curso
+@api.route('/addCourse/<int:id>', methods=['DELETE'])
+def delete_course_id(id):
+    try:
+        search = Course.query.get(id)  
+        db.session.delete(search)
+        db.session.commit()
+        return jsonify({"message":"se elimino correctamente"}), 200
+
+    except Exception as error:
+        print(error)  
+        return jsonify({"message":str(error)}), 500 
+
+#Prueba de editar un elemento de los cursos
+@api.route('/addCourse/<int:id>', methods=['PUT'])
+def edit_course_id(id):
+    try:
+        body = request.get_json()
+        search = Course.query.get(id)  
+
+        search.modality = body["modality"]
+        search.code = body["code"]
+
+        db.session.commit()
+
+        return jsonify({"message":"se edito correctamente"}), 200
+
+    except Exception as error:
+        print(error)  
+        return jsonify({"message":str(error)}), 500  
 
 #Prueba de traer un elemento de los cursos
 # @api.route('/addCourse', methods=['GET'])
-# def get_course_code(code):
-#     int:code
-#     search = Course.query.get(code)   
-#     search_serialize = search.serialize() 
-#     print("valor de search_serialize", search_serialize)       
-#     response_body = {
-#         "msg": "Hello, this is your GET response"
-#     }
+# def get_course_code():
+#     try:
+#         search = Course.query.all()   
+#         search_serialize = search.course.serialize() 
+#         print("valor de search_serialize", search_serialize)       
+#         response_body = {
+#             "msg": "Hello, this is your GET response"
+#         }
 
-#     return jsonify(search_serialize), 200
+#         return jsonify(search_serialize), 200
+
+#     except Exception as error:
+#         print(error)  
+#         return jsonify({"message":str(error)}), 500
+
+  
+  
+
+    
