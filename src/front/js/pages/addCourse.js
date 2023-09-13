@@ -142,12 +142,32 @@ export const AddCourse = () => {
               />
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">
-              <label className="me-3">Fecha de inicio</label>
+              <label className="me-3">Contenidos</label>
               <input
                 type="text"
                 className="addCourse_input"
                 onChange={(e) => {
+                  setContents(e.target.value);
+                }}
+              />
+            </div>
+            <div className="d-flex justify-content-between align-items-center pb-4">
+              <label className="me-3">Fecha de inicio</label>
+              <input
+                type="date"
+                className="addCourse_input"
+                onChange={(e) => {
                   setStartDate(e.target.value);
+                }}
+              />
+            </div>
+            <div className="d-flex justify-content-between align-items-center pb-4">
+              <label className="me-3">Fecha de finalización</label>
+              <input
+                type="date"
+                className="addCourse_input"
+                onChange={(e) => {
+                  setFinishDate(e.target.value);
                 }}
               />
             </div>
@@ -158,26 +178,6 @@ export const AddCourse = () => {
                 className="addCourse_input"
                 onChange={(e) => {
                   setModality(e.target.value);
-                }}
-              />
-            </div>
-            <div className="d-flex justify-content-between align-items-center pb-4">
-              <label className="me-3">Fecha de finalización</label>
-              <input
-                type="text"
-                className="addCourse_input"
-                onChange={(e) => {
-                  setFinishDate(e.target.value);
-                }}
-              />
-            </div>
-            <div className="d-flex justify-content-between align-items-center pb-4">
-              <label className="me-3">Contenidos</label>
-              <input
-                type="text"
-                className="addCourse_input"
-                onChange={(e) => {
-                  setContents(e.target.value);
                 }}
               />
             </div>

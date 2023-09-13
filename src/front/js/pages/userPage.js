@@ -16,16 +16,16 @@ export const UserPage = () => {
             <div className="mt-4 me-5">
                 <h3 className="mb-3">Historial de capacitaciones</h3>
 
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button user_page_accordion collapsed bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <div className="accordion accordion-flush" id="accordionFlushExample">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button user_page_accordion collapsed bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 Capacitaciones en curso
                                 <img src="https://cdn-icons-png.flaticon.com/512/3208/3208749.png" alt="approve_icon" height="25px" width="25px" className="ms-3" />
                             </button>
                         </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
+                        <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">
                                 <div className="user_page_accordion_item">
                                     Big Data Managment
                                 </div>
@@ -35,15 +35,15 @@ export const UserPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button user_page_accordion collapsed bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button user_page_accordion collapsed bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                 Capacitaciones aprobadas
                                 <img src="https://cdn-icons-png.flaticon.com/512/5610/5610944.png" alt="approve_icon" height="25px" width="25px" className="ms-3" />
                             </button>
                         </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
+                        <div id="flush-collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">
                                 <div className="user_page_accordion_item">
                                     Big Data Managment
                                 </div>
@@ -53,15 +53,15 @@ export const UserPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button user_page_accordion collapsed bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header">
+                            <button className="accordion-button user_page_accordion collapsed bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseTwo">
                                 Capacitaciones reprobadas
                                 <img src="https://as1.ftcdn.net/v2/jpg/01/45/20/02/1000_F_145200273_450ViYipr5uU3WIwqzwjsRDHYTMcUH9P.jpg" alt="approve_icon" height="25px" width="25px" className="ms-3" />
                             </button>
                         </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
+                        <div id="flush-collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">
                                 <div className="user_page_accordion_item">
                                     Big Data Managment
                                 </div>

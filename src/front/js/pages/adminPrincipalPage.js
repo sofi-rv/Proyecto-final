@@ -11,7 +11,7 @@ export const AdminPrincipalPage = () => {
                 <div className="admin_feature">
                     <div className="d-flex justify-content-center align-items-center mb-4">
                         <p className="admin_feature_text me-4"> Agregar curso</p>
-                        <Link to="/" className="admin_feature_button">Agregar</Link>
+                        <Link to="/addCourse" className="admin_feature_button">Agregar</Link>
                     </div>
                     <div className="d-flex justify-content-center align-items-center">
                         <div>
@@ -33,7 +33,7 @@ export const AdminPrincipalPage = () => {
                 </div>
                 <div className="admin_feature text-center">
                     <p> Registro de proveedores </p>
-                    <Link to="/" className="admin_feature_button">Mostrar</Link>
+                    <Link to="/suppliers" className="admin_feature_button">Mostrar</Link>
                 </div>
             </div>
         </>
