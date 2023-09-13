@@ -176,7 +176,7 @@ def add_course():
 #Aquí termina el formulario de agregar curso 
 ###########
 
-#Prueba de traer info de todos los cursos
+#Traer info de todos los cursos
 @api.route('/addCourse', methods=['GET'])
 def get_course():
     search = Course.query.all()    
@@ -185,7 +185,7 @@ def get_course():
     
     return jsonify(search_serialize), 200
 
-#Prueba de traer info de un solo curso
+#Traer info de un solo curso
 @api.route('/addCourse/<int:id>', methods=['GET'])
 def get_course_id(id):
     try:
@@ -200,7 +200,7 @@ def get_course_id(id):
             print(error)
             return jsonify({"message":str(error)}), 500
 
-#Prueba de borrar curso
+#Borrar curso
 @api.route('/addCourse/<int:id>', methods=['DELETE'])
 def delete_course_id(id):
     try:
@@ -213,7 +213,7 @@ def delete_course_id(id):
         print(error)  
         return jsonify({"message":str(error)}), 500 
 
-#Prueba de editar un elemento de los cursos
+#Editar curso
 @api.route('/addCourse/<int:id>', methods=['PUT'])
 def edit_course_id(id):
     try:
@@ -231,22 +231,6 @@ def edit_course_id(id):
         print(error)  
         return jsonify({"message":str(error)}), 500  
 
-#Prueba de traer un elemento de los cursos
-# @api.route('/addCourse', methods=['GET'])
-# def get_course_code():
-#     try:
-#         search = Course.query.all()   
-#         search_serialize = search.course.serialize() 
-#         print("valor de search_serialize", search_serialize)       
-#         response_body = {
-#             "msg": "Hello, this is your GET response"
-#         }
-
-#         return jsonify(search_serialize), 200
-
-#     except Exception as error:
-#         print(error)  
-#         return jsonify({"message":str(error)}), 500
 
   
   

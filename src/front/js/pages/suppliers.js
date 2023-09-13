@@ -9,7 +9,7 @@ export const Suppliers = () => {
     const { store, actions } = useContext(Context);
     const [suppliersList, setSuppliersList] = useState([]);
 
-    //Traer informacion de los proveedores
+    //Traer informacion de los cursos
     useEffect(() => {
         const cargaData = async() => {
             let response = await actions.fetchPromise("/api/addCourse")
