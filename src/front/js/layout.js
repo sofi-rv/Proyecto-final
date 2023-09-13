@@ -18,6 +18,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
 import { EditCourse } from "./pages/editCourseForm"; //formulario para editar curso
+import { PruebaMostrarMas } from "./pages/pruebaVistaMostrarMas"; //eliminar despues
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -43,6 +44,7 @@ const Layout = () => {
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
+            <Route element={<PruebaMostrarMas />} path="/pruebaVistaMostrarMas" />
             <Route element={<EditCourse />} path="/editCourseForm/:id" />
             <Route element={
               <>
