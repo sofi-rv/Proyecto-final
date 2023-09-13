@@ -14,6 +14,8 @@ import { AddCourse } from "./pages/addCourse";
 import { UserPage } from "./pages/userPage";
 import { Suppliers } from "./pages/suppliers";
 import { Reglament } from "./pages/reglament";
+import { CourseDetails } from "./pages/courseDetails";
+import { UserList } from "./pages/userList";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
@@ -48,12 +50,7 @@ const Layout = () => {
             <Route element={<EditCourse />} path="/editCourseForm/:id" />
             <Route element={
               <>
-                <Navbar links={
-                  [
-                    { "name": "Mi perfil", "path": "/" },
-                    { "name": "Cerrar Sesion", "path": "/" }
-                  ]
-                } />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <PrincipalPage />
                 <Footer />
               </>
@@ -64,12 +61,7 @@ const Layout = () => {
             <Route element={<AddCourse />} path="/addCourse" />
             <Route element={
               <>
-                <Navbar links={
-                  [
-                    { "name": "Mi perfil", "path": "/" },
-                    { "name": "Cerrar Sesion", "path": "/" }
-                  ]
-                } />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <Reglament />
                 <Footer />
               </>
@@ -78,12 +70,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={
-                  [
-                    { "name": "Mi perfil", "path": "/" },
-                    { "name": "Cerrar Sesion", "path": "/" }
-                  ]
-                } />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <UserPage />
                 <Footer />
               </>
@@ -92,17 +79,30 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={
-                  [
-                    { "name": "Mi perfil", "path": "/" },
-                    { "name": "Cerrar Sesion", "path": "/" }
-                  ]
-                } />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <Suppliers />
                 <Footer />
               </>
             }
               path="/suppliers"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <CourseDetails />
+                <Footer />
+              </>
+            }
+              path="/courseDetails"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <UserList />
+                <Footer />
+              </>
+            }
+              path="/userList"
             />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
