@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/principalPage.css";
 
 export const PrincipalPage = () => {
-
+    const { store, actions } = useContext(Context);
     const [septemberCourses, setSeptemberCourses] = useState([])
     const [octoberCourses, setOctoberCourses] = useState([])
-    // const [CoursesList, setCoursesList] = useState([]);
+    const [CoursesList, setCoursesList] = useState([]);
 
     useEffect(() => {
         //@TODO Estos datos deben venir de la base de datos
-        // const getData = async () => {
-        //     let response = await actions.fetchPromise("/api/addCourse")
+        const getData = async () => {
+            let response = await actions.fetchPromise("/api/addCourse")
 
-        //     if (response.ok) {
-        //         let responseJson = await response.json();
-        //         console.log(responseJson);
-        //         setCoursesList(responseJson)
-        //     } else {
-        //         let responseJson = await response.json();
-        //         console.log(responseJson);
-        //     }
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setCoursesList(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
 
-        // }
-        // getData()
+        }
+        getData()
         let courseList = [
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba1", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba2", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
@@ -115,10 +116,27 @@ export const PrincipalPage = () => {
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
                                     <div className="d-flex justify-content-center">
-                                        {(() => {
+                                        <div>
+                                            {CoursesList && CoursesList.length > 0 ?
+                                                <>
+                                                    {CoursesList.map((item, index) => {
+                                                        return (<div className="card me-5" style={{ width: '18rem' }}>
+                                                            <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
+                                                            <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
+                                                                <h5 className="card-title">{item.name}</h5>
+                                                                <p className="card-text">{item.modality}</p>
+                                                                <p className="card-text">{item.start_date}</p>
+                                                                <Link to="/" className="btn btn-danger course_button">¡Ver mas!</Link>
+                                                            </div>
+                                                        </div>)
+                                                    })}
+                                                </>
+                                                : <></>}
+                                        </div>
+                                        {/* {(() => {
                                             // Este codigo sirve para desplegar 4 cartas de cursos en la vista principal
                                             const arr = [];
-                                            for (let i = 0; i < septemberCourses.length; i++) {
+                                            for (let i = 0; i <septemberCourses.length; i++) {
                                                 // Cuando se hayan desplegado como maximo cuatro cartas en la vista principal se dejan de desplegar mas
                                                 if (i == 4) {
                                                     break
@@ -136,7 +154,8 @@ export const PrincipalPage = () => {
                                                 );
                                             }
                                             return arr;
-                                        })()}
+                                        })()} */}
+
                                     </div>
                                 </div>
                             </div>
