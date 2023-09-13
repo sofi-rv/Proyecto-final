@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
 
 export const PruebaEditar = () => {
     const { store, actions } = useContext(Context);
     const [courseList, setCourseList] = useState([]);
     const [code, setCode] = useState("");
     const [modality, setModality] = useState("");
-
+    const ref = useRef(null);
     //función para traerse los cursos
     useEffect(() => {
         const getData = async () => {
@@ -139,8 +140,10 @@ export const PruebaEditar = () => {
                                                     <input
                                                         type="text"
                                                         className="addCourse_input"
-                                                        onChange={(e) => {
-                                                            setCode(e.target.value);
+                                                        defaultValue={item.code}
+                                                        ref={ref}
+                                                        onChange={(ref) => {
+                                                            setCode(ref.current.value);
                                                         }}
                                                     />
                                                 </div>
@@ -218,6 +221,7 @@ export const PruebaEditar = () => {
                                                     <input
                                                         type="text"
                                                         className="addCourse_input"
+                                                        defaultValue={item.modality}
                                                         onChange={(e) => {
                                                             setModality(e.target.value);
                                                         }}
