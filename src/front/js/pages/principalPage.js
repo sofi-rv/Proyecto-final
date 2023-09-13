@@ -7,9 +7,24 @@ export const PrincipalPage = () => {
 
     const [septemberCourses, setSeptemberCourses] = useState([])
     const [octoberCourses, setOctoberCourses] = useState([])
+    // const [CoursesList, setCoursesList] = useState([]);
 
     useEffect(() => {
         //@TODO Estos datos deben venir de la base de datos
+        // const getData = async () => {
+        //     let response = await actions.fetchPromise("/api/addCourse")
+
+        //     if (response.ok) {
+        //         let responseJson = await response.json();
+        //         console.log(responseJson);
+        //         setCoursesList(responseJson)
+        //     } else {
+        //         let responseJson = await response.json();
+        //         console.log(responseJson);
+        //     }
+
+        // }
+        // getData()
         let courseList = [
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba1", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba2", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
@@ -24,6 +39,7 @@ export const PrincipalPage = () => {
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba5", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba6", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" }
         ]
+
         // Esto almacena en dos arreglos diferentes dependiendo del mes del curso
         let septemberCoursesList = courseList.filter((element) => { return element.Mes == "Septiembre" })
         let octoberCoursesList = courseList.filter((element) => { return element.Mes == "Octubre" })
