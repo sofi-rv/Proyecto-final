@@ -27,6 +27,7 @@ def user_register():
     password = body["password"]
     name = body["name"]
     lastname = body["lastname"]
+    role = body["role"]
     is_active = True
     if body is None:
         raise APIException("Body está vacío", status_code=400)

@@ -85,16 +85,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ ...store, loginConfirmation: false });
       },
 
-      activateAdminLoginConfirmation: () => {
-        const store = getStore();
-        const actions = getActions();
-        setStore({ ...store, adminloginConfirmation: true });
-      },
-      deactivateAdminLoginConfirmation: () => {
-        const store = getStore();
-        const actions = getActions();
-        setStore({ ...store, adminloginConfirmation: false });
-      }, 
+      // activateAdminLoginConfirmation: () => {
+      //   const store = getStore();
+      //   const actions = getActions();
+      //   setStore({ ...store, adminloginConfirmation: true });
+      // },
+      // deactivateAdminLoginConfirmation: () => {
+      //   const store = getStore();
+      //   const actions = getActions();
+      //   setStore({ ...store, adminloginConfirmation: false });
+      // }, 
     },
   };
 };
