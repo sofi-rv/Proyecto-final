@@ -186,7 +186,7 @@ def get_course():
     return jsonify(search_serialize), 200
 
 #Traer info de un solo curso
-@api.route('/addCourse/<int:id>', methods=['GET'])
+@api.route('/pruebaVistaMostrarMas/<int:id>', methods=['GET'])
 def get_course_id(id):
     try:
         search = Course.query.get(id)   
