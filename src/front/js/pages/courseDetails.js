@@ -44,7 +44,7 @@ export const CourseDetails = () => {
                         </ul>
                     </div>
                     <div className="ms-5">
-                        {courseDetails && <p className="mb-1">Costo: {courseDetails.cost}</p>}
+                        {courseDetails && <p className="mb-1">Costo: ${courseDetails.cost}</p>}
                         {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
                         {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
                         {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}

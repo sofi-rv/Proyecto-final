@@ -41,6 +41,16 @@ export const PrincipalPage = () => {
             { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba6", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" }
         ]
 
+
+
+        // const obtenerMes = (fecha) => {
+        //     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        //     const arrayFecha = fecha.split("-")
+        //     const traerMes = Number(arrayFecha[1]) - 1
+        //     return meses[traerMes]
+        // }
+
+
         // Esto almacena en dos arreglos diferentes dependiendo del mes del curso
         let septemberCoursesList = courseList.filter((element) => { return element.Mes == "Septiembre" })
         let octoberCoursesList = courseList.filter((element) => { return element.Mes == "Octubre" })
