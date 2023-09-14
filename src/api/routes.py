@@ -39,6 +39,8 @@ def user_register():
         raise APIException("Los apellidos son necesarios", status_code=400)
     if password is None or password=="":
         raise APIException("El password es necesario", status_code=400)
+    if role is None or role=="":
+        role= "user"
     user = User.query.filter_by(email=email).first()
     #se verifica si el usuario ya existe en BD
     if user:
@@ -51,6 +53,7 @@ def user_register():
                         password=password, 
                         name=name,
                         lastname=lastname,
+                        role=role,
                         is_active= is_active)
     try:
         db.session.add(new_register)
@@ -187,7 +190,7 @@ def get_course():
     return jsonify(search_serialize), 200
 
 #Traer info de un solo curso
-@api.route('/pruebaVistaMostrarMas/<int:id>', methods=['GET'])
+@api.route('/addCourse/<int:id>', methods=['GET'])
 def get_course_id(id):
     try:
         search = Course.query.get(id)   

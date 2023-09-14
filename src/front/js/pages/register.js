@@ -31,6 +31,7 @@ export const Register = () => {
       lastname: lastname,
       email: email,
       password: password,
+      role: ""
     };
     let response = await actions.fetchPromise("/api/register", "POST", obj);
     if (response.ok) {
