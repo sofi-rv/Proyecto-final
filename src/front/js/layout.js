@@ -46,7 +46,7 @@ const Layout = () => {
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
-            <Route element={<PruebaMostrarMas />} path="/pruebaVistaMostrarMas" />
+            <Route element={<PruebaMostrarMas />} path="/pruebaVistaMostrarMas/:id" />
             <Route element={<EditCourse />} path="/editCourseForm/:id" />
             <Route element={
               <>
