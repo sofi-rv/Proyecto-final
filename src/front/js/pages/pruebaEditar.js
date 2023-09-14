@@ -20,6 +20,8 @@ export const PruebaEditar = () => {
                 let responseJson = await response.json();
                 console.log(responseJson);
                 setCourseList(responseJson)
+                setCode(responseJson.code)
+                setModality(responseJson.modality)
             } else {
                 let responseJson = await response.json();
                 console.log(responseJson);
@@ -141,9 +143,10 @@ export const PruebaEditar = () => {
                                                         type="text"
                                                         className="addCourse_input"
                                                         defaultValue={item.code}
+                                                        placeholder={item.code}
                                                         ref={ref}
-                                                        onChange={(ref) => {
-                                                            setCode(ref.current.value);
+                                                        onChange={(e) => {
+                                                            setCode(e.target.value);
                                                         }}
                                                     />
                                                 </div>
