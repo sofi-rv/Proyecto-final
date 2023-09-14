@@ -19,7 +19,6 @@ import { UserList } from "./pages/userList";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
-import { PruebaMostrarMas } from "./pages/pruebaVistaMostrarMas"; //eliminar despues
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -45,7 +44,6 @@ const Layout = () => {
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
-            <Route element={<PruebaMostrarMas />} path="/pruebaVistaMostrarMas/:id" />
             <Route element={
               <>
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
@@ -91,7 +89,7 @@ const Layout = () => {
                 <Footer />
               </>
             }
-              path="/courseDetails"
+              path="/courseDetails/:id"
             />
             <Route element={
               <>
