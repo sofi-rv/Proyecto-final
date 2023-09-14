@@ -223,9 +223,11 @@ def edit_course_id(id):
     try:
         body = request.get_json()
         search = Course.query.get(id)  
-
-        search.modality = body["modality"]
-        search.code = body["code"]
+        if "modality" in body:
+            search.modality = body["modality"]
+        
+        if "code" in body:
+            search.code = body["code"]
 
         db.session.commit()
 
