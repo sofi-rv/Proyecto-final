@@ -1,30 +1,55 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../styles/courseDetails.css";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const CourseDetails = () => {
+
+    const { store, actions } = useContext(Context);
+    const [courseDetails, setCourseDetails] = useState({});
+    const { id } = useParams();
+    console.log(id)
+
+    useEffect(() => {
+        const getData = async () => {
+            let response = await actions.fetchPromise(`/api/addCourse/${id}`)
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setCourseDetails(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+
+        }
+        getData()
+    }, [])
+
     return (
         <div className="courseDetails_page">
             <div className="courseDetails_content">
-                <h3>Nombre del curso</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo mauris eu dolor ullamcorper, ac lobortis ante rhoncus. Mauris ut odio vitae libero tempor aliquam. Aliquam venenatis varius sem eu cursus. Quisque pretium ipsum nec turpis tristique, vel ullamcorper nulla venenatis. Maecenas sollicitudin elit magna, quis accumsan dolor laoreet id. Maecenas sed tortor viverra, sollicitudin ipsum vitae, rhoncus erat. Cras in dignissim nunc. Duis malesuada urna quis lorem ultricies pulvinar quis sit amet lacus. Aliquam lacus enim, ultricies non pharetra non, varius eu mi. Suspendisse scelerisque leo id lorem elementum pellentesque nec nec neque. In semper augue a nisl hendrerit vulputate. Curabitur neque eros, egestas eu mattis nec, euismod sit amet tortor.
-
-                    Pellentesque ac ultrices lectus. Integer ut suscipit nibh. Nullam condimentum tristique erat, vel aliquet ipsum hendrerit non. Vivamus at volutpat ligula, sit amet gravida nisi. Etiam ac elit vitae elit tincidunt lobortis. Phasellus posuere a enim lacinia varius. Donec et ante ante. Donec hendrerit dictum consectetur. Vestibulum ornare at quam non fermentum.</p>
+                {courseDetails && <h3>{courseDetails.name}</h3>}
+                {courseDetails && <p>{courseDetails.description}</p>}
                 <div className="d-flex align-items-start">
                     <div className="me-5">
                         <h4>Contenidos:</h4>
                         <ul>
+                            {courseDetails && <li>{courseDetails.contents}</li>}
+                            {/* <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li> */}
                         </ul>
                     </div>
                     <div className="ms-5">
-                        <p className="mb-1">Costo: $100</p>
-                        <p className="mb-1">Modalidad: Virtual/Presencial/Híbrido</p>
-                        <p className="mb-1">Fecha de inicio: dd/mm/yyyy</p>
-                        <p className="mb-1">Duración: X meses</p>
-                        <p>Código: xxxxxx</p>
+                        {courseDetails && <p className="mb-1">Costo: {courseDetails.cost}</p>}
+                        {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
+                        {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
+                        {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}
+                        {/* <p className="mb-1">Duración: X meses</p> */}
+                        {courseDetails && <p>Código: {courseDetails.code}</p>}
                     </div>
                 </div>
                 <button className="courseDetails_button mt-5">Matricular</button>
