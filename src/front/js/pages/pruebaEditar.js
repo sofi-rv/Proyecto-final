@@ -235,6 +235,7 @@ export const PruebaEditar = () => {
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 <button type="button" className="btn btn-primary" onClick={() => {
                                                     editData(item.id);
+                                                    location.reload();
                                                     console.log(item.id)
                                                 }}>Save changes</button>
                                             </div>

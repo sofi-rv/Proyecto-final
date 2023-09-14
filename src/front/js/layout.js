@@ -19,7 +19,6 @@ import { UserList } from "./pages/userList";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
-import { EditCourse } from "./pages/editCourseForm"; //formulario para editar curso
 import { PruebaMostrarMas } from "./pages/pruebaVistaMostrarMas"; //eliminar despues
 import injectContext from "./store/appContext";
 
@@ -47,7 +46,6 @@ const Layout = () => {
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
             <Route element={<PruebaMostrarMas />} path="/pruebaVistaMostrarMas/:id" />
-            <Route element={<EditCourse />} path="/editCourseForm/:id" />
             <Route element={
               <>
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
