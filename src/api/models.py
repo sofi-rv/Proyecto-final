@@ -42,6 +42,22 @@ class Company_admin(db.Model): #pascalcase
             # do not serialize the password, its a security breach
         }
 
+# class SupplierPivot(db.Model):
+#     __tablename__ = 'supplierpivot'
+#     id = db.Column(db.Integer, primary_key=True)
+#     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+#     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'))
+
+#     def __repr__(self):
+#         return '<Supplier %r>' % self.id
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "course_id": self.course_id,
+#             "supplier_id": self.supplier_id
+#         }
+
 # class Supplier(db.Model):
 #     __tablename__ = 'supplier'
 #     id = db.Column(db.Integer, primary_key=True)
@@ -49,8 +65,7 @@ class Company_admin(db.Model): #pascalcase
 #     phone = db.Column(db.String(200), unique=True, nullable=False)
 #     email = db.Column(db.String(120), unique=True, nullable=False)
 #     legal_id = db.Column(db.String(120), unique=True, nullable=False)
-#     course_id = db.Column(db.String(120), db.ForeignKey('course.id'))
-#     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+#     course = db.relationship(SupplierPivot, backref = 'supplier', lazy=True)
 
 #     def __repr__(self):
 #         return '<Supplier %r>' % self.id
@@ -62,7 +77,7 @@ class Company_admin(db.Model): #pascalcase
 #             "phone": self.phone,
 #             "email": self.email,
 #             "legal_id": self.legal_id,
-#             "course_id": self.course_id,
+#             "course": self.course
 #         }
 
 class Course(db.Model):
@@ -78,7 +93,7 @@ class Course(db.Model):
     start_date = db.Column(db.String(200), unique=False, nullable=False)
     finish_date = db.Column(db.String(200), unique=False, nullable=False)
     contents = db.Column(db.String(200), unique=False, nullable=False)
-    #supplier = db.relationship(Supplier, backref = 'course', lazy=True)
+    #supplier = db.relationship(SupplierPivot, backref = 'course', lazy=True)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
     def __repr__(self):
