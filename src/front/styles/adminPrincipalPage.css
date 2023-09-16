@@ -1,3 +1,7 @@
+.adminPrincipalPage_page {
+    height: 100vh;
+}
+
 .admin_features {
     display: grid;
     grid-template-columns: auto auto;

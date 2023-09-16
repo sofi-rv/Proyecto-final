@@ -1,0 +1,19 @@
+.approvalReview_page {
+    height: 100vh
+}
+
+.approvalReview_list {
+    background-color: rgb(209, 209, 209);
+    padding: 1.5em;
+    border-radius: 15px;
+}
+
+.approvalReview_button {
+    display: block;
+    border-radius: 20px;
+    padding: .5em 2em;
+    height: 2.7em;
+    width: 10em;
+    color: black;
+    background-color: rgb(255, 73, 73);
+}

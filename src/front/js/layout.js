@@ -15,7 +15,9 @@ import { UserPage } from "./pages/userPage";
 import { Suppliers } from "./pages/suppliers";
 import { Reglament } from "./pages/reglament";
 import { CourseDetails } from "./pages/courseDetails";
+import { RegisterCourse } from "./pages/registerCourse";
 import { UserList } from "./pages/userList";
+import { ApprovalReview } from "./pages/approvalReview";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
@@ -53,8 +55,24 @@ const Layout = () => {
             }
               path="/principalPage"
             />
-            <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
-            <Route element={<AddCourse />} path="/addCourse" />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <AdminPrincipalPage />
+                <Footer />
+              </>
+            }
+              path="/adminPrincipalPage"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <AddCourse />
+                <Footer />
+              </>
+            }
+              path="/addCourse"
+            />
             <Route element={
               <>
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
@@ -94,11 +112,29 @@ const Layout = () => {
             <Route element={
               <>
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <RegisterCourse />
+                <Footer />
+              </>
+            }
+              path="/registerCourse/:id"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <UserList />
                 <Footer />
               </>
             }
               path="/userList"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <ApprovalReview />
+                <Footer />
+              </>
+            }
+              path="/approvalReview"
             />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
