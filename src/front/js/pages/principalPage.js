@@ -33,29 +33,16 @@ export const PrincipalPage = () => {
 
         }
         getData()
-        let courseList = [
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba1", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba2", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba3", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba4", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba5", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba6", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Septiembre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba1", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba2", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba3", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba4", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba5", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" },
-            { "Imagen": "https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg", "Nombre": "Prueba6", "Informacion": "Este es el mejor curso de cocina del mundo", "Mes": "Octubre" }
-        ]
-
-
-
-        // Esto almacena en dos arreglos diferentes dependiendo del mes del curso
-        let septemberCoursesList = courseList.filter((element) => { return element.Mes == "Septiembre" })
-        let octoberCoursesList = courseList.filter((element) => { return element.Mes == "Octubre" })
-        setSeptemberCourses(septemberCoursesList)
-        setOctoberCourses(octoberCoursesList)
     }, []);
+
+
+
+    // Esto almacena en dos arreglos diferentes dependiendo del mes del curso
+    //     let septemberCoursesList = courseList.filter((element) => { return element.Mes == "Septiembre" })
+    //     let octoberCoursesList = courseList.filter((element) => { return element.Mes == "Octubre" })
+    //     setSeptemberCourses(septemberCoursesList)
+    //     setOctoberCourses(octoberCoursesList)
+    // 
 
 
     const handleCarouselButtons = (direction, month) => {
@@ -125,35 +112,12 @@ export const PrincipalPage = () => {
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
                                     <div className="d-flex justify-content-center">
-                                        {/* {(() => {
-                                            // Este codigo sirve para desplegar 4 cartas de cursos en la vista principal
-                                            const arr = [];
-                                            for (let i = 0; i <septemberCourses.length; i++) {
-                                                // Cuando se hayan desplegado como maximo cuatro cartas en la vista principal se dejan de desplegar mas
-                                                if (i == 4) {
-                                                    break
-                                                }
-                                                let element = septemberCourses[i]
-                                                arr.push(
-                                                    <div className="card me-5" style={{ width: '18rem' }} key={i}>
-                                                        <img src={element.Imagen} className="card-img-top" alt="course_thumbnail" />
-                                                        <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
-                                                            <h5 className="card-title">{element.Nombre}</h5>
-                                                            <p className="card-text">{element.Informacion}</p>
-                                                            <Link to="/" className="btn btn-danger course_button">¡Ver mas!</Link>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            }
-                                            return arr;
-                                        })()} */}
                                         <div className="d-flex">
                                             {CoursesList && CoursesList.length > 0 ?
                                                 <>
                                                     {CoursesList.map((item, index) => {
 
                                                         return (
-                                                            //revisar esto
                                                             obtenerMes(item.start_date) % 2 == 0 &&
                                                             <div key={index} className="card me-5" style={{ width: '18rem' }}>
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
@@ -191,28 +155,29 @@ export const PrincipalPage = () => {
                             <div className="carousel-inner">
                                 <div className="carousel-item active mb-5">
                                     <div className="d-flex justify-content-center">
-                                        {(() => {
-                                            // Este codigo sirve para desplegar 4 cartas de cursos en la vista principal
-                                            const arr = [];
-                                            for (let i = 0; i < octoberCourses.length; i++) {
-                                                // Cuando se hayan desplegado como maximo cuatro cartas en la vista principal se dejan de desplegar mas
-                                                if (i == 4) {
-                                                    break
-                                                }
-                                                let element = octoberCourses[i]
-                                                arr.push(
-                                                    <div className="card me-5" style={{ width: '18rem' }} key={i}>
-                                                        <img src={element.Imagen} className="card-img-top" alt="course_thumbnail" />
-                                                        <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
-                                                            <h5 className="card-title">{element.Nombre}</h5>
-                                                            <p className="card-text">{element.Informacion}</p>
-                                                            <Link to="/" className="btn btn-danger course_button">¡Ver mas!</Link>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            }
-                                            return arr;
-                                        })()}
+                                        <div className="d-flex">
+                                            {CoursesList && CoursesList.length > 0 ?
+                                                <>
+                                                    {CoursesList.map((item, index) => {
+
+                                                        return (
+                                                            obtenerMes(item.start_date) % 2 != 0 &&
+                                                            <div key={index} className="card me-5" style={{ width: '18rem' }}>
+                                                                <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
+                                                                <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
+                                                                    <h5 className="card-title">{item.name}</h5>
+                                                                    <p className="card-text">{item.modality}</p>
+                                                                    <p className="card-text">{item.start_date}</p>
+                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
+                                                                </div>
+                                                            </div>
+
+
+                                                        )
+                                                    })}
+                                                </>
+                                                : <></>}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
