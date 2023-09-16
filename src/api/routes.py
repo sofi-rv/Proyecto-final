@@ -181,7 +181,7 @@ def admin_login():
 ###########
 
 #Traer info de todos los cursos
-@api.route('/addCourse', methods=['GET'])
+@api.route('/courses', methods=['GET'])
 def get_course():
     search = Course.query.all()    
     search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
@@ -238,7 +238,7 @@ def edit_course_id(id):
         return jsonify({"message":str(error)}), 500 
 
 #Agregar proveedor
-@api.route('/suppliers', methods=["POST"]) #arreglar path
+@api.route('/suppliers', methods=["POST"]) 
 def supplier_register():
     body = request.get_json()
     name = body["name"]
