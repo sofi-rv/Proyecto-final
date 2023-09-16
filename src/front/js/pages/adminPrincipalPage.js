@@ -5,7 +5,7 @@ import "../../styles/adminPrincipalPage.css";
 
 export const AdminPrincipalPage = () => {
     return (
-        <>
+        <div className="adminPrincipalPage_page">
             <h3 className="mt-4 text-center">¡Bienvenido Administrador!</h3>
             <div className="admin_features">
                 <div className="admin_feature">
@@ -36,6 +36,6 @@ export const AdminPrincipalPage = () => {
                     <Link to="/suppliers" className="admin_feature_button">Mostrar</Link>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
