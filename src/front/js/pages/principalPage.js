@@ -20,7 +20,7 @@ export const PrincipalPage = () => {
     useEffect(() => {
         //@TODO Estos datos deben venir de la base de datos
         const getData = async () => {
-            let response = await actions.fetchPromise("/api/addCourse")
+            let response = await actions.fetchPromise("/api/courses")
 
             if (response.ok) {
                 let responseJson = await response.json();

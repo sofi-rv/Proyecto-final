@@ -88,20 +88,25 @@ class Supplier(db.Model):
     phone = db.Column(db.String(200), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     legal_id = db.Column(db.String(120), unique=True, nullable=False)
-    supplierpivot = db.relationship(SupplierPivot, backref = 'supplier', lazy=True)
+    supplierpivot = db.relationship('SupplierPivot', backref = 'supplier', lazy=True)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
         return '<Supplier %r>' % self.id
 
     def serialize(self):
+        search = SupplierPivot.query.filter_by(supplier_id=self.id).all()    
+        search_serialize = list(map(lambda x: x.serialize()["course_id"], search))
+        courses = []
+        for course_id in search_serialize : 
+            courses.append(Course.query.get(course_id).serialize()["name"])    
         return {
             "id": self.id,
             "name": self.name,
             "phone": self.phone,
             "email": self.email,
             "legal_id": self.legal_id,
-            "supplierpivot": self.supplierpivot
+            "courses": courses
         }
 
 class Course(db.Model):
@@ -125,6 +130,7 @@ class Course(db.Model):
         return f'<Course {self.id}>'
     
     def serialize(self):
+        
         return {
             "id": self.id,
             "name": self.name,
@@ -137,8 +143,8 @@ class Course(db.Model):
             "start_date": self.start_date,
             "finish_date": self.finish_date,
             "contents": self.contents,
-            "supplierpivot": self.supplierpivot,
-            "course_enrollment": self.course_enrollment
+            #"supplierpivot": self.supplierpivot,
+            #"course_enrollment": self.course_enrollment
             # do not serialize the password, its a security breach
         }
 
