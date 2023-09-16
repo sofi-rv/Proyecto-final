@@ -17,8 +17,10 @@ export const AddCourse = () => {
   const [finish_date, setFinishDate] = useState("");
   const [contents, setContents] = useState("");
   const { store, actions } = useContext(Context);
+  const [suppliersList, setSuppliersList] = useState([]);
   let navigate = useNavigate(""); // useHistory("")
 
+  //Agregar curso
   const addcourse = async () => {
     //Sección de verificación
     if (code == "" || name == "" || description == "" || modality == "") {
@@ -36,7 +38,7 @@ export const AddCourse = () => {
       name: name,
       code: code,
       category: category,
-      provider: provider,
+      provider_id: provider,
       cost: cost,
       description: description,
       modality: modality,
@@ -69,6 +71,25 @@ export const AddCourse = () => {
     }
     return;
   };
+
+  //Traer informacion de los proveedores
+  useEffect(() => {
+    const cargaData = async () => {
+      let response = await actions.fetchPromise("/api/suppliers")
+
+      if (response.ok) {
+        let responseJson = await response.json();
+        console.log(responseJson);
+        setSuppliersList(responseJson)
+      } else {
+        let responseJson = await response.json();
+        console.log(responseJson);
+      }
+
+    }
+    cargaData()
+  }, [])
+
 
   return (
     <>
@@ -105,19 +126,28 @@ export const AddCourse = () => {
                 }}
               >
                 <option value="">Elija una categoría</option>
-                <option value="true">Tecnología</option>
-                <option value="false">Humanístico</option>
+                <option value="Tecnología">Tecnología</option>
+                <option value="Humanístico">Humanístico</option>
               </select>
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">
               <label className="me-3">Proveedor</label>
-              <input
-                type="text"
-                className="addCourse_input"
-                onChange={(e) => {
-                  setProvider(e.target.value);
-                }}
-              />
+              <select defaultValue="0" onChange={(e) => setProvider(e.target.value)}
+                className="picker addCourse_input"
+              >
+                <option disabled value="0">Selecciona una opcion</option>
+                {suppliersList && suppliersList.length > 0 ?
+                  <>
+                    {suppliersList.map((item, index) => {
+
+                      return (
+                        <option value={item.id}>{item.name}</option>
+                      )
+                    })}
+                  </>
+                  : <></>}
+
+              </select>
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">
               <label className="me-3">Costo</label>

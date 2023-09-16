@@ -11,10 +11,10 @@ export const PrincipalPage = () => {
     const [CoursesList, setCoursesList] = useState([]);
 
     const obtenerMes = (fecha) => {
-        const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        //const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
         const arrayFecha = fecha.split("-")
         const traerMes = Number(arrayFecha[1]) - 1
-        return meses[traerMes]
+        return traerMes
     }
 
     useEffect(() => {
@@ -147,24 +147,26 @@ export const PrincipalPage = () => {
                                             }
                                             return arr;
                                         })()} */}
-                                        <div>
+                                        <div className="d-flex">
                                             {CoursesList && CoursesList.length > 0 ?
                                                 <>
                                                     {CoursesList.map((item, index) => {
-                                                        { //revisar esto
-                                                            obtenerMes(item.start_date) == "Septiembre" ? <>
-                                                                return (<div className="card me-5" style={{ width: '18rem' }}>
-                                                                    <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
-                                                                    <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
-                                                                        <h5 className="card-title">{item.name}</h5>
-                                                                        <p className="card-text">{item.modality}</p>
-                                                                        <p className="card-text">{item.start_date}</p>
-                                                                        <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
-                                                                    </div>
-                                                                </div>)
-                                                            </> : <></>
-                                                        }
 
+                                                        return (
+                                                            //revisar esto
+                                                            obtenerMes(item.start_date) % 2 == 0 &&
+                                                            <div key={index} className="card me-5" style={{ width: '18rem' }}>
+                                                                <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
+                                                                <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
+                                                                    <h5 className="card-title">{item.name}</h5>
+                                                                    <p className="card-text">{item.modality}</p>
+                                                                    <p className="card-text">{item.start_date}</p>
+                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
+                                                                </div>
+                                                            </div>
+
+
+                                                        )
                                                     })}
                                                 </>
                                                 : <></>}

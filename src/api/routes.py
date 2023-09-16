@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint , current_app
-from api.models import db, User, Course, Company_admin
+from api.models import db, User, Course, Company_admin, Supplier, SupplierPivot
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -113,69 +113,69 @@ def admin_login():
 
 #Aquí termina login administrador
 
-@api.route('/addCourse', methods=["POST"])
-def add_course():
-    body = request.get_json()
-    print(body)
-    name = body["name"]
-    code = body["code"]
-    category = body["category"]
-    provider = body["provider"]
-    cost = body["cost"]
-    description = body["description"]
-    modality = body["modality"]
-    start_date = body["start_date"]
-    finish_date = body["finish_date"]
-    contents = body["contents"]
-    is_active = True
-    if body is None:
-        raise APIException("Body está vacío", status_code=400)
-    if name is None or name=="":
-        raise APIException("Ingrese el nombre de curso", status_code=400)
-    if code is None or code=="":
-        raise APIException("Ingrese el código", status_code=400)
-    if category is None or category=="":
-        raise APIException("Ingrese la categoría", status_code=400)
-    if provider is None or provider=="":
-        raise APIException("Ingrese el proveedor", status_code=400)
-    if cost is None or cost=="":
-        raise APIException("Ingrese el costo", status_code=400)
-    if description is None or description=="":
-        raise APIException("Digite la descripción", status_code=400)
-    if modality is None or modality=="":
-        raise APIException("Ingrese la modalidad", status_code=400)
-    if start_date is None or start_date=="":
-        raise APIException("Ingrese la fecha de inicio", status_code=400)
-    if finish_date is None or finish_date=="":
-        raise APIException("Ingrese la fecha de finalización de curso", status_code=400)
-    if contents is None or contents=="":
-        raise APIException("Ingrese los contenidos", status_code=400)
-    addcourse = Course.query.filter_by(code=code).first()
-    #se verifica si el curso ya existe en BD
-    if addcourse:
-        raise APIException("El curso ya existe", status_code=400)
-    #debería encriptar el password
-    #print("password sin encriptar:", password)
-    #password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
-    #print("password con encriptación:", password)
-    new_course = Course(name=name,
-                        code=code,
-                        category=category,
-                        provider=provider,
-                        cost=cost,
-                        description=description,
-                        modality=modality,
-                        start_date=start_date,
-                        finish_date=finish_date,
-                        contents=contents,
-                        is_active=True)
-    try:
-        db.session.add(new_course)
-        db.session.commit()
-        return jsonify({"message":"curso añadido"}), 201
-    except Exception as error:
-        print(str(error))
-        return jsonify({"message":"error al añadir el curso en BD"}), 500
+# @api.route('/addCourse', methods=["POST"])
+# def add_course():
+#     body = request.get_json()
+#     print(body)
+#     name = body["name"]
+#     code = body["code"]
+#     category = body["category"]
+#     provider = body["provider"]
+#     cost = body["cost"]
+#     description = body["description"]
+#     modality = body["modality"]
+#     start_date = body["start_date"]
+#     finish_date = body["finish_date"]
+#     contents = body["contents"]
+#     is_active = True
+#     if body is None:
+#         raise APIException("Body está vacío", status_code=400)
+#     if name is None or name=="":
+#         raise APIException("Ingrese el nombre de curso", status_code=400)
+#     if code is None or code=="":
+#         raise APIException("Ingrese el código", status_code=400)
+#     if category is None or category=="":
+#         raise APIException("Ingrese la categoría", status_code=400)
+#     if provider is None or provider=="":
+#         raise APIException("Ingrese el proveedor", status_code=400)
+#     if cost is None or cost=="":
+#         raise APIException("Ingrese el costo", status_code=400)
+#     if description is None or description=="":
+#         raise APIException("Digite la descripción", status_code=400)
+#     if modality is None or modality=="":
+#         raise APIException("Ingrese la modalidad", status_code=400)
+#     if start_date is None or start_date=="":
+#         raise APIException("Ingrese la fecha de inicio", status_code=400)
+#     if finish_date is None or finish_date=="":
+#         raise APIException("Ingrese la fecha de finalización de curso", status_code=400)
+#     if contents is None or contents=="":
+#         raise APIException("Ingrese los contenidos", status_code=400)
+#     addcourse = Course.query.filter_by(code=code).first()
+#     #se verifica si el curso ya existe en BD
+#     if addcourse:
+#         raise APIException("El curso ya existe", status_code=400)
+#     #debería encriptar el password
+#     #print("password sin encriptar:", password)
+#     #password = current_app.bcrypt.generate_password_hash(password, 10).decode("utf-8")
+#     #print("password con encriptación:", password)
+#     new_course = Course(name=name,
+#                         code=code,
+#                         category=category,
+#                         provider=provider,
+#                         cost=cost,
+#                         description=description,
+#                         modality=modality,
+#                         start_date=start_date,
+#                         finish_date=finish_date,
+#                         contents=contents,
+#                         is_active=True)
+#     try:
+#         db.session.add(new_course)
+#         db.session.commit()
+#         return jsonify({"message":"curso añadido"}), 201
+#     except Exception as error:
+#         print(str(error))
+#         return jsonify({"message":"error al añadir el curso en BD"}), 500
 
 #Aquí termina el formulario de agregar curso 
 ###########
@@ -235,9 +235,97 @@ def edit_course_id(id):
 
     except Exception as error:
         print(error)  
-        return jsonify({"message":str(error)}), 500  
+        return jsonify({"message":str(error)}), 500 
 
+#Agregar proveedor
+@api.route('/suppliers', methods=["POST"]) #arreglar path
+def supplier_register():
+    body = request.get_json()
+    name = body["name"]
+    phone = body["phone"]
+    email = body["email"]
+    legal_id = body["legal_id"]
+    is_active = True
+    if body is None:
+        raise APIException("Body está vacío", status_code=400)
+    if name is None or name=="":
+        raise APIException("El nombre del proveedor es necesario", status_code=400)
+    if phone is None or phone=="":
+        raise APIException("El numero de telefono es necesario", status_code=400)
+    if email is None or email=="":
+        raise APIException("El email es necesario", status_code=400)
+    if legal_id is None or legal_id=="":
+        raise APIException("La cedula juridica es necesaria", status_code=400)
+    
+    supplier = Supplier.query.filter_by(legal_id=legal_id).first()
+    #se verifica si el usuario ya existe en BD
+    if supplier:
+        raise APIException("El proveedor ya existe", status_code=400)
+    new_supplier = Supplier(name=name,
+                        phone=phone, 
+                        email=email,
+                        legal_id=legal_id,
+                        is_active= is_active)
+    try:
+        db.session.add(new_supplier)
+        db.session.commit()
+        return jsonify({"message":"Proveedor registrado"}), 201
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message":"error al almacenar en BD"}), 500 
 
+#Traer info de todos los proveedores
+@api.route('/suppliers', methods=['GET'])
+def get_supplier():
+    search = Supplier.query.all()    
+    search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
+    print("valor de search_serialize ", search_serialize)
+    
+    return jsonify(search_serialize), 200
+
+@api.route('/addCourse', methods=["POST"])
+def add_course():
+    body = request.get_json()
+
+    # Extrae los datos del cuerpo de la solicitud
+    name = body["name"]
+    code = body["code"]
+    category = body["category"]
+    provider_id = body["provider_id"]  # Cambia "provider" a "provider_id"
+    cost = body["cost"]
+    description = body["description"]
+    modality = body["modality"]
+    start_date = body["start_date"]
+    finish_date = body["finish_date"]
+    contents = body["contents"]
+
+    if body is None:
+        return jsonify({"message": "Body está vacío"}), 400
+
+    # ... Validaciones y creación del curso ...
+
+    try:
+        # Crea un nuevo curso en la tabla de cursos
+        new_course = Course(name=name, code=code, category=category, cost=cost, description=description,
+                            modality=modality, start_date=start_date, finish_date=finish_date, contents=contents, is_active=True)
+        db.session.add(new_course)
+        db.session.commit()
+        db.session.refresh(new_course) #para que se agregue el id
+
+        new_supplier_pivot=SupplierPivot(course_id=new_course.id, supplier_id=provider_id) 
+        db.session.add(new_supplier_pivot)
+        db.session.commit()
+
+        # Asocia el curso con el proveedor utilizando la tabla pivote curso_proveedor
+        # supplier = Supplier.query.get(supplier_id)
+        # new_course.Supplier.append(supplier)  # Asocia el curso con el proveedor
+
+        # db.session.commit()
+
+        return jsonify({"message": "Curso añadido"}), 201
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message": "Error al añadir el curso en BD"}), 500
   
   
 
