@@ -29,7 +29,7 @@ export const AdminPrincipalPage = () => {
                 <div className="admin_feature text-center">
                     <p> Mostrar lista de empleados <br />
                         matriculados/reprobados/aprobados</p>
-                    <Link to="/" className="admin_feature_button">Ingresar</Link>
+                    <Link to="/userList" className="admin_feature_button">Ingresar</Link>
                 </div>
                 <div className="admin_feature text-center">
                     <p> Registro de proveedores </p>

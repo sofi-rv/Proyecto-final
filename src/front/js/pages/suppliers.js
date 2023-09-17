@@ -148,23 +148,30 @@ export const Suppliers = () => {
                 </div>
             </div>
 
-            <div className="suppliers_list">
-                <div>
-                    {suppliersList && suppliersList.length > 0 ?
-                        <>
-                            {suppliersList.map((item, index) => {
-                                return (<ul className="list-group">
+            <div className="suppliers_list row">
+                {suppliersList && suppliersList.length > 0 ?
+                    <>
+                        {suppliersList.map((item, index) => {
+                            return (
+                                <ul key={index} className="list-group">
                                     <li className="list-group-item">
-                                        <h3>{item.name}</h3>
-                                        Teléfono: {item.phone} <br></br>
-                                        Email: {item.email} <br></br>
-                                        Cédula jurídica: {item.legal_id}
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <h3>{item.name}</h3>
+                                                Teléfono: {item.phone} <br></br>
+                                                Email: {item.email} <br></br>
+                                                Cédula jurídica: {item.legal_id}
+                                            </div>
+                                            <div className="col-6">
+                                                {item.courses}
+                                            </div>
+                                        </div>
                                     </li>
-                                </ul>)
-                            })}
-                        </>
-                        : <></>}
-                </div>
+                                </ul>
+                            )
+                        })}
+                    </>
+                    : <></>}
             </div>
         </div>
     );
