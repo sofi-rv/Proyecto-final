@@ -48,7 +48,7 @@ const Layout = () => {
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/userPage" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <PrincipalPage />
                 <Footer />
               </>

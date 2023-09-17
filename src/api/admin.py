@@ -1,7 +1,7 @@
   
 import os
 from flask_admin import Admin
-from .models import db, User, Course, Company_admin, Supplier, SupplierPivot, CourseEnrollment
+from .models import db, User, Course, Supplier, SupplierPivot, CourseEnrollment
 from flask_admin.contrib.sqla import ModelView
 
 def setup_admin(app):
@@ -12,7 +12,6 @@ def setup_admin(app):
     
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))
-    admin.add_view(ModelView(Company_admin, db.session))
     admin.add_view(ModelView(Course, db.session))
     admin.add_view(ModelView(CourseEnrollment, db.session))
     admin.add_view(ModelView(Supplier, db.session))

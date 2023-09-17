@@ -1,16 +1,89 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../styles/registerCourse.css";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
 
 export const RegisterCourse = () => {
+    const { store, actions } = useContext(Context);
+    const [courseDetails, setCourseDetails] = useState({});
+    const [id_number, setIdNumber] = useState("");
+    const { id } = useParams();
+    console.log(id)
+
+    //Cargar informacion de curso
+    useEffect(() => {
+        const getData = async () => {
+            let response = await actions.fetchPromise(`/api/addCourse/${id}`)
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setCourseDetails(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+
+        }
+        getData()
+    }, [])
+
+    //Enviar matricula
+    const enroll = async () => {
+        //Sección de verificación
+        if (id_number == "") {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "¡Por favor llene todos los campos!",
+                /* footer: '<a href="">Why do I have this issue?</a>' */
+                timer: 3500,
+            });
+            return;
+        }
+        //Sección para enviar la data al backend
+        let obj = {
+            user_id: "1",
+            course_id: id,
+            id_number: id_number,
+            condition: "matriculado"
+        };
+        let response = await actions.fetchPromise("/api/enrollment", "POST", obj);
+        if (response.ok) {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: responseJson.message,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            navigate("/"); // history.push("/")
+        } else {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "¡Error al registrar!",
+                /* footer: '<a href="">Why do I have this issue?</a>' */
+                timer: 3500,
+            });
+        }
+        return;
+    };
+
     return (
         <div className="registerCourse_page">
             <form method="post" className="registerCourse_form my-5">
-                <h3 className="text-center py-3">Formulario de Mátricula</h3>
+                <h3 className="text-center py-3">Formulario de Matrícula</h3>
 
                 <div className="my-4">
-                    <p>Nombre del curso: Curso</p>
-                    <p>Código del curso: xxxxxx</p>
-                    <p>Precio: $100</p>
+                    {courseDetails && <p className="mb-1">Nombre del curso: {courseDetails.name}</p>}
+                    {courseDetails && <p className="mb-1">Código del curso: {courseDetails.code}</p>}
+                    {courseDetails && <p className="mb-1">Precio: ${courseDetails.cost}</p>}
                 </div>
 
                 <div>
@@ -20,7 +93,9 @@ export const RegisterCourse = () => {
                     </div>
                     <div className="d-flex justify-content-between align-items-center pb-4">
                         <label className="me-3">No. Cédula:</label>
-                        <input type="text" className="registerCourse_input" />
+                        <input type="text" className="registerCourse_input" onChange={(e) => {
+                            setIdNumber(e.target.value);
+                        }} />
                     </div>
                     <div className="d-flex justify-content-between align-items-center pb-4">
                         <label className="me-3">Email institucional:</label>
@@ -31,7 +106,7 @@ export const RegisterCourse = () => {
                         <input type="text" className="registerCourse_input" />
                     </div>
                 </div>
-                <input type="submit" value="Finalizar Mátricula" className="registerCourse_button my-4" />
+                <input type="button" value="Finalizar Mátricula" className="registerCourse_button my-4" onClick={enroll} />
             </form>
         </div>
     );
