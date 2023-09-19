@@ -11,6 +11,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
   let navigate = useNavigate(""); // useHistory("")
+
   const register = async () => {
     //Sección de verificación
     if (password == "" || email == "") {
@@ -39,8 +40,11 @@ export const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      localStorage.setItem("token", responseJson.token);
+      let userInfo = responseJson.user;
+      // actions.userInfo(userInfo)
+      localStorage.setItem("user", JSON.stringify(userInfo));
       actions.activateLoginConfirmation();
-      //prueba - pero debe llevar a página principal de usuario
       navigate("/principalPage"); // history.push("/")
     } else {
       let responseJson = await response.json();

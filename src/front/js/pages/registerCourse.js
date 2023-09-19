@@ -7,12 +7,14 @@ import Swal from "sweetalert2";
 export const RegisterCourse = () => {
     const { store, actions } = useContext(Context);
     const [courseDetails, setCourseDetails] = useState({});
+    const [currency, setCurrency] = useState({});
     const [id_number, setIdNumber] = useState("");
     const { id } = useParams();
-    console.log(id)
+    let user_id = store.user;
+    console.log(user_id);
 
-    //Cargar informacion de curso
     useEffect(() => {
+        //Cargar informacion de curso
         const getData = async () => {
             let response = await actions.fetchPromise(`/api/addCourse/${id}`)
 
@@ -27,6 +29,21 @@ export const RegisterCourse = () => {
 
         }
         getData()
+
+        //Cargar tipo de cambio
+        const getCurrency = async () => {
+            let response = await actions.fetchGenerico("https://apis.gometa.org/tdc/tdc.json?fbclid=IwAR0mI3_X97fIgrSdbaJJ8f4_Lpv6dCo2hjgYy7eI_ud0B54KdEliOCCkv9s")
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setCurrency(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+        }
+
     }, [])
 
     //Enviar matricula
@@ -74,6 +91,8 @@ export const RegisterCourse = () => {
         }
         return;
     };
+
+
 
     return (
         <div className="registerCourse_page">
