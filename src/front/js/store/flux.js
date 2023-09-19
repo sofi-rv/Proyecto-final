@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      loginConfirmation: false,
+      user: {},
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -47,6 +49,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+
+      fetchGenerico: async (path, metodo = "GET", data = null) => {
+        let obj = {
+          method: metodo,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        if (metodo == "GET") {
+          obj = {
+            method: metodo,
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          };
+        }
+        let response = await fetch(path, obj);
+        return response;
       },
 
       fetchPromise: async (path, metodo = "GET", data = null) => {
@@ -84,6 +107,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
         setStore({ ...store, loginConfirmation: false });
       },
+
+      userInfo: () => {
+        const store = getStore();
+        const userInfo = JSON.parse(localStorage.getItem("user"))
+        console.log(userInfo)
+        setStore({ ...store, user: userInfo });
+
+      }
     },
   };
 };

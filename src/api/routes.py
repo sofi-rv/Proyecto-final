@@ -65,7 +65,7 @@ def user_register():
         return jsonify({"message":"error al almacenar en BD"}), 500
 
 #Login de usuario
-@api.route("/", methods=["POST"])
+@api.route("/", methods=["POST"]) 
 def login():
     body = request.get_json()
     #ver si se puede hacer un email restringido de empresa
@@ -85,7 +85,8 @@ def login():
     if not coincidencia:
         raise APIException("El usuario o el password son incorrectos", status_code=400)
     access_token = create_access_token(identity=email)
-    return jsonify({"token":access_token}), 200
+    user_info = user.serialize() #["id"] para solo traer id
+    return jsonify({"token":access_token, "user":user_info}), 200
 
 #Traer info de un usuario
 @api.route('/user/<int:id>', methods=['GET'])
@@ -273,6 +274,6 @@ def enroll_course():
     except Exception as error:
         print(str(error))
         return jsonify({"message": "Error al matricularse"}), 500 
-  
+
 
     
