@@ -98,7 +98,7 @@ export const Login = () => {
             onClick={register}
           />
 
-          <Link to="/adminLogin" className="form_link text-center text-danger">
+          <Link to="/adminLogin" className="form_link text-center text-black">
             Ingresar como administrador
           </Link>
         </form>
@@ -107,7 +107,8 @@ export const Login = () => {
         <h2 className="login_text_title">¡Bienvenido!</h2>
         <p>
           Bienvenido al programa de capacitaciones para <br /> empleados de
-          Company. Ingresa para acceder a <br /> los cursos disponibles
+          Company C.R. <br />Ingresa para acceder a 
+          los cursos disponibles
         </p>
       </div>
     </div>
