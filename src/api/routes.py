@@ -255,9 +255,11 @@ def enroll_course():
     course_id = body["course_id"]
     id_number = body["id_number"]
     condition = body["condition"]
+    if "approval_doc" in body:
+        approval_doc = body["approval_doc"]
 
-    if body is None:
-        return jsonify({"message": "Body está vacío"}), 400
+    # if body is None:
+    #     return jsonify({"message": "Body está vacío"}), 400
 
     # ... Validaciones y matricula ...
 
@@ -266,7 +268,7 @@ def enroll_course():
         if search2:
             return jsonify({"message":"ya se encuentra matriculado"}), 409
         # Crea un nuevo curso en la tabla de cursos
-        enroll_course = CourseEnrollment(id_number=id_number, condition=condition, course_id=course_id, user_id=user_id)
+        enroll_course = CourseEnrollment(id_number=id_number, condition=condition, course_id=course_id, user_id=user_id, approval_doc=approval_doc)
         db.session.add(enroll_course)
         db.session.commit()
 
@@ -275,5 +277,48 @@ def enroll_course():
         print(str(error))
         return jsonify({"message": "Error al matricularse"}), 500 
 
+#Traer info de todas las matrículas de cursos
+@api.route('/enrollment', methods=['GET'])
+def course_enrollment():
+    try:
+        search = CourseEnrollment.query.all()    
+        search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
+        print("valor de search_serialize ", search_serialize)
 
-    
+        return jsonify(search_serialize), 200
+
+    except Exception as error:
+        print(error)
+        return jsonify({"message":str(error)}), 500
+
+#Traer info del historial académico del usuario
+@api.route('/enrollment/<int:id>', methods=['GET'])
+def course_enrollment_id(id):
+    try:
+        search2 = CourseEnrollment.query.filter_by(user_id = id).all()
+        search2_serialize = list(map(lambda x: x.serialize(), search2))
+        print("resultado final: ", search2_serialize)
+        
+        return jsonify(search2_serialize), 200      
+
+        return jsonify(search_serialize), 200
+
+    except Exception as error:
+            print(error)
+            return jsonify({"message":str(error)}), 500
+
+#Ingresar comprobante de aprobación
+@api.route('/enrollment/<int:id>', methods=['PUT'])
+def send_approval_doc(id):
+    try:
+        body = request.get_json()
+        search = CourseEnrollment.query.get(id)
+        search.approval_doc = body["approval_doc"]
+
+        db.session.commit()
+
+        return jsonify({"message":"se envio correctamente"}), 200
+
+    except Exception as error:
+        print(error)  
+        return jsonify({"message":str(error)}), 500 

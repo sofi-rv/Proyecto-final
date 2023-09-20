@@ -10,7 +10,7 @@ export const RegisterCourse = () => {
     const [currency, setCurrency] = useState({});
     const [id_number, setIdNumber] = useState("");
     const { id } = useParams();
-    let user_id = store.user;
+    let user_id = store.user.id;
     console.log(user_id);
 
     useEffect(() => {
@@ -61,10 +61,11 @@ export const RegisterCourse = () => {
         }
         //Sección para enviar la data al backend
         let obj = {
-            user_id: "1",
+            user_id: user_id,
             course_id: id,
             id_number: id_number,
-            condition: "matriculado"
+            condition: "En curso",
+            approval_doc: ""
         };
         let response = await actions.fetchPromise("/api/enrollment", "POST", obj);
         if (response.ok) {
