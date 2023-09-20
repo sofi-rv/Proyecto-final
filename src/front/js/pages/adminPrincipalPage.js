@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import WithAuth from "../component/Authentication/WithAuth";
 
 import "../../styles/adminPrincipalPage.css";
 
@@ -39,3 +40,5 @@ export const AdminPrincipalPage = () => {
         </div>
     );
 };
+
+export default WithAuth(AdminPrincipalPage);

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint , current_app
-from api.models import db, User, Course, Supplier, SupplierPivot, CourseEnrollment
+from api.models import db, User, TokenBlocked, Course, Supplier, SupplierPivot, CourseEnrollment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -87,6 +87,24 @@ def login():
     access_token = create_access_token(identity=email)
     user_info = user.serialize() #["id"] para solo traer id
     return jsonify({"token":access_token, "user":user_info}), 200
+
+@api.route("/logout", methods=["POST"])
+@jwt_required()
+def logout():
+    try:
+        jti = get_jwt()["jti"]
+        identity = get_jwt_identity() #asociada al correo
+        print("jti: ", jti)
+        new_register =  TokenBlocked(token=jti, email= identity) #creamos una instancia de la clase TokenBlocked
+
+        db.session.add(new_register)
+        db.session.commit()
+
+        return jsonify({"message":"logout succesfully"}), 200
+    
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message":"error trying to logout"}), 403
 
 #Traer info de un usuario
 @api.route('/user/<int:id>', methods=['GET'])
