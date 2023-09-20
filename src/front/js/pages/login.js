@@ -56,9 +56,24 @@ export const Login = () => {
         /* footer: '<a href="">Why do I have this issue?</a>' */
         timer: 3500,
       });
+
+    } if (response.data.user.admin) {
+      setStore({
+        admin: true,
+        auth: true,
+        userId: response.data.user.id,
+      });
+
+    } else {
+      setStore({
+        auth: true,
+        userId: response.data.user.id,
+      });
     }
     return;
   };
+
+
 
   return (
     <div className="login_content">
@@ -107,7 +122,7 @@ export const Login = () => {
         <h2 className="login_text_title">¡Bienvenido!</h2>
         <p>
           Bienvenido al programa de capacitaciones para <br /> empleados de
-          Company C.R. <br />Ingresa para acceder a 
+          Company C.R. <br />Ingresa para acceder a
           los cursos disponibles
         </p>
       </div>
