@@ -14,7 +14,7 @@ const WithAuth = (Component) => {
         if (isAuth) {
             return <Component />
         } else {
-            return <Navigate to="/adminPrincipalPage" />
+            return <Navigate to="/" />
         }
     }
     return AuthRoute

@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db = SQLAlchemy()
 
@@ -44,6 +45,22 @@ class User(db.Model):
             "email": self.email,
             "role": self.role,
             #"course_enrollment": self.course_enrollment
+            # do not serialize the password, its a security breach
+        }
+
+class TokenBlocked(db.Model):
+    __tablename__ = 'tokenblocked'
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(200), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    date = db.Column(db.DateTime, nullable = False, default=datetime.datetime.utcnow)
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "token": self.token,
+            "date": self.date
             # do not serialize the password, its a security breach
         }
 
