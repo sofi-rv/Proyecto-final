@@ -10,6 +10,7 @@ class CourseEnrollment(db.Model):
     id_number = db.Column(db.String(100), unique=True, nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     condition = db.Column(db.String(12), unique=False, nullable=False)
+    approval_doc = db.Column(db.String(200), unique=False, nullable=False)
   
     def __repr__(self):
         return '<CourseEnrollment %r>' % self.id
@@ -20,7 +21,11 @@ class CourseEnrollment(db.Model):
             "user_id": self.user_id,
             "id_number": self.id_number,
             "course_id": self.course_id,
-            "condition": self.condition
+            "condition": self.condition,
+            "approval_doc": self.approval_doc,
+            "course_name": Course.query.get(self.course_id).serialize()["name"],
+            "user_name": User.query.get(self.user_id).serialize()["name"],
+            "user_lastname": User.query.get(self.user_id).serialize()["lastname"]
         }
 
 class User(db.Model):
