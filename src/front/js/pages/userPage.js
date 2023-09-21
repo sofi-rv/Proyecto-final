@@ -122,7 +122,7 @@ export const UserPage = () => {
                                     <>
                                         {academicRecord.map((item, index) => {
                                             return (
-                                                item.condition == "matriculado" &&
+                                                item.condition == "En curso" &&
                                                 <ul key={index} className="list-group">
                                                     <li className="list-group-item">
                                                         {item.course_name}
@@ -189,7 +189,7 @@ export const UserPage = () => {
                                     <>
                                         {academicRecord.map((item, index) => {
                                             return (
-                                                item.condition == "aprobado" &&
+                                                item.condition == "Aprobados" &&
                                                 <ul key={index} className="list-group">
                                                     <li className="list-group-item">
 
@@ -226,7 +226,7 @@ export const UserPage = () => {
                                     <>
                                         {academicRecord.map((item, index) => {
                                             return (
-                                                item.condition == "reprobado" &&
+                                                item.condition == "Reprobados" &&
                                                 <ul key={index} className="list-group">
                                                     <li className="list-group-item">
 

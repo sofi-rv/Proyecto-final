@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 export const RegisterCourse = () => {
     const { store, actions } = useContext(Context);
+    const [userDetails, setUserDetails] = useState({});
     const [courseDetails, setCourseDetails] = useState({});
     const [currency, setCurrency] = useState({});
     const [id_number, setIdNumber] = useState("");
@@ -43,6 +44,23 @@ export const RegisterCourse = () => {
                 console.log(responseJson);
             }
         }
+        getCurrency()
+
+        //Cargar informacion del usuario
+        const getUser = async () => {
+            let response = await actions.fetchPromise(`/api/user/${user_id}`)
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setUserDetails(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+
+        }
+        getUser()
 
     }, [])
 
@@ -98,18 +116,22 @@ export const RegisterCourse = () => {
     return (
         <div className="registerCourse_page">
             <form method="post" className="registerCourse_form my-5">
+                <button type="button" className="btn btn-secondary" data-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Left popover">
+                    Popover on left
+                </button>
+                {currency && <h3>{currency.compra}</h3>}
                 <h3 className="text-center py-3">Formulario de Matrícula</h3>
 
                 <div className="my-4">
-                    {courseDetails && <p className="mb-1">Nombre del curso: {courseDetails.name}</p>}
+                    {courseDetails && <p className="mb-1">Curso: {courseDetails.name}</p>}
                     {courseDetails && <p className="mb-1">Código del curso: {courseDetails.code}</p>}
                     {courseDetails && <p className="mb-1">Precio: ${courseDetails.cost}</p>}
                 </div>
 
                 <div>
-                    <div className="d-flex justify-content-between align-items-center pb-4">
-                        <label className="me-3">Nombre completo:</label>
-                        <input type="text" className="registerCourse_input" />
+                    <div className="mb-5">
+                        {userDetails && <p className="mb-1">Nombre: {userDetails.name} {userDetails.lastname}</p>}
+                        {userDetails && <p className="mb-1">Email institucional: {userDetails.email}</p>}
                     </div>
                     <div className="d-flex justify-content-between align-items-center pb-4">
                         <label className="me-3">No. Cédula:</label>
@@ -117,14 +139,10 @@ export const RegisterCourse = () => {
                             setIdNumber(e.target.value);
                         }} />
                     </div>
-                    <div className="d-flex justify-content-between align-items-center pb-4">
-                        <label className="me-3">Email institucional:</label>
-                        <input type="email" className="registerCourse_input" />
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center pb-4">
+                    {/* <div className="d-flex justify-content-between align-items-center pb-4">
                         <label className="me-3">Pago de curso:</label>
                         <input type="text" className="registerCourse_input" />
-                    </div>
+                    </div> */}
                 </div>
                 <input type="button" value="Finalizar Mátricula" className="registerCourse_button my-4" onClick={enroll} />
             </form>
