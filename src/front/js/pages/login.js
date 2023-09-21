@@ -43,9 +43,13 @@ export const Login = () => {
       localStorage.setItem("token", responseJson.token);
       let userInfo = responseJson.user;
       // actions.userInfo(userInfo)
-      localStorage.setItem("user", JSON.stringify(userInfo));
-      actions.activateLoginConfirmation();
-      navigate("/principalPage"); // history.push("/")
+      actions.activateLoginConfirmation(userInfo);
+      if (userInfo.role == "user") {
+        navigate("/principalPage"); // history.push("/")
+      } else if (userInfo.role == "admin") {
+        navigate("/adminPrincipalPage"); // history.push("/")
+      }
+
     } else {
       let responseJson = await response.json();
       console.log(responseJson);
@@ -57,19 +61,20 @@ export const Login = () => {
         timer: 3500,
       });
 
-    } if (response.data.user.admin) {
-      setStore({
-        admin: true,
-        auth: true,
-        userId: response.data.user.id,
-      });
-
-    } else {
-      setStore({
-        auth: true,
-        userId: response.data.user.id,
-      });
     }
+    // if (response.data.user.admin) {
+    //   setStore({
+    //     admin: true,
+    //     auth: true,
+    //     userId: response.data.user.id,
+    //   });
+
+    // } else {
+    //   setStore({
+    //     auth: true,
+    //     userId: response.data.user.id,
+    //   });
+    // }
     return;
   };
 

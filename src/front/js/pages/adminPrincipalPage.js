@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import WithAuth from "../component/Authentication/WithAuth";
-
+import { Context } from "../store/appContext";
 import "../../styles/adminPrincipalPage.css";
 
 export const AdminPrincipalPage = () => {
-    return (
+    const { store, actions } = useContext(Context)
+    return store.user && store.user.role == "admin" ? (
         <div className="adminPrincipalPage_page">
             <h3 className="mt-4 text-center">¡Bienvenido Administrador!</h3>
             <div className="admin_features">
@@ -38,7 +39,11 @@ export const AdminPrincipalPage = () => {
                 </div>
             </div>
         </div>
-    );
+    )
+        :
+        (
+            <h1>¡No tienes permitido estar aquí!</h1>
+        )
 };
 
 export default WithAuth(AdminPrincipalPage);
