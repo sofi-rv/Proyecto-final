@@ -42,7 +42,7 @@ export const AdminPrincipalPage = () => {
     )
         :
         (
-            <h1>¡No tienes permitido estar aquí!</h1>
+            <h1 className="text-center">¡No tienes permitido estar aquí!</h1>
         )
 };
 
