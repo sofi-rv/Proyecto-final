@@ -55,7 +55,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         let obj = {
           method: metodo,
           headers: {
-            "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         };
@@ -63,8 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           obj = {
             method: metodo,
             headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("token"),
+              // "Content-Type": "application/json",
+              // Authorization: "Bearer " + localStorage.getItem("token"),
             },
           };
         }
