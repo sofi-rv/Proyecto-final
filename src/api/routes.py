@@ -11,13 +11,27 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 
 
+#prueba para bloquear token y no entre a esta ruta privada
+def verifyToken(jti):
+    search = TokenBlocked.query.filter_by(token=jti).first()
+    
+    if search == None:
+        return True #para este caso el token no estaría en la lista de bloqueados
+    else:
+        return False #para este caso el token sí estaría en la lista de bloqueados
+
 @api.route('/hello', methods=['POST', 'GET'])
 @jwt_required() 
 
 def handle_hello():
 
+    verification = verifyToken(get_jwt()["jti"])
+    if verification == False:
+        return jsonify({"message":"forbidden"}), 403 
+
+
     response_body = {
-        "message": "Hola qué tal"
+        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
 
     return jsonify(response_body), 200
