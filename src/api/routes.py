@@ -5,13 +5,15 @@ from flask import Flask, request, jsonify, url_for, Blueprint , current_app
 from api.models import db, User, TokenBlocked, Course, Supplier, SupplierPivot, CourseEnrollment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, get_jwt
 from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
+@jwt_required() 
+
 def handle_hello():
 
     response_body = {
@@ -101,6 +103,20 @@ def logout():
         db.session.commit()
 
         return jsonify({"message":"logout succesfully"}), 200
+    
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message":"error trying to logout"}), 403
+
+@api.route("/auth", methods=["GET"])
+@jwt_required()
+def auth():
+    try:
+        email = get_jwt_identity() #asociada al correo
+        print(email)
+        user = User.query.filter_by(email = email).first()
+
+        return jsonify(user.serialize()), 200
     
     except Exception as error:
         print(str(error))
