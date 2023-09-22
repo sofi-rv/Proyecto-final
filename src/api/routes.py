@@ -134,7 +134,7 @@ def auth():
     
     except Exception as error:
         print(str(error))
-        return jsonify({"message":"error trying to logout"}), 403
+        return jsonify({"message":"error trying to auth"}), 403
 
 #Traer info de un usuario
 @api.route('/user/<int:id>', methods=['GET'])

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export const AddCourse = () => {
+  const { store, actions } = useContext(Context);
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -16,8 +17,8 @@ export const AddCourse = () => {
   const [modality, setModality] = useState("");
   const [finish_date, setFinishDate] = useState("");
   const [contents, setContents] = useState("");
-  const { store, actions } = useContext(Context);
   const [suppliersList, setSuppliersList] = useState([]);
+
   let navigate = useNavigate(""); // useHistory("")
 
   //Agregar curso
@@ -91,7 +92,7 @@ export const AddCourse = () => {
   }, [])
 
 
-  return (
+  return store.user && store.user.role == "admin" ? (
     <>
       <div className="addCourse_page">
         <form className="addCourse_form my-5" id="addCourse_form">
@@ -221,5 +222,9 @@ export const AddCourse = () => {
         </form>
       </div>
     </>
-  );
+  )
+    :
+    (
+      <h1 className="text-center">¡No tienes permitido estar aquí!</h1>
+    )
 };

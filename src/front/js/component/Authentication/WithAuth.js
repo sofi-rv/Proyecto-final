@@ -12,7 +12,7 @@ const WithAuth = (Component) => {
 
         const isAuth = store.loginConfirmation
         if (isAuth) {
-            return <Navigate to="/adminPrincipalPage" />
+            return <Component />
         } else {
             return <Navigate to="/" />
         }

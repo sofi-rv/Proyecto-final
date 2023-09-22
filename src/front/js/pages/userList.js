@@ -71,7 +71,7 @@ export const UserList = () => {
     //     // }
     //     return category
     // }
-    return (
+    return store.user && store.user.role == "admin" ? (
         <div className="userList_page">
             <div className="mt-4 ms-4">
                 <h3>Listado de empleados por condición</h3>
@@ -179,4 +179,8 @@ export const UserList = () => {
             </div>
         </div>
     )
+        :
+        (
+            <h1 className="text-center">¡No tienes permitido estar aquí!</h1>
+        )
 };
