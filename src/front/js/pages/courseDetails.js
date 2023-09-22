@@ -28,7 +28,7 @@ export const CourseDetails = () => {
         getData()
     }, [])
 
-    return (
+    return store.user && store.user.role == "user" ? (
         <div className="courseDetails_page">
             <div className="courseDetails_content">
                 {courseDetails && <h3>{courseDetails.name}</h3>}
@@ -58,4 +58,8 @@ export const CourseDetails = () => {
             </div>
         </div>
     )
+        :
+        (
+            <h1 className="text-center alert">¡No tienes permitido estar aquí!</h1>
+        )
 };
