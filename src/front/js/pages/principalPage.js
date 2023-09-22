@@ -77,7 +77,7 @@ export const PrincipalPage = () => {
         return listModified
     }
 
-    return (
+    return store.user && store.user.role == "user" ? (
         <>
             <main>
                 <article>
@@ -194,5 +194,9 @@ export const PrincipalPage = () => {
                 </article>
             </main>
         </>
-    );
+    )
+        :
+        (
+            <h1 className="text-center alert">¡No tienes permitido estar aquí!</h1>
+        )
 };

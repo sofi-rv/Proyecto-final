@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/passwordRecover.css";
 
 export const PasswordRecover = () => {
-  return (
+  const { store, actions } = useContext(Context)
+  return store.user && store.user.role == "user" || "admin" ? (
     <div className="recover_page">
       <form className="recover_form">
         <h3 className="recover_title mb-4">Recuperar Contraseña</h3>
@@ -22,5 +24,9 @@ export const PasswordRecover = () => {
         </Link>
       </form>
     </div>
-  );
+  )
+    :
+    (
+      <h1 className="text-center alert">¡No tienes permitido estar aquí!</h1>
+    )
 };
