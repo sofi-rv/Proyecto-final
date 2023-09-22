@@ -116,10 +116,11 @@ export const RegisterCourse = () => {
     return (
         <div className="registerCourse_page">
             <form method="post" className="registerCourse_form my-5">
-                <button type="button" className="btn btn-secondary" data-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Left popover">
-                    Popover on left
-                </button>
-                {currency && <h3>{currency.compra}</h3>}
+                {/* popover */}
+                <div class="help-tip">
+                    {currency && <p>{currency.compra}</p>}
+                </div>
+
                 <h3 className="text-center py-3">Formulario de Matrícula</h3>
 
                 <div className="my-4">

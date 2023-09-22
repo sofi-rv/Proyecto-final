@@ -11,11 +11,19 @@ export const PrincipalPage = () => {
     const [CoursesList, setCoursesList] = useState([]);
 
     const obtenerMes = (fecha) => {
-        //const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
         const arrayFecha = fecha.split("-")
-        const traerMes = Number(arrayFecha[1]) - 1
+        const traerMes = Number(arrayFecha[1]) //por qué -1??? 
+        console.log(traerMes)
         return traerMes
     }
+
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+    const d = new Date();
+    console.log(d);
+    // const today_month = d.getMonth() + 1;
+    const today_month = 11;
+    console.log(today_month)
 
     useEffect(() => {
         //@TODO Estos datos deben venir de la base de datos
@@ -107,7 +115,7 @@ export const PrincipalPage = () => {
                     <h3>¡Bienvenido a la agenda de capacitaciones V Bimestre 2023!</h3>
                     <p>En un mundo en constante evolución, la adquisición de nuevos conocimientos y habilidades se ha convertido en un pilar fundamental para el éxito tanto en el ámbito personal como profesional. En [Nombre de tu Empresa o Plataforma], estamos comprometidos con la excelencia en la educación y el desarrollo continuo de las personas.</p>
                     <div className="my-4">
-                        <h4 className="my-4">Cursos disponibles Septiembre</h4>
+                        <h4 className="my-4">Cursos disponibles {today_month % 2 == 0 ? meses[today_month - 2] : meses[today_month - 1]}</h4>
                         <div id="carouselExampleAutoplaying" className="carousel slide carousel-fade my-4" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
@@ -118,7 +126,7 @@ export const PrincipalPage = () => {
                                                     {CoursesList.map((item, index) => {
 
                                                         return (
-                                                            obtenerMes(item.start_date) % 2 == 0 &&
+                                                            obtenerMes(item.start_date) % 2 !== 0 && obtenerMes(item.start_date) >= today_month - 1 && obtenerMes(item.start_date) < today_month + 1 &&
                                                             <div key={index} className="card me-5" style={{ width: '18rem' }}>
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
                                                                 <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
@@ -150,7 +158,7 @@ export const PrincipalPage = () => {
                         </div>
                     </div>
                     <div className="my-5">
-                        <h4 className="my-4">Cursos disponibles Octubre</h4>
+                        <h4 className="my-4">Cursos disponibles {today_month % 2 !== 0 ? meses[today_month] : meses[today_month - 1]}</h4>
                         <div id="carouselExampleAutoplaying" className="carousel slide carousel-fade my-4" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active mb-5">
@@ -161,7 +169,7 @@ export const PrincipalPage = () => {
                                                     {CoursesList.map((item, index) => {
 
                                                         return (
-                                                            obtenerMes(item.start_date) % 2 != 0 &&
+                                                            obtenerMes(item.start_date) % 2 == 0 && today_month <= obtenerMes(item.start_date) && obtenerMes(item.start_date) <= today_month + 1 &&
                                                             <div key={index} className="card me-5" style={{ width: '18rem' }}>
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
                                                                 <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
