@@ -77,7 +77,7 @@ export const Suppliers = () => {
         cargaData()
     }, [])
 
-    return (
+    return store.user && store.user.role == "admin" ? (
         <div className="suppliers_page mx-4">
             <h3 className="my-4">Proveedores</h3>
             {/* Button trigger modal */}
@@ -174,5 +174,9 @@ export const Suppliers = () => {
                     : <></>}
             </div>
         </div>
-    );
+    )
+        :
+        (
+            <h1 className="text-center">¡No tienes permitido estar aquí!</h1>
+        )
 };

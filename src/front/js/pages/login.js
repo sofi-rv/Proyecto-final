@@ -117,10 +117,6 @@ export const Login = () => {
             className="form_button my-4"
             onClick={register}
           />
-
-          <Link to="/adminLogin" className="form_link text-center text-black">
-            Ingresar como administrador
-          </Link>
         </form>
       </div>
       <div className="login_text">
