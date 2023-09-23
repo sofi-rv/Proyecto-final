@@ -24,6 +24,7 @@ class CourseEnrollment(db.Model):
             "condition": self.condition,
             "approval_doc": self.approval_doc,
             "course_name": Course.query.get(self.course_id).serialize()["name"],
+            "course_code": Course.query.get(self.course_id).serialize()["code"],
             "user_name": User.query.get(self.user_id).serialize()["name"],
             "user_lastname": User.query.get(self.user_id).serialize()["lastname"]
         }
@@ -49,7 +50,6 @@ class User(db.Model):
             "lastname": self.lastname,
             "email": self.email,
             "role": self.role,
-            #"course_enrollment": self.course_enrollment
             # do not serialize the password, its a security breach
         }
 
@@ -113,13 +113,28 @@ class Supplier(db.Model):
             "courses": courses
         }
 
+# class Contents(db.Model):
+#     __tablename__ = 'contents'
+#     id = db.Column(db.Integer, primary_key=True)
+#     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+#     content = db.Column(db.String(500), unique=False, nullable=True)
+
+#     def __repr__(self):
+#         return '<Contents %r>' % self.id
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "course_id": self.course_id,
+#             "content": self.content
+#         }
+
 class Course(db.Model):
     __tablename__ = 'course'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=False, nullable=False)
     code = db.Column(db.String(200), unique=True, nullable=False)
     category = db.Column(db.String(200), unique=False, nullable=False)
-    #provider = db.Column(db.String(200), unique=False, nullable=False) #hay que borrarlo
     cost = db.Column(db.String(200), unique=False, nullable=False)
     description = db.Column(db.String(200), unique=False, nullable=False)
     modality = db.Column(db.String(200), unique=False, nullable=False)
@@ -128,27 +143,24 @@ class Course(db.Model):
     contents = db.Column(db.String(200), unique=False, nullable=False)
     supplierpivot = db.relationship(SupplierPivot, backref = 'course', lazy=True)
     course_enrollment = db.relationship(CourseEnrollment, backref = 'course', lazy=True)
+    # contents = db.relationship(Contents, backref = 'course', lazy=True)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
     def __repr__(self):
         return f'<Course {self.id}>'
     
     def serialize(self):
-        
         return {
             "id": self.id,
             "name": self.name,
             "code": self.code,
             "category": self.category,
             "cost": self.cost,
-            #"provider": self.provider,
             "description": self.description,
             "modality": self.modality,
             "start_date": self.start_date,
             "finish_date": self.finish_date,
             "contents": self.contents,
-            #"supplierpivot": self.supplierpivot,
-            #"course_enrollment": self.course_enrollment
-            # do not serialize the password, its a security breach
+            # "provider": Supplier.query.get(self.id).serialize()["name"],
         }
 

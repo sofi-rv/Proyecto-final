@@ -21,8 +21,8 @@ export const PrincipalPage = () => {
 
     const d = new Date();
     console.log(d);
-    // const today_month = d.getMonth() + 1;
-    const today_month = 11;
+    const today_month = d.getMonth() + 1;
+    //const today_month = 11;
     console.log(today_month)
 
     useEffect(() => {

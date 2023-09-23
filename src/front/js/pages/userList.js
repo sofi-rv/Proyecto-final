@@ -87,95 +87,38 @@ export const UserList = () => {
             </div>
             <div className="mx-4 mt-4">
                 <h3 className="text-center">{savedValue}</h3>
-                {/* {(() => {
-                    return { userCategory } != "" ? <h3 className="text-center">{userCategory}</h3> : ""
-                })()} */}
 
-                <div className="userList_users mt-4">
-                    <table className="table table-bordered userList_usersInfo">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cédula</th>
-                                <th scope="col">Código del curso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userCategoryList && userCategoryList.length > 0 ?
-                                <>
-                                    {userCategoryList.map((item, index) => {
-                                        return (
-                                            item.condition == savedValue &&
-
+                {userCategoryList && userCategoryList.length > 0 ?
+                    <>
+                        {userCategoryList.map((item, index) => {
+                            return (
+                                item.condition == savedValue &&
+                                <div className="userList_users mt-4">
+                                    <table className="table table-bordered userList_usersInfo">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Apellidos</th>
+                                                <th scope="col">Cédula</th>
+                                                <th scope="col">Curso</th>
+                                                <th scope="col">Código de curso</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <tr key={index}>
                                                 <td>{item.user_name}</td>
+                                                <td>{item.user_lastname}</td>
                                                 <td>{item.id_number}</td>
                                                 <td>{item.course_name}</td>
+                                                <td>{item.course_code}</td>
                                             </tr>
-
-                                            // <ul key={index} className="list-group">
-                                            //     <li className="list-group-item">
-
-                                            //         <div>
-                                            //             {item.user_name}
-                                            //         </div>
-                                            //         <div>
-                                            //             {item.course_name}
-                                            //         </div>
-
-
-                                            //     </li>
-                                            // </ul>
-                                        )
-                                    })}
-                                </>
-                                : <></>}
-
-                            {/* fghdfghdfgh */}
-                            {/* {userCategoryList.map((user, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{user.Nombre}</td>
-                                        <td>{user.Cedula}</td>
-                                        <td>{user.CodigoCurso}</td>
-                                    </tr>
-                                )
-                            })} */}
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-                {/* {(() => {
-                    if (userCategory.length) {
-                        return (
-                            <div className="userList_users mt-4">
-                                <table className="table table-bordered userList_usersInfo">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Cédula</th>
-                                            <th scope="col">Código del curso</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {userCategoryList.map((user, index) => {
-                                            return (
-                                                <tr key={index}>
-                                                    <td>{user.Nombre}</td>
-                                                    <td>{user.Cedula}</td>
-                                                    <td>{user.CodigoCurso}</td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
-                        )
-                    }
-                })()} */}
-
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )
+                        })}
+                    </>
+                    : <></>}
             </div>
         </div>
     )

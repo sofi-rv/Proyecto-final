@@ -127,7 +127,7 @@ export const UserPage = () => {
                                                     <li className="list-group-item">
                                                         {item.course_name}
                                                         {/* -- Button trigger modal -- */}
-                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <button type="button" className="btn btn-primary" style={{ float: "right" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             Enviar comprobante
                                                         </button>
 

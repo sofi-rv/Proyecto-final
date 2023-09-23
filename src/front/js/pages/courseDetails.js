@@ -38,9 +38,6 @@ export const CourseDetails = () => {
                         <h4>Contenidos:</h4>
                         <ul>
                             {courseDetails && <li>{courseDetails.contents}</li>}
-                            {/* <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li> */}
                         </ul>
                     </div>
                     <div className="ms-5">
@@ -48,7 +45,6 @@ export const CourseDetails = () => {
                         {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
                         {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
                         {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}
-                        {/* <p className="mb-1">Duración: X meses</p> */}
                         {courseDetails && <p>Código: {courseDetails.code}</p>}
                     </div>
                 </div>
