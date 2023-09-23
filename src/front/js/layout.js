@@ -42,30 +42,28 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <Navbar />
           <Routes>
             <Route element={<Home />} path="/home" />
             <Route element={<Login />} path="/" /> {/* resolver para que no salga navbar ni footer*/}
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
-            <Route element={<PrincipalPage />} path="/principalPage" />
-            <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
-            <Route element={<AddCourse />} path="/addCourse" />
-            <Route element={<Maintenance />} path="/maintenance" />
-            <Route element={<UpdateCourse />} path="/updateCourse" />
-            <Route element={<Reglament />} path="/reglament" />
-            <Route element={<UserPage />} path="/userPage" />
-            <Route element={<Suppliers />} path="/suppliers" />
-            <Route element={<CourseDetails />} path="/courseDetails/:id" />
-            <Route element={<RegisterCourse />} path="/registerCourse/:id" />
-            <Route element={<UserList />} path="/userList" />
-            <Route element={<ApprovalReview />} path="/approvalReview" />
+            <Route element={<><Navbar /><PrincipalPage /><Footer /></>} path="/principalPage" />
+            <Route element={<><Navbar /><AdminPrincipalPage /><Footer /></>} path="/adminPrincipalPage" />
+            <Route element={<><Navbar /><AddCourse /><Footer /></>} path="/addCourse" />
+            <Route element={<><Navbar /><Maintenance /><Footer /></>} path="/maintenance" />
+            <Route element={<><Navbar /><UpdateCourse /><Footer /></>} path="/updateCourse" />
+            <Route element={<><Navbar /><Reglament /><Footer /></>} path="/reglament" />
+            <Route element={<><Navbar /><UserPage /><Footer /></>} path="/userPage" />
+            <Route element={<><Navbar /><Suppliers /><Footer /></>} path="/suppliers" />
+            <Route element={<><Navbar /><CourseDetails /><Footer /></>} path="/courseDetails/:id" />
+            <Route element={<><Navbar /><RegisterCourse /><Footer /></>} path="/registerCourse/:id" />
+            <Route element={<><Navbar /><UserList /><Footer /></>} path="/userList" />
+            <Route element={<><Navbar /><ApprovalReview /><Footer /></>} path="/approvalReview" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
-          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>

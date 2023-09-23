@@ -13,13 +13,13 @@
 }
 
 .userList_users {
-    background-color: rgb(248, 99, 99);
+    background-color: #2d9fd9;
     padding: 1em;
     border-radius: 15px;
 }
 
 .userList_usersInfo  {
-    border: 1px solid rgb(248, 99, 99);
+    border: 1px solid #2d9fd9;
 }
 
 .userList_usersInfo tbody {
