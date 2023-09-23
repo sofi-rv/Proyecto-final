@@ -27,7 +27,8 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Logout } from "./pages/logout";
+
+
 
 //create your first component
 const Layout = () => {
@@ -41,127 +42,30 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          {/*<Navbar />*/}
+          <Navbar />
           <Routes>
             <Route element={<Home />} path="/home" />
-            <Route element={<Login />} path="/" />
+            <Route element={<Login />} path="/" /> {/* resolver para que no salga navbar ni footer*/}
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/userPage" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <PrincipalPage />
-                <Footer />
-              </>
-            }
-              path="/principalPage"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <AdminPrincipalPage />
-                <Footer />
-              </>
-            }
-              path="/adminPrincipalPage"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <AddCourse />
-                <Footer />
-              </>
-            }
-              path="/addCourse"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
-                <Maintenance />
-                <Footer />
-              </>
-            }
-              path="/maintenance"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
-                <UpdateCourse />
-                <Footer />
-              </>
-            }
-              path="/updateCourse"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
-                <Reglament />
-                <Footer />
-              </>
-            }
-              path="/reglament"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <UserPage />
-                <Footer />
-              </>
-            }
-              path="/userPage"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <Suppliers />
-                <Footer />
-              </>
-            }
-              path="/suppliers"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <CourseDetails />
-                <Footer />
-              </>
-            }
-              path="/courseDetails/:id"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <RegisterCourse />
-                <Footer />
-              </>
-            }
-              path="/registerCourse/:id"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <UserList />
-                <Footer />
-              </>
-            }
-              path="/userList"
-            />
-            <Route element={
-              <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
-                <ApprovalReview />
-                <Footer />
-              </>
-            }
-              path="/approvalReview"
-            />
+            <Route element={<PrincipalPage />} path="/principalPage" />
+            <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
+            <Route element={<AddCourse />} path="/addCourse" />
+            <Route element={<Maintenance />} path="/maintenance" />
+            <Route element={<UpdateCourse />} path="/updateCourse" />
+            <Route element={<Reglament />} path="/reglament" />
+            <Route element={<UserPage />} path="/userPage" />
+            <Route element={<Suppliers />} path="/suppliers" />
+            <Route element={<CourseDetails />} path="/courseDetails/:id" />
+            <Route element={<RegisterCourse />} path="/registerCourse/:id" />
+            <Route element={<UserList />} path="/userList" />
+            <Route element={<ApprovalReview />} path="/approvalReview" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
-            <Route element={<Logout />} path="/logout" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
+          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>
