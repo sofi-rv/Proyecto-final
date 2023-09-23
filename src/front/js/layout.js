@@ -17,8 +17,11 @@ import { CourseDetails } from "./pages/courseDetails";
 import { RegisterCourse } from "./pages/registerCourse";
 import { UserList } from "./pages/userList";
 import { ApprovalReview } from "./pages/approvalReview";
+import { Maintenance } from "./pages/maintenance";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { UpdateCourse } from "./pages/updateCourse";
+
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
 import injectContext from "./store/appContext";
 
@@ -75,6 +78,25 @@ const Layout = () => {
             <Route element={
               <>
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Maintenance />
+                <Footer />
+              </>
+            }
+              path="/maintenance"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <UpdateCourse />
+                <Footer />
+              </>
+            }
+              path="/updateCourse"
+            />
+            <Route element={
+              <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <Reglament />
                 <Footer />
               </>
