@@ -62,19 +62,6 @@ export const Login = () => {
       });
 
     }
-    // if (response.data.user.admin) {
-    //   setStore({
-    //     admin: true,
-    //     auth: true,
-    //     userId: response.data.user.id,
-    //   });
-
-    // } else {
-    //   setStore({
-    //     auth: true,
-    //     userId: response.data.user.id,
-    //   });
-    // }
     return;
   };
 
