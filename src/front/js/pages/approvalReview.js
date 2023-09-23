@@ -100,7 +100,7 @@ export const ApprovalReview = () => {
         setApprovalList(temp)
     }
 
-    return (
+    return store.user && store.user.role == "admin" ? (
         <div className="approvalReview_page">
             <div className="approvalReview_content">
                 <h3 className="ms-5 my-4">Solicitudes</h3>
@@ -141,5 +141,11 @@ export const ApprovalReview = () => {
                 </div>
             </div>
         </div>
-    );
+    )
+        :
+        (
+            <div className="alert alert-danger d-flex justify-content-center" role="alert">
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo administradores. No tienes permitido entrar a esta página</b>
+            </div>
+        )
 };

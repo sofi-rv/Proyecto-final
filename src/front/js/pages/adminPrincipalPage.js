@@ -26,7 +26,7 @@ export const AdminPrincipalPage = () => {
                 </div>
                 <div className="admin_feature text-center">
                     <p> Revision de aprobación de cursos </p>
-                    <Link to="/" className="admin_feature_button">Mostrar</Link>
+                    <Link to="/approvalReview" className="admin_feature_button">Mostrar</Link>
                 </div>
                 <div className="admin_feature text-center">
                     <p> Mostrar lista de empleados <br />
@@ -43,9 +43,8 @@ export const AdminPrincipalPage = () => {
         :
         (
             <div className="alert alert-danger d-flex justify-content-center" role="alert">
-                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i> Para entrar a esta página debes iniciar sesión
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo administradores. No tienes permitido entrar a esta página</b>
             </div>
-
         )
 };
 
