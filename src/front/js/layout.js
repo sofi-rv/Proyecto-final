@@ -27,6 +27,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Logout } from "./pages/logout";
 
 //create your first component
 const Layout = () => {
@@ -49,7 +50,7 @@ const Layout = () => {
             <Route element={<PruebaEditar />} path="/pruebaEditar" />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/userPage" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/userPage" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <PrincipalPage />
                 <Footer />
               </>
@@ -58,7 +59,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <AdminPrincipalPage />
                 <Footer />
               </>
@@ -67,7 +68,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <AddCourse />
                 <Footer />
               </>
@@ -76,6 +77,7 @@ const Layout = () => {
             />
             <Route element={
               <>
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
                 <Maintenance />
                 <Footer />
@@ -103,7 +105,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <UserPage />
                 <Footer />
               </>
@@ -112,7 +114,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <Suppliers />
                 <Footer />
               </>
@@ -121,7 +123,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <CourseDetails />
                 <Footer />
               </>
@@ -130,7 +132,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <RegisterCourse />
                 <Footer />
               </>
@@ -139,7 +141,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <UserList />
                 <Footer />
               </>
@@ -148,7 +150,7 @@ const Layout = () => {
             />
             <Route element={
               <>
-                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/" }]} />
+                <Navbar links={[{ "name": "Mi perfil", "path": "/" }, { "name": "Cerrar Sesion", "path": "/logout" }]} />
                 <ApprovalReview />
                 <Footer />
               </>
@@ -157,6 +159,7 @@ const Layout = () => {
             />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
+            <Route element={<Logout />} path="/logout" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
         </ScrollToTop>
