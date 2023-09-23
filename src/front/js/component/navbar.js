@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = (props) => {
+  const { store, actions } = useContext(Context);
+
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
@@ -13,17 +16,19 @@ export const Navbar = (props) => {
         <div className="offcanvas offcanvas-end text-bg-dark" tabIndex={-1} id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
-            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close">
+            </button>
           </div>
           <div className="offcanvas-body bg-dark">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-              {props?.links.map((link, index) => {
-                return (
-                  <li className="nav-item" key={index}>
-                    <Link className="nav-link active" aria-current="page" to={link.path}>{link.name}</Link>
-                  </li>
-                )
-              })}
+              {/* {store.user && store.user.role == "user" ?} */}
+              <li><Link className="nav-link active ms-2" aria-current="page" to="/userPage" >
+                Mi perfil
+              </Link></li>
+              <Link to="/reglament" className="nav-link active ms-2 mt-2">Normativa</Link> {/* revisar si quitar o no*/}
+              <li><button className="bg-dark border-0" onClick={() => actions.logout()}><Link className="nav-link active" aria-current="page" to="/" >
+                Cerrar sesión
+              </Link></button></li>
             </ul>
           </div>
         </div>

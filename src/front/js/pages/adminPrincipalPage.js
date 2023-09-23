@@ -42,7 +42,10 @@ export const AdminPrincipalPage = () => {
     )
         :
         (
-            <h1 className="text-center alert">¡No tienes permitido estar aquí!</h1>
+            <div className="alert alert-danger d-flex justify-content-center" role="alert">
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i> Para entrar a esta página debes iniciar sesión
+            </div>
+
         )
 };
 
