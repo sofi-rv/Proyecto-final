@@ -14,10 +14,14 @@
 }
 
 .courseDetails_button {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     border: none;
     border-radius: 10em;
-    background-color: rgb(248, 99, 99);
-    display: block;
+    background-color: #262559;
     height: 3em;
     width: 10em;
     margin: 0 auto;

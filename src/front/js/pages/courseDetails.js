@@ -48,8 +48,8 @@ export const CourseDetails = () => {
                         {courseDetails && <p>Código: {courseDetails.code}</p>}
                     </div>
                 </div>
-                <Link to={`/registerCourse/${id}`}>
-                    <button className="courseDetails_button mt-5">Matricular</button>
+                <Link className="courseDetails_button mt-5" to={`/registerCourse/${id}`}>
+                    Matricular
                 </Link>
             </div>
         </div>

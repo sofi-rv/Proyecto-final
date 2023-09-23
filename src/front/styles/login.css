@@ -8,13 +8,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff url(https://educacioncontinua.ucol.mx/pluginfile.php/76/coursecat/description/curso-taller.jpg) left center/contain no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
 }
 
 .login_form_content {
+    color: white;
     display: flex;
     flex-direction: column;
+    padding: 6em;
+    background-color: #262559;
 }
 
 .login_form_title {
@@ -24,7 +28,7 @@
 
 .form_link {
     text-decoration: none;
-    color: black;
+    color: gray;
 }
 
 .form_input {
