@@ -121,6 +121,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(responseJson)
         }
 
+      },
+      logout: async () => {
+        const store = getStore();
+        const actions = getActions();
+        let response = await actions.fetchPromise("/api/logout", "POST");
+        if (response.ok) {
+          let responseJson = await response.json();
+          console.log(responseJson)
+          setStore({ ...store, user: null });
+          actions.deactivateLoginConfirmation()
+        } else {
+          let responseJson = await response.json();
+          console.log(responseJson)
+        }
+
       }
     },
   };

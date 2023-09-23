@@ -370,3 +370,19 @@ def send_approval_doc(id):
     except Exception as error:
         print(error)  
         return jsonify({"message":str(error)}), 500 
+
+#Ingresar condición de empleado 
+@api.route('/condition/<int:id>', methods=['PUT'])
+def set_condition(id):
+    try:
+        body = request.get_json()
+        search = CourseEnrollment.query.get(id)
+        search.condition = body["condition"]
+
+        db.session.commit()
+
+        return jsonify({"message":"se envio correctamente"}), 200
+
+    except Exception as error:
+        print(error)  
+        return jsonify({"message":str(error)}), 500 

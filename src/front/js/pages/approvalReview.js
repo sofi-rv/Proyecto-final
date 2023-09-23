@@ -1,31 +1,97 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
+
 
 import "../../styles/approvalReview.css";
 
 export const ApprovalReview = () => {
 
     const [approvalList, setApprovalList] = useState([])
+    const { store, actions } = useContext(Context);
+
 
     useEffect(() => {
-        //@TODO Estos datos deben venir de la base de datos
-        let approvalList = [
-            { "NombreEmpleado": "Nombre del empleado", "CedulaEmpleado": "Cédula", "CodigoCurso": "Código del curso", "LinkComprobante": "#" },
-            { "NombreEmpleado": "Nombre del empleado", "CedulaEmpleado": "Cédula", "CodigoCurso": "Código del curso", "LinkComprobante": "#" },
-            { "NombreEmpleado": "Nombre del empleado", "CedulaEmpleado": "Cédula", "CodigoCurso": "Código del curso", "LinkComprobante": "#" },
-            { "NombreEmpleado": "Nombre del empleado", "CedulaEmpleado": "Cédula", "CodigoCurso": "Código del curso", "LinkComprobante": "#" },
-        ]
-        setApprovalList(approvalList)
+        const getData = async () => {
+            let response = await actions.fetchPromise("/api/enrollment")
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setApprovalList(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+
+        }
+        getData()
+
     }, []);
 
-    const handleApproval = (position) => {
+    const handleApproval = async (id) => {
         // @TODO hacer la logica de aprobacion en la base de datos
-        removeApprovalFromList(position)
+        // removeApprovalFromList(position)
+        //Sección para enviar la data al backend
+        let obj = {
+            condition: "Aprobados"
+        };
+        let response = await actions.fetchPromise(`/api/condition/${id}`, "PUT", obj);
+        if (response.ok) {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: responseJson.message,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        } else {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "¡Error al enviar!",
+                /* footer: '<a href="">Why do I have this issue?</a>' */
+                timer: 3500,
+            });
+        }
+        return;
     }
 
-    const handleRejection = (position) => {
+    const handleRejection = async (id) => {
         // @TODO hacer la logica de rechazo en la base de datos
-        removeApprovalFromList(position)
+        // removeApprovalFromList(position)
+        //Sección para enviar la data al backend
+        let obj = {
+            condition: "Reprobados"
+        };
+        let response = await actions.fetchPromise(`/api/condition/${id}`, "PUT", obj);
+        if (response.ok) {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: responseJson.message,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        } else {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "¡Error al enviar!",
+                /* footer: '<a href="">Why do I have this issue?</a>' */
+                timer: 3500,
+            });
+        }
+        return;
     }
 
     const removeApprovalFromList = (position) => {
@@ -39,34 +105,39 @@ export const ApprovalReview = () => {
             <div className="approvalReview_content">
                 <h3 className="ms-5 my-4">Solicitudes</h3>
                 <div className="approvalReview_list mx-5 mb-5">
-                    {approvalList.map((element, index, { length }) => {
+                    {approvalList && approvalList.length > 0 ?
+                        <>
+                            {approvalList.map((item, index) => {
 
-                        return (
-                            <div key={index}>
-                                <div className="approvalReview_listItem d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h4>{element.NombreEmpleado}</h4>
-                                        <p>{element.CedulaEmpleado}</p>
-                                        <p>{element.CodigoCurso}</p>
-                                        <Link to={element.LinkComprobante} className="form_link">
-                                            Link del comprobante enviado
-                                        </Link>
+                                return (
+                                    (item.approval_doc) !== "" &&
+                                    <div key={index}>
+                                        <div className="approvalReview_listItem d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4>{item.user_name} {item.user_lastname}</h4>
+                                                <p>{item.id_number}</p>
+                                                <p>{item.course_name}</p> {/* agregar codigo de curso*/}
+                                                <Link to={item.approval_doc} className="form_link">
+                                                    Link del comprobante enviado
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <button className="approvalReview_button mb-4" onClick={() => handleApproval(item.id)}>Aprobar</button>
+                                                <button className="approvalReview_button" onClick={() => handleRejection(item.id)}>Reprobar</button>
+                                            </div>
+                                        </div>
+                                        {(() => {
+                                            if (index + 1 !== length) {
+                                                return (
+                                                    <hr />
+                                                )
+                                            }
+                                        })()}
                                     </div>
-                                    <div>
-                                        <button className="approvalReview_button mb-4" onClick={() => handleApproval(index)}>Aprobar</button>
-                                        <button className="approvalReview_button" onClick={() => handleRejection(index)}>Reprobar</button>
-                                    </div>
-                                </div>
-                                {(() => {
-                                    if (index + 1 !== length) {
-                                        return (
-                                            <hr />
-                                        )
-                                    }
-                                })()}
-                            </div>
-                        )
-                    })}
+                                )
+                            })}
+                        </>
+                        : <></>}
                 </div>
             </div>
         </div>
