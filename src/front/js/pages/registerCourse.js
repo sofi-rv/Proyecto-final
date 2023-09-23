@@ -113,7 +113,7 @@ export const RegisterCourse = () => {
 
 
 
-    return (
+    return store.user && store.user.role == "user" ? (
         <div className="registerCourse_page">
             <form method="post" className="registerCourse_form my-5">
                 {/* popover */}
@@ -148,5 +148,11 @@ export const RegisterCourse = () => {
                 <input type="button" value="Finalizar Mátricula" className="registerCourse_button my-4" onClick={enroll} />
             </form>
         </div>
-    );
+    )
+        :
+        (
+            <div className="alert alert-danger d-flex justify-content-center" role="alert">
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo usuarios. No tienes permitido entrar a esta página</b>
+            </div>
+        )
 };

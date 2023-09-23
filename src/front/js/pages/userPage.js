@@ -89,7 +89,7 @@ export const UserPage = () => {
         return;
     };
 
-    return (
+    return store.user && store.user.role == "user" ? (
         <div className="ms-5 mt-4 user_page">
             <div className="d-flex align-items-center">
                 <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user_img" height="200px" width="200px" />
@@ -247,5 +247,11 @@ export const UserPage = () => {
                 </div>
             </div>
         </div>
-    );
+    )
+        :
+        (
+            <div className="alert alert-danger d-flex justify-content-center" role="alert">
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo usuarios. No tienes permitido entrar a esta página</b>
+            </div>
+        )
 };

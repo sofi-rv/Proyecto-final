@@ -225,6 +225,8 @@ export const AddCourse = () => {
   )
     :
     (
-      <h1 className="text-center">¡No tienes permitido estar aquí!</h1>
+      <div className="alert alert-danger d-flex justify-content-center" role="alert">
+        <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo administradores. No tienes permitido entrar a esta página</b>
+      </div>
     )
 };
