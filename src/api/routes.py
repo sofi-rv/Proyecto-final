@@ -248,11 +248,18 @@ def supplier_register():
 #Traer info de todos los proveedores
 @api.route('/suppliers', methods=['GET'])
 def get_supplier():
-    search = Supplier.query.all()    
-    search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
-    print("valor de search_serialize ", search_serialize)
-    
-    return jsonify(search_serialize), 200
+    try:
+        print("entre a la ruta supplier")
+        search = Supplier.query.all() 
+        print("GET base de datos supplier: ", search)   
+        search_serialize = list(map(lambda x: x.serialize(), search)) # search.map((item)=>{item.serialize()})
+        print("valor de search_serialize ", search_serialize)
+        
+        return jsonify(search_serialize), 200
+    except Exception as error:
+        print(str(error))
+        return jsonify({"message":"error al obtener suppliers"}), 500 
+
 
 #Agregar curso
 @api.route('/addCourse', methods=["POST"])

@@ -14,7 +14,7 @@ export const PruebaEditar = () => {
     //función para traerse los cursos
     useEffect(() => {
         const getData = async () => {
-            let response = await actions.fetchPromise("/api/addCourse")
+            let response = await actions.fetchPromise("/api/courses")
 
             if (response.ok) {
                 let responseJson = await response.json();
@@ -84,7 +84,7 @@ export const PruebaEditar = () => {
     //funcion para filtrar los cursos por nombre
     //courseList.filter(course => {})
 
-    return (
+    return store.user && store.user.role == "admin" ? (
         <div className="container">
             <div>
                 Buscar curso
@@ -252,5 +252,10 @@ export const PruebaEditar = () => {
 
 
         </div>
-    );
+    ) :
+        (
+            <div className="alert alert-danger d-flex justify-content-center" role="alert">
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo administradores. No tienes permitido entrar a esta página</b>
+            </div>
+        )
 };

@@ -155,17 +155,14 @@ export const Suppliers = () => {
                             return (
                                 <ul key={index} className="list-group">
                                     <li className="list-group-item">
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <h3>{item.name}</h3>
-                                                Teléfono: {item.phone} <br></br>
-                                                Email: {item.email} <br></br>
-                                                Cédula jurídica: {item.legal_id}
-                                            </div>
-                                            <div className="col-6">
-                                                {item.courses}
-                                            </div>
+
+                                        <div>
+                                            <h3>{item.name}</h3>
+                                            Teléfono: {item.phone} <br></br>
+                                            Email: {item.email} <br></br>
+                                            Cédula jurídica: {item.legal_id}
                                         </div>
+
                                     </li>
                                 </ul>
                             )
