@@ -8,7 +8,7 @@
 
 .registerCourse_form {
     border-radius: 10px;
-    background-color: rgb(250, 142, 142);
+    background-color: #262559;
     display: flex;
     flex-direction: column;
     padding: 3em 15em;
