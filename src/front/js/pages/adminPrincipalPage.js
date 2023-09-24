@@ -21,7 +21,7 @@ export const AdminPrincipalPage = () => {
                                 Editar Curso
                             </p>
                         </div>
-                        <Link to="/" className="admin_feature_button">Ingresar</Link>
+                        <Link to="/maintenance" className="admin_feature_button">Ingresar</Link>
                     </div>
                 </div>
                 <div className="admin_feature text-center">
