@@ -64,6 +64,7 @@ export const UserPage = () => {
         let obj = {
             approval_doc: approvalDoc
         };
+        console.log(obj)
         let response = await actions.fetchPromise(`/api/enrollment/${id}`, "PUT", obj);
         if (response.ok) {
             let responseJson = await response.json();

@@ -27,3 +27,45 @@
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
+
+.my-carousel {
+    display: flex;
+    overflow-x: scroll;
+    position: relative;
+  }
+  
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: grey black;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(124, 176, 236);
+    border-radius: 20px;
+    border: 6px solid rgb(226, 224, 224);
+  }
+
+  .card-style:hover {
+    border-color: rgb(194, 195, 197);
+    box-shadow: 0 0 20px rgb(194, 195, 197);
+    transform: translate3D(0, -1px, 0) scale(1.03);
+    transition: all .4s ease;
+  }
+
+  .card-style {
+    /* border-radius: 10px; */
+    margin-left: 40px;
+    min-width: 270px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }

@@ -7,7 +7,7 @@ class CourseEnrollment(db.Model):
     __tablename__ = 'courseenrollment'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    id_number = db.Column(db.String(100), unique=True, nullable=False)
+    id_number = db.Column(db.String(100), unique=False, nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     condition = db.Column(db.String(12), unique=False, nullable=False)
     approval_doc = db.Column(db.String(200), unique=False, nullable=False)

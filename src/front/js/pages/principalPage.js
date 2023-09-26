@@ -54,9 +54,9 @@ export const PrincipalPage = () => {
 
     const handleCarouselButtons = (direction, month) => {
         // Esto sirve para dar el efecto en el carousel de que se mueven las cartas de una en una
-        if (month == "Septiembre" && septemberCourses.length) {
-            let list = direction == "left" ? moveCarouselListLeft(septemberCourses) : moveCarouselListRight(septemberCourses)
-            setSeptemberCourses(list)
+        if (CoursesList.length) {
+            let list = direction == "left" ? moveCarouselListLeft(CoursesList) : moveCarouselListRight(CoursesList)
+            setCoursesList(list)
         } else if (month == "Octubre" && septemberCourses.length) {
             let list = direction == "left" ? moveCarouselListLeft(octoberCourses) : moveCarouselListRight(octoberCourses)
             setOctoberCourses(list)
@@ -119,19 +119,19 @@ export const PrincipalPage = () => {
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
                                     <div className="d-flex justify-content-center">
-                                        <div className="d-flex">
+                                        <div className="my-carousel"> {/*d-flex*/}
                                             {CoursesList && CoursesList.length > 0 ?
                                                 <>
                                                     {CoursesList.map((item, index) => {
 
                                                         return (
                                                             obtenerMes(item.start_date) % 2 !== 0 && obtenerMes(item.start_date) >= today_month - 1 && obtenerMes(item.start_date) < today_month + 1 &&
-                                                            <div key={index} className="card me-5" style={{ width: '18rem' }}>
+                                                            <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
                                                                 <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
                                                                     <h5 className="card-title">{item.name}</h5>
-                                                                    <p className="card-text">{item.modality}</p>
-                                                                    <p className="card-text">{item.start_date}</p>
+                                                                    <p className="card-text">Modalidad: {item.modality}</p>
+                                                                    <p className="card-text">Inicio: {item.start_date}</p>
                                                                     <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
                                                                 </div>
                                                             </div>
@@ -173,8 +173,8 @@ export const PrincipalPage = () => {
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
                                                                 <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
                                                                     <h5 className="card-title">{item.name}</h5>
-                                                                    <p className="card-text">{item.modality}</p>
-                                                                    <p className="card-text">{item.start_date}</p>
+                                                                    <p className="card-text">Modalidad: {item.modality}</p>
+                                                                    <p className="card-text">Inicio: {item.start_date}</p>
                                                                     <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
                                                                 </div>
                                                             </div>
