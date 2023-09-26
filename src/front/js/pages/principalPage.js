@@ -132,7 +132,7 @@ export const PrincipalPage = () => {
                                                                     <h5 className="card-title">{item.name}</h5>
                                                                     <p className="card-text">{item.modality}</p>
                                                                     <p className="card-text">{item.start_date}</p>
-                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
+                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-primary course_button">¡Ver mas!</Link>
                                                                 </div>
                                                             </div>
 
@@ -175,7 +175,7 @@ export const PrincipalPage = () => {
                                                                     <h5 className="card-title">{item.name}</h5>
                                                                     <p className="card-text">{item.modality}</p>
                                                                     <p className="card-text">{item.start_date}</p>
-                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-danger course_button">¡Ver mas!</Link>
+                                                                    <Link to={`/courseDetails/${item.id}`} className="btn btn-primary course_button">¡Ver mas!</Link>
                                                                 </div>
                                                             </div>
 
