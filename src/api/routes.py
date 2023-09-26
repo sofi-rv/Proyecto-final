@@ -8,7 +8,61 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity, get_jwt
 from flask_jwt_extended import jwt_required
 
+import smtplib, ssl
+import os
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime
+from email.mime.base import MIMEBase
+from email import encoders
+
+smtp_address = os.getenv("SMTP_ADDRESS")
+smtp_port = os.getenv("SMTP_PORT")
+email_address = os.getenv("EMAIL_ADDRESS")
+email_password = os.getenv("EMAIL_PASSWORD")
+
 api = Blueprint('api', __name__)
+
+#enviar correos
+def send_email(asunto, destinatario, body):
+    message = MIMEMultipart("alternative")
+    message["Subject"] = asunto
+    message["From"] = email_address
+    message["To"] = destinatario
+    
+    #Version HTML del body
+    #''' indica principio y final de una cadena de texto
+    html = '''
+    
+    <html>
+    <body>
+    <div>
+    <h1>
+    Hola 
+    </h1>
+     ''' + body + '''   
+    </div>
+    </body>
+    </html>
+    '''
+
+    #crear los elemento MIME
+    html_mime = MIMEText(html, 'html')
+
+    #adjuntamos el código html al mensaje
+    message.attach(html_mime)
+
+    #enviar el correo
+    try:
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
+            server.login(email_address, email_password)
+            server.sendmail(email_address, destinatario, message.as_string())
+        return True
+    
+    except Exception as error:
+        print(str(error))
+        return False
 
 
 #prueba para bloquear token y no entre a esta ruta privada
@@ -416,3 +470,18 @@ def set_condition(id):
     except Exception as error:
         print(error)  
         return jsonify({"message":str(error)}), 500 
+
+#ruta para enviar correo
+@api.route("/sendmail", methods=["POST"])
+def endpoint_mail():
+    body = request.get_json()
+    asunto = body["asunto"]
+    destinatario = body["destinatario"]
+    cuerpo = body["contenido"]
+
+    verificar = send_email(asunto, destinatario, cuerpo)
+
+    if verificar==True:
+        return jsonify({"message":"email sent"}), 200
+    else:
+        return jsonify({"message":"error sending mail"}), 400
