@@ -30,7 +30,7 @@ export const ApprovalReview = () => {
 
     }, []);
 
-    const handleApproval = async (id) => {
+    const handleApproval = async (id, index) => {
         // @TODO hacer la logica de aprobacion en la base de datos
         // removeApprovalFromList(position)
         //Sección para enviar la data al backend
@@ -41,6 +41,7 @@ export const ApprovalReview = () => {
         if (response.ok) {
             let responseJson = await response.json();
             console.log(responseJson);
+            removeApprovalFromList(index);
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -62,7 +63,7 @@ export const ApprovalReview = () => {
         return;
     }
 
-    const handleRejection = async (id) => {
+    const handleRejection = async (id, index) => {
         // @TODO hacer la logica de rechazo en la base de datos
         // removeApprovalFromList(position)
         //Sección para enviar la data al backend
@@ -73,6 +74,7 @@ export const ApprovalReview = () => {
         if (response.ok) {
             let responseJson = await response.json();
             console.log(responseJson);
+            removeApprovalFromList(index);
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -99,6 +101,7 @@ export const ApprovalReview = () => {
         temp.splice(position, 1)
         setApprovalList(temp)
     }
+    useEffect(() => { console.log("renderizando de nuevo") }, [approvalList])
 
     return store.user && store.user.role == "admin" ? (
         <div className="approvalReview_page">
@@ -122,8 +125,8 @@ export const ApprovalReview = () => {
                                                 </Link>
                                             </div>
                                             <div>
-                                                <button className="approvalReview_button mb-4" onClick={() => handleApproval(item.id)}>Aprobar</button>
-                                                <button className="approvalReview_button" onClick={() => handleRejection(item.id)}>Reprobar</button>
+                                                <button className="approvalReview_button mb-4" onClick={() => handleApproval(item.id, index)}>Aprobar</button>
+                                                <button className="approvalReview_button" onClick={() => handleRejection(item.id, index)}>Reprobar</button>
                                             </div>
                                         </div>
                                         {(() => {

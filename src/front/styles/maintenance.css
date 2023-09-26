@@ -1,6 +1,6 @@
-.maintenance_page {
+/* .maintenance_page {
     height: 100vh
-}
+} */
 
 .maintenance_content {
     margin-top: 2em;
@@ -11,8 +11,9 @@
 .maintenance_searchForm {
     border-radius: 15px;
     background-color: #2F2ABF;
-    padding: 3em;
+    padding: 2em;
     color: #E8E8E8;
+    /* height: 5em; */
 }
 
 .maintenance_searchForm_title {

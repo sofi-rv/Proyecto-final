@@ -96,7 +96,7 @@ export const AddCourse = () => {
     <>
       <div className="addCourse_page">
         <form className="addCourse_form my-5" id="addCourse_form">
-          <h3 className="addCourse_title py-3">Agregar curso</h3>
+          <h3 className="addCourse_title py-4">Agregar curso</h3>
           <div>
             <div className="d-flex justify-content-between align-items-center pb-4">
               <label className="me-3">Código</label>
@@ -151,7 +151,7 @@ export const AddCourse = () => {
               </select>
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">
-              <label className="me-3">Costo</label>
+              <label className="me-3">Costo $</label>
               <input
                 type="number"
                 min="0"
@@ -174,9 +174,10 @@ export const AddCourse = () => {
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">
               <label className="me-3">Contenidos</label>
-              <input
-                type="text"
-                className="addCourse_input"
+              <textarea
+                rows={6}
+                form="addCourse_form"
+                className="addCourse_textarea"
                 onChange={(e) => {
                   setContents(e.target.value);
                 }}

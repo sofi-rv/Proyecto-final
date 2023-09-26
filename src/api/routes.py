@@ -194,12 +194,33 @@ def edit_course_id(id):
     try:
         body = request.get_json()
         search = Course.query.get(id)  
-        if "modality" in body:
-            search.modality = body["modality"]
-        
+        if "name" in body:
+            search.name = body["name"]
+
         if "code" in body:
             search.code = body["code"]
 
+        if "category" in body:
+            search.category = body["category"]
+
+        if "cost" in body:
+            search.cost = body["cost"]
+
+        if "description" in body:
+            search.description = body["description"]
+
+        if "modality" in body:
+            search.modality = body["modality"]
+        
+        if "start_date" in body:
+            search.start_date = body["start_date"]
+        
+        if "finish_date" in body:
+            search.finish_date = body["finish_date"]
+
+        if "contents" in body:
+            search.contents = body["contents"]
+        
         db.session.commit()
 
         return jsonify({"message":"se edito correctamente"}), 200
@@ -366,8 +387,10 @@ def course_enrollment_id(id):
 @api.route('/enrollment/<int:id>', methods=['PUT'])
 def send_approval_doc(id):
     try:
+        print(id)
         body = request.get_json()
-        search = CourseEnrollment.query.get(id)
+        search = CourseEnrollment.query.filter_by(course_id = id).first()
+        print(search.serialize())
         search.approval_doc = body["approval_doc"]
 
         db.session.commit()

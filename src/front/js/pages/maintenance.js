@@ -7,8 +7,15 @@ import { Link } from "react-router-dom";
 export const Maintenance = () => {
     const { store, actions } = useContext(Context);
     const [courseList, setCourseList] = useState([]);
+    const [name, setName] = useState("");
     const [code, setCode] = useState("");
+    const [category, setCategory] = useState("");
+    const [cost, setCost] = useState("");
+    const [description, setDescription] = useState("");
     const [modality, setModality] = useState("");
+    const [start_date, setStartDate] = useState("");
+    const [finish_date, setFinishDate] = useState("");
+    const [contents, setContents] = useState("");
     const ref = useRef(null);
 
     const [alertMessage, setAlert] = useState("");
@@ -53,8 +60,15 @@ export const Maintenance = () => {
     const editData = async (id) => {
         //Sección para enviar la data al backend
         let obj = {
-            modality: modality,
+            name: name,
             code: code,
+            category: category,
+            cost: cost,
+            description: description,
+            modality: modality,
+            start_date: start_date,
+            finish_date: finish_date,
+            contents: contents,
         };
 
         let response = await actions.fetchPromise(`/api/addCourse/${id}`, "PUT", obj)
@@ -154,7 +168,7 @@ export const Maintenance = () => {
             <div className="maintenance_content">
                 {alertMessage}
 
-                <h3 className="ms-4">Eliminar o editar cursos</h3>
+                <h3 className="ms-4 mb-4">Eliminar o editar cursos</h3>
                 <div className="maintenance_searchForm mx-4 mb-5">
                     <form method="post" onSubmit={(e) => handleSearch(e)}>
                         <label className="maintenance_searchForm_title maintenance_label me-3">Busqueda de cursos:</label>
@@ -193,7 +207,7 @@ export const Maintenance = () => {
                             {courseList.map((item, index) => {
                                 return (
                                     <div key={index}>
-                                        <div className="row">
+                                        <div className="row p-4">
                                             <div className="col-11">
                                                 <h4>{item.name}</h4>
                                                 <div className="row">
@@ -230,9 +244,6 @@ export const Maintenance = () => {
                                                 <div className="modal-content">
                                                     <div className="modal-header">
                                                         <h5 className="modal-title" id="exampleModalLongTitle">Editar curso</h5>
-                                                        <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
                                                     </div>
                                                     <div className="modal-body bg-light">
                                                         <div className="d-flex justify-content-between align-items-center pb-4">
@@ -253,6 +264,12 @@ export const Maintenance = () => {
                                                             <input
                                                                 type="text"
                                                                 className="addCourse_input"
+                                                                defaultValue={item.name}
+                                                                placeholder={item.name}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setName(e.target.value);
+                                                                }}
 
                                                             />
                                                         </div>
@@ -260,6 +277,12 @@ export const Maintenance = () => {
                                                             <label className="me-3">Categoria</label>
                                                             <select
                                                                 className="picker addCourse_input"
+                                                                defaultValue={item.category}
+                                                                placeholder={item.category}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setCategory(e.target.category);
+                                                                }}
 
                                                             >
                                                                 <option value="">Elija una categoría</option>
@@ -281,6 +304,12 @@ export const Maintenance = () => {
                                                                 type="number"
                                                                 min="0"
                                                                 className="addCourse_input"
+                                                                defaultValue={item.cost}
+                                                                placeholder={item.cost}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setCost(e.target.value);
+                                                                }}
 
                                                             />
                                                         </div>
@@ -290,14 +319,27 @@ export const Maintenance = () => {
                                                                 rows={6}
                                                                 form="addCourse_form"
                                                                 className="addCourse_textarea"
+                                                                defaultValue={item.description}
+                                                                placeholder={item.description}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setDescription(e.target.value);
+                                                                }}
 
                                                             />
                                                         </div>
                                                         <div className="d-flex justify-content-between align-items-center pb-4">
                                                             <label className="me-3">Contenidos</label>
-                                                            <input
-                                                                type="text"
-                                                                className="addCourse_input"
+                                                            <textarea
+                                                                rows={6}
+                                                                form="addCourse_form"
+                                                                className="addCourse_textarea"
+                                                                defaultValue={item.contents}
+                                                                placeholder={item.contents}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setContents(e.target.value);
+                                                                }}
 
                                                             />
                                                         </div>
@@ -306,6 +348,12 @@ export const Maintenance = () => {
                                                             <input
                                                                 type="date"
                                                                 className="addCourse_input"
+                                                                defaultValue={item.start_date}
+                                                                placeholder={item.start_date}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setStartDate(e.target.value);
+                                                                }}
 
                                                             />
                                                         </div>
@@ -314,7 +362,12 @@ export const Maintenance = () => {
                                                             <input
                                                                 type="date"
                                                                 className="addCourse_input"
-
+                                                                defaultValue={item.finish_date}
+                                                                placeholder={item.finish_date}
+                                                                ref={ref}
+                                                                onChange={(e) => {
+                                                                    setFinishDate(e.target.value);
+                                                                }}
                                                             />
                                                         </div>
                                                         <div className="d-flex justify-content-between align-items-center pb-4">

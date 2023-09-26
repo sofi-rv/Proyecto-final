@@ -79,11 +79,13 @@ export const Suppliers = () => {
 
     return store.user && store.user.role == "admin" ? (
         <div className="suppliers_page mx-4">
-            <h3 className="my-4">Proveedores</h3>
+            <h3 className="mt-4">Proveedores</h3>
             {/* Button trigger modal */}
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
-                Agregar proveedor
-            </button>
+            <div className="d-flex justify-content-end mb-3">
+                <button type="button" className="btn btn-outline-primary border-3" style={{ borderRadius: "20px" }} data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                    Agregar proveedor
+                </button>
+            </div>
 
             {/* Modal */}
             <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -91,11 +93,8 @@ export const Suppliers = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLongTitle">Agregar proveedor</h5>
-                            <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                         </div>
-                        <div className="modal-body bg-light">
+                        <div className="modal-body bg-secondary" >
                             <div className="d-flex justify-content-between align-items-center pb-4">
                                 <label className="me-3">Nombre</label>
                                 <input
@@ -107,7 +106,7 @@ export const Suppliers = () => {
                                 />
                             </div>
                             <div className="d-flex justify-content-between align-items-center pb-4">
-                                <label className="me-3">Número de teléfono</label>
+                                <label className="me-3">Teléfono</label>
                                 <input
                                     type="text"
                                     className="addCourse_input"
