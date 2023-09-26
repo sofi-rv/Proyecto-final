@@ -16,6 +16,8 @@ export const Maintenance = () => {
     const [start_date, setStartDate] = useState("");
     const [finish_date, setFinishDate] = useState("");
     const [contents, setContents] = useState("");
+    const [selectedCourseId, setSelectedCourseId] = useState(null);
+    const [selectedCourse, setSelectedCourse] = useState(null);
     const ref = useRef(null);
 
     const [alertMessage, setAlert] = useState("");
@@ -64,21 +66,27 @@ export const Maintenance = () => {
     }
 
     //función para editar curso
-    const editData = async (id) => {
+    const editData = async () => {
         //Sección para enviar la data al backend
+
+        if (!selectedCourse) {
+            // Handle the case where no course is selected
+            return;
+        }
+
         let obj = {
-            name: name,
-            code: code,
-            category: category,
-            cost: cost,
-            description: description,
-            modality: modality,
-            start_date: start_date,
-            finish_date: finish_date,
-            contents: contents,
+            name: name || selectedCourse.name,
+            code: code || selectedCourse.code,
+            category: category || selectedCourse.category,
+            cost: cost || selectedCourse.cost,
+            description: description || selectedCourse.description,
+            modality: modality || selectedCourse.modality,
+            start_date: start_date || selectedCourse.start_date,
+            finish_date: finish_date || selectedCourse.finish_date,
+            contents: contents || selectedCourse.contents,
         };
 
-        let response = await actions.fetchPromise(`/api/addCourse/${id}`, "PUT", obj)
+        let response = await actions.fetchPromise(`/api/addCourse/${selectedCourse.id}`, "PUT", obj)
 
         if (response.ok) {
             let responseJson = await response.json();
@@ -132,11 +140,11 @@ export const Maintenance = () => {
             let coursesFilter = []
 
             if (categoryOfSearch == "searchForCourseName") {
-                coursesFilter = courses.filter((element) => {
+                coursesFilter = courseList.filter((element) => {
                     return element.name.toLowerCase().includes(textToSearch.toLowerCase())
                 })
             } else {
-                coursesFilter = courses.filter((element) => {
+                coursesFilter = courseList.filter((element) => {
                     return element.code == textToSearch
                 })
             }
@@ -256,7 +264,9 @@ export const Maintenance = () => {
                                                             console.log(item.id)
                                                         }}><i className="fa-solid fa-trash"></i></button>
                                                         {/* Button trigger modal */}
-                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" onClick={() => {
+                                                            setSelectedCourse(item);
+                                                        }}>
                                                             <i className="fa-solid fa-pen"></i>
                                                         </button>
                                                     </div>
@@ -274,8 +284,8 @@ export const Maintenance = () => {
                                                                     <input
                                                                         type="text"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.code}
-                                                                        placeholder={item.code}
+                                                                        defaultValue={selectedCourse ? selectedCourse.code : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.code : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setCode(e.target.value);
@@ -287,8 +297,8 @@ export const Maintenance = () => {
                                                                     <input
                                                                         type="text"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.name}
-                                                                        placeholder={item.name}
+                                                                        defaultValue={selectedCourse ? selectedCourse.name : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.name : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setName(e.target.value);
@@ -300,8 +310,8 @@ export const Maintenance = () => {
                                                                     <label className="me-3">Categoria</label>
                                                                     <select
                                                                         className="picker addCourse_input"
-                                                                        defaultValue={item.category}
-                                                                        placeholder={item.category}
+                                                                        defaultValue={selectedCourse ? selectedCourse.category : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.category : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setCategory(e.target.category);
@@ -313,22 +323,22 @@ export const Maintenance = () => {
                                                                         <option value="false">Humanístico</option>
                                                                     </select>
                                                                 </div>
-                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                {/* <div className="d-flex justify-content-between align-items-center pb-4">
                                                                     <label className="me-3">Proveedor</label>
                                                                     <input
                                                                         type="text"
                                                                         className="addCourse_input"
 
                                                                     />
-                                                                </div>
+                                                                </div> */}
                                                                 <div className="d-flex justify-content-between align-items-center pb-4">
                                                                     <label className="me-3">Costo</label>
                                                                     <input
                                                                         type="number"
                                                                         min="0"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.cost}
-                                                                        placeholder={item.cost}
+                                                                        defaultValue={selectedCourse ? selectedCourse.cost : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.cost : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setCost(e.target.value);
@@ -342,8 +352,8 @@ export const Maintenance = () => {
                                                                         rows={6}
                                                                         form="addCourse_form"
                                                                         className="addCourse_textarea"
-                                                                        defaultValue={item.description}
-                                                                        placeholder={item.description}
+                                                                        defaultValue={selectedCourse ? selectedCourse.description : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.description : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setDescription(e.target.value);
@@ -357,8 +367,8 @@ export const Maintenance = () => {
                                                                         rows={6}
                                                                         form="addCourse_form"
                                                                         className="addCourse_textarea"
-                                                                        defaultValue={item.contents}
-                                                                        placeholder={item.contents}
+                                                                        defaultValue={selectedCourse ? selectedCourse.contents : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.contents : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setContents(e.target.value);
@@ -371,8 +381,8 @@ export const Maintenance = () => {
                                                                     <input
                                                                         type="date"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.start_date}
-                                                                        placeholder={item.start_date}
+                                                                        defaultValue={selectedCourse ? selectedCourse.start_date : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.start_date : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setStartDate(e.target.value);
@@ -385,8 +395,8 @@ export const Maintenance = () => {
                                                                     <input
                                                                         type="date"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.finish_date}
-                                                                        placeholder={item.finish_date}
+                                                                        defaultValue={selectedCourse ? selectedCourse.finish_date : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.finish_date : ''}
                                                                         ref={ref}
                                                                         onChange={(e) => {
                                                                             setFinishDate(e.target.value);
@@ -398,7 +408,8 @@ export const Maintenance = () => {
                                                                     <input
                                                                         type="text"
                                                                         className="addCourse_input"
-                                                                        defaultValue={item.modality}
+                                                                        defaultValue={selectedCourse ? selectedCourse.modality : ''}
+                                                                        placeholder={selectedCourse ? selectedCourse.modality : ''}
                                                                         onChange={(e) => {
                                                                             setModality(e.target.value);
                                                                         }}
@@ -408,7 +419,7 @@ export const Maintenance = () => {
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                 <button type="button" className="btn btn-primary" onClick={() => {
-                                                                    editData(item.id);
+                                                                    editData();
                                                                     location.reload();
                                                                     console.log(item.id)
                                                                 }}>Save changes</button>

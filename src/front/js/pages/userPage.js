@@ -9,6 +9,7 @@ export const UserPage = () => {
     const [userDetails, setUserDetails] = useState({});
     const [academicRecord, setAcademicRecord] = useState({});
     const [approvalDoc, setApprovalDoc] = useState("");
+    const [selectedCourseId, setSelectedCourseId] = useState(null);
     let user_id = store.user.id;
     console.log(user_id);
 
@@ -48,7 +49,7 @@ export const UserPage = () => {
     }, [])
 
     //Ingresar comprobante de aprobación
-    const addApprovalDoc = async (id) => {
+    const addApprovalDoc = async () => {
         //Sección de verificación
         if (approvalDoc == "") {
             Swal.fire({
@@ -65,7 +66,7 @@ export const UserPage = () => {
             approval_doc: approvalDoc
         };
         console.log(obj)
-        let response = await actions.fetchPromise(`/api/enrollment/${id}`, "PUT", obj);
+        let response = await actions.fetchPromise(`/api/enrollment/${selectedCourseId}`, "PUT", obj);
         if (response.ok) {
             let responseJson = await response.json();
             console.log(responseJson);
@@ -128,7 +129,9 @@ export const UserPage = () => {
                                                     <li className="list-group-item">
                                                         {item.course_name}
                                                         {/* -- Button trigger modal -- */}
-                                                        <button type="button" className="btn btn-primary" style={{ float: "right" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <button type="button" className="btn btn-primary" style={{ float: "right" }} data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
+                                                            setSelectedCourseId(item.course_id)
+                                                        }} >
                                                             Enviar comprobante
                                                         </button>
 
@@ -152,8 +155,7 @@ export const UserPage = () => {
                                                                     <div className="modal-footer">
                                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                                         <button type="button" className="btn btn-primary" onClick={() => {
-                                                                            addApprovalDoc(item.course_id)
-                                                                            console.log(item.id)
+                                                                            addApprovalDoc()
                                                                         }}>Enviar</button>
                                                                     </div>
                                                                 </div>
