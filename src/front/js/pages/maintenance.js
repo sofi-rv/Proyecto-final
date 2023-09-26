@@ -30,8 +30,15 @@ export const Maintenance = () => {
                 let responseJson = await response.json();
                 console.log(responseJson);
                 setCourseList(responseJson)
+                setName(responseJson.name)
                 setCode(responseJson.code)
+                setCategory(responseJson.category)
+                setCost(responseJson.cost)
+                setDescription(responseJson.description)
                 setModality(responseJson.modality)
+                setStartDate(responseJson.start_date)
+                setFinishDate(responseJson.finish_date)
+                setContents(responseJson.contents)
             } else {
                 let responseJson = await response.json();
                 console.log(responseJson);
@@ -169,6 +176,7 @@ export const Maintenance = () => {
                 {alertMessage}
 
                 <h3 className="ms-4 mb-4">Eliminar o editar cursos</h3>
+
                 <div className="maintenance_searchForm mx-4 mb-5">
                     <form method="post" onSubmit={(e) => handleSearch(e)}>
                         <label className="maintenance_searchForm_title maintenance_label me-3">Busqueda de cursos:</label>
@@ -181,7 +189,7 @@ export const Maintenance = () => {
                     </form>
                 </div>
 
-                <div className="maintenance_courseList mx-4 mb-4">
+                <div className="maintenance_courseList mx-4 mb-4 border border-danger">
                     {/* {coursesList.map((course, index) => {
                         return (
                             <div className="maintenance_courseElement" key={index}>
@@ -206,11 +214,26 @@ export const Maintenance = () => {
                         <>
                             {courseList.map((item, index) => {
                                 return (
-                                    <div key={index}>
-                                        <div className="row p-4">
-                                            <div className="col-11">
-                                                <h4>{item.name}</h4>
-                                                <div className="row">
+                                    <ul key={index} className="list-group">
+                                        <li className="list-group-item">
+
+                                            <div key={index}>
+                                                <div className="row p-4">
+                                                    <div className="col-11">
+                                                        <h4>{item.name}</h4>
+
+                                                        <p>
+                                                            <a className="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                Ver más
+                                                            </a>
+                                                        </p>
+                                                        <div className="collapse" id="collapseExample">
+                                                            <div className="card card-body">
+                                                                Descripción:{item.description}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* <div className="row">
                                                     <div className="col-4">
                                                         Descripción:{item.description}
                                                     </div>
@@ -225,176 +248,180 @@ export const Maintenance = () => {
                                                         Fecha de inicio:{item.start_date} <br></br>
                                                         Fecha de finalización:{item.start_date}
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 mt-4">
-                                                <button type="button" className="btn btn-primary" onClick={() => {
-                                                    deleteData(item.id);
-                                                    console.log(item.id)
-                                                }}><i className="fa-solid fa-trash"></i></button>
-                                                {/* Button trigger modal */}
-                                                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
-                                                    <i className="fa-solid fa-pen"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        {/* Modal */}
-                                        <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                            <div className="modal-dialog" role="document">
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h5 className="modal-title" id="exampleModalLongTitle">Editar curso</h5>
+                                                </div> */}
                                                     </div>
-                                                    <div className="modal-body bg-light">
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Código</label>
-                                                            <input
-                                                                type="text"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.code}
-                                                                placeholder={item.code}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setCode(e.target.value);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Nombre de curso</label>
-                                                            <input
-                                                                type="text"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.name}
-                                                                placeholder={item.name}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setName(e.target.value);
-                                                                }}
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Categoria</label>
-                                                            <select
-                                                                className="picker addCourse_input"
-                                                                defaultValue={item.category}
-                                                                placeholder={item.category}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setCategory(e.target.category);
-                                                                }}
-
-                                                            >
-                                                                <option value="">Elija una categoría</option>
-                                                                <option value="true">Tecnología</option>
-                                                                <option value="false">Humanístico</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Proveedor</label>
-                                                            <input
-                                                                type="text"
-                                                                className="addCourse_input"
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Costo</label>
-                                                            <input
-                                                                type="number"
-                                                                min="0"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.cost}
-                                                                placeholder={item.cost}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setCost(e.target.value);
-                                                                }}
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Descripción</label>
-                                                            <textarea
-                                                                rows={6}
-                                                                form="addCourse_form"
-                                                                className="addCourse_textarea"
-                                                                defaultValue={item.description}
-                                                                placeholder={item.description}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setDescription(e.target.value);
-                                                                }}
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Contenidos</label>
-                                                            <textarea
-                                                                rows={6}
-                                                                form="addCourse_form"
-                                                                className="addCourse_textarea"
-                                                                defaultValue={item.contents}
-                                                                placeholder={item.contents}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setContents(e.target.value);
-                                                                }}
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Fecha de inicio</label>
-                                                            <input
-                                                                type="date"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.start_date}
-                                                                placeholder={item.start_date}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setStartDate(e.target.value);
-                                                                }}
-
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Fecha de finalización</label>
-                                                            <input
-                                                                type="date"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.finish_date}
-                                                                placeholder={item.finish_date}
-                                                                ref={ref}
-                                                                onChange={(e) => {
-                                                                    setFinishDate(e.target.value);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center pb-4">
-                                                            <label className="me-3">Modalidad</label>
-                                                            <input
-                                                                type="text"
-                                                                className="addCourse_input"
-                                                                defaultValue={item.modality}
-                                                                onChange={(e) => {
-                                                                    setModality(e.target.value);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <div className="col-1 mt-4">
                                                         <button type="button" className="btn btn-primary" onClick={() => {
-                                                            editData(item.id);
-                                                            location.reload();
+                                                            deleteData(item.id);
                                                             console.log(item.id)
-                                                        }}>Save changes</button>
+                                                        }}><i className="fa-solid fa-trash"></i></button>
+                                                        {/* Button trigger modal */}
+                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                                                            <i className="fa-solid fa-pen"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                {/* Modal */}
+                                                <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                    <div className="modal-dialog" role="document">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h5 className="modal-title" id="exampleModalLongTitle">Editar curso</h5>
+                                                            </div>
+                                                            <div className="modal-body bg-light">
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Código</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.code}
+                                                                        placeholder={item.code}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setCode(e.target.value);
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Nombre de curso</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.name}
+                                                                        placeholder={item.name}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setName(e.target.value);
+                                                                        }}
 
-                                    </div>
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Categoria</label>
+                                                                    <select
+                                                                        className="picker addCourse_input"
+                                                                        defaultValue={item.category}
+                                                                        placeholder={item.category}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setCategory(e.target.category);
+                                                                        }}
+
+                                                                    >
+                                                                        <option value="">Elija una categoría</option>
+                                                                        <option value="true">Tecnología</option>
+                                                                        <option value="false">Humanístico</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Proveedor</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="addCourse_input"
+
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Costo</label>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="0"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.cost}
+                                                                        placeholder={item.cost}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setCost(e.target.value);
+                                                                        }}
+
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Descripción</label>
+                                                                    <textarea
+                                                                        rows={6}
+                                                                        form="addCourse_form"
+                                                                        className="addCourse_textarea"
+                                                                        defaultValue={item.description}
+                                                                        placeholder={item.description}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setDescription(e.target.value);
+                                                                        }}
+
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Contenidos</label>
+                                                                    <textarea
+                                                                        rows={6}
+                                                                        form="addCourse_form"
+                                                                        className="addCourse_textarea"
+                                                                        defaultValue={item.contents}
+                                                                        placeholder={item.contents}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setContents(e.target.value);
+                                                                        }}
+
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Fecha de inicio</label>
+                                                                    <input
+                                                                        type="date"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.start_date}
+                                                                        placeholder={item.start_date}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setStartDate(e.target.value);
+                                                                        }}
+
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Fecha de finalización</label>
+                                                                    <input
+                                                                        type="date"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.finish_date}
+                                                                        placeholder={item.finish_date}
+                                                                        ref={ref}
+                                                                        onChange={(e) => {
+                                                                            setFinishDate(e.target.value);
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <div className="d-flex justify-content-between align-items-center pb-4">
+                                                                    <label className="me-3">Modalidad</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        className="addCourse_input"
+                                                                        defaultValue={item.modality}
+                                                                        onChange={(e) => {
+                                                                            setModality(e.target.value);
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-primary" onClick={() => {
+                                                                    editData(item.id);
+                                                                    location.reload();
+                                                                    console.log(item.id)
+                                                                }}>Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </li>
+                                    </ul>
+
                                 )
                             })}
                         </>

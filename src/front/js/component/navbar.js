@@ -22,7 +22,7 @@ export const Navbar = (props) => {
           <div className="offcanvas-body bg-dark">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               {/* {store.user && store.user.role == "user" ?} */}
-              <li><Link className="nav-link active ms-2" aria-current="page" to="/userPage" >
+              <li><Link className="nav-link active ms-2" aria-current="page" to="/userPage/:id" >
                 Mi perfil
               </Link></li>
               <Link to="/reglament" className="nav-link active ms-2 mt-2">Normativa</Link> {/* revisar si quitar o no*/}
