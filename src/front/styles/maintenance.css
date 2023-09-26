@@ -20,7 +20,7 @@
     font-weight: bold;
 }
 
-maintenance_label, maintenance_input {
+.maintenance_label, maintenance_input {
     -webkit-user-select: none;
     user-select: none;
 }

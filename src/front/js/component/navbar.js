@@ -8,7 +8,7 @@ export const Navbar = (props) => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
-        <img src="https://i0.wp.com/www.iedunote.com/img/23559/what-is-a-company.jpg?w=1080&quality=100&ssl=1" alt="logo" height="50px" width="50px" />
+        <img src="https://cdn-icons-png.flaticon.com/512/3615/3615806.png" alt="logo" height="50px" width="50px" />
         <Link className="navbar-brand" to="/principalPage">Company</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
