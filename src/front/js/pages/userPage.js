@@ -138,9 +138,6 @@ export const UserPage = () => {
                                                                 <div className="modal-content">
                                                                     <div className="modal-header">
                                                                         <h5 className="modal-title" id="exampleModalLabel">Comprobante de aprobación</h5>
-                                                                        <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
                                                                     </div>
                                                                     <div className="modal-body">
                                                                         Ingrese el link de su comprobante para realizar la solicitud de aprobación del curso

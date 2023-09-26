@@ -113,7 +113,7 @@ export const ApprovalReview = () => {
                             {approvalList.map((item, index) => {
 
                                 return (
-                                    (item.approval_doc) !== "" &&
+                                    (item.approval_doc) !== "" && (item.condition) == "En curso" &&
                                     <div key={index}>
                                         <div className="approvalReview_listItem d-flex justify-content-between align-items-center">
                                             <div>
