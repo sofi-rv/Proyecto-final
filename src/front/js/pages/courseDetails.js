@@ -8,6 +8,7 @@ export const CourseDetails = () => {
 
     const { store, actions } = useContext(Context);
     const [courseDetails, setCourseDetails] = useState({});
+    const [courseSupplier, setCourseSupplier] = useState({});
     const { id } = useParams();
     console.log(id)
 
@@ -26,13 +27,28 @@ export const CourseDetails = () => {
 
         }
         getData()
+
+        const getSupplier = async () => {
+            let response = await actions.fetchPromise(`/api/supplier/${id}`)
+
+            if (response.ok) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                setCourseSupplier(responseJson)
+            } else {
+                let responseJson = await response.json();
+                console.log(responseJson);
+            }
+
+        }
+        getSupplier()
     }, [])
 
     return store.user && store.user.role == "user" ? (
-        <div className="courseDetails_page">
+        <div className="courseDetails_page my-4">
             <div className="courseDetails_content">
-                {courseDetails && <h3>{courseDetails.name}</h3>}
-                {courseDetails && <p>{courseDetails.description}</p>}
+                {courseDetails && <h3 className="mb-4">{courseDetails.name}</h3>}
+                {courseDetails && <p className="mb-4">{courseDetails.description}</p>}
                 <div className="d-flex align-items-start">
                     <div className="me-5">
                         <h4>Contenidos:</h4>
@@ -41,11 +57,18 @@ export const CourseDetails = () => {
                         </ul>
                     </div>
                     <div className="ms-5">
-                        {courseDetails && <p className="mb-1">Costo: ${courseDetails.cost}</p>}
-                        {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
-                        {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
-                        {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}
+                        <p>Proveedor: {courseSupplier.supplier_name}</p>
+                        <br />
                         {courseDetails && <p>Código: {courseDetails.code}</p>}
+                        <br />
+                        {courseDetails && <p className="mb-1">Costo: ${courseDetails.cost}</p>}
+                        <br />
+                        {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
+                        <br />
+                        {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
+                        <br />
+                        {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}
+
                     </div>
                 </div>
                 <Link className="courseDetails_button mt-5" to={`/registerCourse/${id}`}>

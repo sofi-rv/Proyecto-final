@@ -7,7 +7,6 @@ class CourseEnrollment(db.Model):
     __tablename__ = 'courseenrollment'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    id_number = db.Column(db.String(100), unique=False, nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     condition = db.Column(db.String(12), unique=False, nullable=False)
     approval_doc = db.Column(db.String(200), unique=False, nullable=False)
@@ -19,12 +18,12 @@ class CourseEnrollment(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "id_number": self.id_number,
             "course_id": self.course_id,
             "condition": self.condition,
             "approval_doc": self.approval_doc,
             "course_name": Course.query.get(self.course_id).serialize()["name"],
             "course_code": Course.query.get(self.course_id).serialize()["code"],
+            "user_email": User.query.get(self.user_id).serialize()["email"],
             "user_name": User.query.get(self.user_id).serialize()["name"],
             "user_lastname": User.query.get(self.user_id).serialize()["lastname"]
         }
@@ -82,7 +81,8 @@ class SupplierPivot(db.Model):
         return {
             "id": self.id,
             "course_id": self.course_id,
-            "supplier_id": self.supplier_id
+            "supplier_id": self.supplier_id,
+            "supplier_name": Supplier.query.get(self.supplier_id).serialize()["name"],
         }
 
 class Supplier(db.Model):

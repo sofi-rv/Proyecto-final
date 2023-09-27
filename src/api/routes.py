@@ -335,6 +335,19 @@ def get_supplier():
         print(str(error))
         return jsonify({"message":"error al obtener suppliers"}), 500 
 
+#Traer info del proveedor de un curso
+@api.route('/supplier/<int:id>', methods=['GET'])
+def get_supplier_id(id):
+    try:
+        search = SupplierPivot.query.filter_by(course_id = id).first()
+        search_serialize = search.serialize()  
+        print("valor de search_serialize", search_serialize) 
+        
+        return jsonify(search_serialize), 200
+
+    except Exception as error:
+            print(error)
+            return jsonify({"message":str(error)}), 500
 
 #Agregar curso
 @api.route('/addCourse', methods=["POST"])
@@ -383,7 +396,6 @@ def enroll_course():
     # Extrae los datos del cuerpo de la solicitud
     user_id = body["user_id"]
     course_id = body["course_id"]
-    id_number = body["id_number"]
     condition = body["condition"]
     if "approval_doc" in body:
         approval_doc = body["approval_doc"]
@@ -398,7 +410,7 @@ def enroll_course():
         if search2:
             return jsonify({"message":"ya se encuentra matriculado"}), 409
         # Crea un nuevo curso en la tabla de cursos
-        enroll_course = CourseEnrollment(id_number=id_number, condition=condition, course_id=course_id, user_id=user_id, approval_doc=approval_doc)
+        enroll_course = CourseEnrollment(condition=condition, course_id=course_id, user_id=user_id, approval_doc=approval_doc)
         db.session.add(enroll_course)
         db.session.commit()
 
