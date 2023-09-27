@@ -87,39 +87,45 @@ export const UserList = () => {
             </div>
             <div className="mx-4 mt-4">
                 <h3 className="text-center">{savedValue}</h3>
-                <div className="userList_users my-4">
-                    <table className="table table-bordered userList_usersInfo">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Curso</th>
-                                <th scope="col">Código de curso</th>
-                            </tr>
-                        </thead>
-                        {userCategoryList && userCategoryList.length > 0 ?
-                            <>
-                                {userCategoryList.map((item, index) => {
-                                    return (
-                                        item.condition == savedValue &&
 
-                                        <tbody>
-                                            <tr key={index}>
-                                                <td>{item.user_name}</td>
-                                                <td>{item.user_lastname}</td>
-                                                <td>{item.user_email}</td>
-                                                <td>{item.course_name}</td>
-                                                <td>{item.course_code}</td>
-                                            </tr>
-                                        </tbody>
+                {savedValue != "" ? (
+                    <>
+                        <div className="userList_users my-4">
 
-                                    )
-                                })}
-                            </>
-                            : <></>}
-                    </table>
-                </div>
+                            <table className="table table-bordered userList_usersInfo">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellidos</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Curso</th>
+                                        <th scope="col">Código de curso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {userCategoryList.map((item, index) => {
+                                        return (
+                                            item.condition === savedValue && (
+                                                <tr key={index}>
+                                                    <td>{item.user_name}</td>
+                                                    <td>{item.user_lastname}</td>
+                                                    <td>{item.user_email}</td>
+                                                    <td>{item.course_name}</td>
+                                                    <td>{item.course_code}</td>
+                                                </tr>
+                                            )
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </>
+                ) : (
+                    // Render a placeholder message when there are no results
+                    <></>
+                )}
+
             </div>
         </div>
     )

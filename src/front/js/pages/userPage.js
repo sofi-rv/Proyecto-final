@@ -77,6 +77,8 @@ export const UserPage = () => {
                 showConfirmButton: false,
                 timer: 1500,
             });
+
+            setApprovalDoc("");
         } else {
             let responseJson = await response.json();
             console.log(responseJson);
@@ -93,11 +95,18 @@ export const UserPage = () => {
 
     return store.user && store.user.role == "user" ? (
         <div className="ms-5 mt-4 user_page">
+            {/* <div className="d-flex align-items-center"> */}
+
             <div className="d-flex align-items-center">
                 <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user_img" height="200px" width="200px" />
-                <div className="ms-3">
+                <div className="ms-4">
                     {userDetails && <h3 className="fw-bold">{userDetails.name} {userDetails.lastname}</h3>}
                     {userDetails && <h5>{userDetails.email}</h5>}
+                    <br />
+                    <Link to="/changePassword" style={{ textDecoration: "none" }}>
+                        Cambiar contraseña
+                    </Link>
+
                 </div>
             </div>
 
@@ -126,14 +135,22 @@ export const UserPage = () => {
                                             return (
                                                 item.condition == "En curso" &&
                                                 <ul key={index} className="list-group">
-                                                    <li className="list-group-item">
-                                                        {item.course_name}
-                                                        {/* -- Button trigger modal -- */}
-                                                        <button type="button" className="btn btn-primary" style={{ float: "right" }} data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
-                                                            setSelectedCourseId(item.course_id)
-                                                        }} >
-                                                            Enviar comprobante
-                                                        </button>
+                                                    <li className="list-group-item p-4">
+                                                        <div className="row">
+                                                            <div className="col-8">
+                                                                <h5>{item.course_name}</h5>
+                                                                Código: {item.course_code} <br />
+                                                                Fecha de inicio: {item.course_start_date}
+                                                            </div>
+                                                            <div className="col-4">
+                                                                {/* -- Button trigger modal -- */}
+                                                                <button type="button" className="btn btn-primary mt-4" style={{ float: "right" }} data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
+                                                                    setSelectedCourseId(item.course_id)
+                                                                }} >
+                                                                    Enviar comprobante
+                                                                </button>
+                                                            </div>
+                                                        </div>
 
                                                         {/* -- Modal -- */}
                                                         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -191,10 +208,12 @@ export const UserPage = () => {
                                             return (
                                                 item.condition == "Aprobados" &&
                                                 <ul key={index} className="list-group">
-                                                    <li className="list-group-item">
+                                                    <li className="list-group-item p-4">
 
                                                         <div>
-                                                            {item.course_name}
+                                                            <h5>{item.course_name}</h5>
+                                                            Código: {item.course_code} <br />
+                                                            Fecha de finalización: {item.course_finish_date}
                                                         </div>
 
 
@@ -228,10 +247,12 @@ export const UserPage = () => {
                                             return (
                                                 item.condition == "Reprobados" &&
                                                 <ul key={index} className="list-group">
-                                                    <li className="list-group-item">
+                                                    <li className="list-group-item p-4">
 
                                                         <div>
-                                                            {item.course_name}
+                                                            <h5>{item.course_name}</h5>
+                                                            Código: {item.course_code} <br />
+                                                            Fecha de finalización: {item.course_finish_date}
                                                         </div>
 
 

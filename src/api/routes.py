@@ -26,6 +26,7 @@ import string
 
 api = Blueprint('api', __name__)
 
+
 def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     random_password = ''.join(secrets.choice(characters) for _ in range(length))
@@ -545,10 +546,9 @@ def password_recovery():
         return jsonify({"message": "User not found"}), 404
 
 #cambiar contraseña
-@api.route('/change_password', methods=['PUT'])
-def change_password():
+@api.route('/change_password/<string:email>', methods=['PUT'])
+def change_password(email):
     body = request.get_json()
-    email = body["email"]
     password = body["password"]
     
     user = User.query.filter_by(email=email).first()
