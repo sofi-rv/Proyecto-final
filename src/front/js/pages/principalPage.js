@@ -111,7 +111,7 @@ export const PrincipalPage = () => {
                     </div>
                 </article>
                 <article className="mt-5 mx-4">
-                    <h3>¡Bienvenido a la agenda de capacitaciones V Bimestre 2023!</h3>
+                    <h2 className="mb-4">¡Bienvenido a la agenda de capacitaciones V Bimestre 2023!</h2>
                     <p>En un mundo en constante evolución, la adquisición de nuevos conocimientos y habilidades se ha convertido en un pilar fundamental para el éxito tanto en el ámbito personal como profesional. En [Nombre de tu Empresa o Plataforma], estamos comprometidos con la excelencia en la educación y el desarrollo continuo de las personas.</p>
                     <div className="my-4">
                         <h4 className="my-4">Cursos disponibles {today_month % 2 == 0 ? meses[today_month - 2] : meses[today_month - 1]}</h4>

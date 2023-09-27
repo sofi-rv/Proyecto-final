@@ -105,7 +105,9 @@ export const RegisterCourse = () => {
             <form method="post" className="registerCourse_form my-5">
                 {/* popover */}
                 <div class="help-tip">
-                    {currency && <p>{currency.compra}</p>}
+
+                    {currency && <p>Compra: ₡{currency.compra} Venta: ₡{currency.venta}</p>}
+
                 </div>
 
                 <h3 className="text-center py-3">Formulario de Matrícula</h3>
