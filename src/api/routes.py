@@ -497,3 +497,23 @@ def endpoint_mail():
         return jsonify({"message":"email sent"}), 200
     else:
         return jsonify({"message":"error sending mail"}), 400
+
+# #Cambiar contraseña
+# @api.route('/password', methods=['PUT'])
+# def change_password(id):
+#     try:
+#         # print(id)
+#         body = request.get_json()
+#         search = User.query.filter_by(email = id).first()
+#         print(search.serialize())
+#         search.password = body["password"]
+
+# if body is None:
+#         raise APIException("Body está vacío", status_code=400)
+#         db.session.commit()
+
+#         return jsonify({"message":"se envio correctamente"}), 200
+
+#     except Exception as error:
+#         print(error)  
+#         return jsonify({"message":str(error)}), 500 

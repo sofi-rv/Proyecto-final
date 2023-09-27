@@ -1,6 +1,7 @@
-/* .maintenance_page {
-    height: 100vh
-} */
+.maintenance_page {
+    /* height: 100vh */
+    min-height: 100vh;
+}
 
 .maintenance_content {
     margin-top: 2em;

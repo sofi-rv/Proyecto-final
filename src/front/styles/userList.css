@@ -1,6 +1,7 @@
-/* .userList_page {
-    height: 100vh;
-} */
+.userList_page {
+    /* height: 100vh; */
+    min-height: 100vh;
+}
 
 .userList_selector {
     display: flex;

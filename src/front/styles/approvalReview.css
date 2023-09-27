@@ -1,5 +1,6 @@
 .approvalReview_page {
-    height: 100vh
+    /* height: 100vh */
+    min-height: 100vh;
 }
 
 .approvalReview_list {

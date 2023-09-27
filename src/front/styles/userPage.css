@@ -1,6 +1,7 @@
-/* .user_page {
-    height: 85vh;
-} */
+.user_page {
+    /* height: 85vh; */
+    min-height: 100vh;
+}
 
 .user_page_accordion {
     border-radius: 10px !important;

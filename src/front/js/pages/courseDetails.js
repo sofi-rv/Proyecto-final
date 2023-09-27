@@ -49,6 +49,7 @@ export const CourseDetails = () => {
             <div className="courseDetails_content">
                 {courseDetails && <h3 className="mb-4">{courseDetails.name}</h3>}
                 {courseDetails && <p className="mb-4">{courseDetails.description}</p>}
+
                 <div className="d-flex align-items-start">
                     <div className="me-5">
                         <h4>Contenidos:</h4>
@@ -58,16 +59,15 @@ export const CourseDetails = () => {
                     </div>
                     <div className="ms-5">
                         <p>Proveedor: {courseSupplier.supplier_name}</p>
-                        <br />
                         {courseDetails && <p>Código: {courseDetails.code}</p>}
-                        <br />
-                        {courseDetails && <p className="mb-1">Costo: ${courseDetails.cost}</p>}
-                        <br />
-                        {courseDetails && <p className="mb-1">Modalidad: {courseDetails.modality}</p>}
-                        <br />
-                        {courseDetails && <p className="mb-1">Fecha de inicio: {courseDetails.start_date}</p>}
-                        <br />
-                        {courseDetails && <p className="mb-1">Fecha de finalización: {courseDetails.finish_date}</p>}
+
+                        {courseDetails && <p>Costo: ${courseDetails.cost}</p>}
+
+                        {courseDetails && <p>Modalidad: {courseDetails.modality}</p>}
+
+                        {courseDetails && <p>Fecha de inicio: {courseDetails.start_date}</p>}
+
+                        {courseDetails && <p>Fecha de finalización: {courseDetails.finish_date}</p>}
 
                     </div>
                 </div>
