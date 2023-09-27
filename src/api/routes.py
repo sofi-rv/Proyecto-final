@@ -34,8 +34,8 @@ def generate_random_password(length=12):
 
 def send_password_reset_email(destinatario, random_password):
     
-    asunto = "Password Reset"
-    cuerpo = f"Your new password: {random_password}"
+    asunto = "Recuperación de contraseña"
+    cuerpo = f"Su contraseña provisional es: {random_password}"
 
     
     send_email(asunto, destinatario, cuerpo)
@@ -57,7 +57,13 @@ def send_email(asunto, destinatario, body):
     <h1>
     Hola 
     </h1>
+    <p>
+    Estás recibiendo este correo porque hiciste una solicitud de recuperación de contraseña para tu cuenta
+    </p>
      ''' + body + '''   
+    <p>
+    Company CR
+    </p>
     </div>
     </body>
     </html>
@@ -515,7 +521,7 @@ def endpoint_mail():
     else:
         return jsonify({"message":"error sending mail"}), 400
 
-#Cambiar contraseña
+#recuperar contraseña
 @api.route("/password_recovery", methods=["POST"])
 def password_recovery():
     body = request.get_json()
@@ -537,3 +543,22 @@ def password_recovery():
         return jsonify({"message": "Password reset email sent"}), 200
     else:
         return jsonify({"message": "User not found"}), 404
+
+#cambiar contraseña
+@api.route('/change_password', methods=['PUT'])
+def change_password():
+    body = request.get_json()
+    email = body["email"]
+    password = body["password"]
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+
+        user.password = current_app.bcrypt.generate_password_hash(password).decode('utf-8')
+        db.session.commit()
+
+        return jsonify({"message": "Password reset"}), 200
+    else:
+        return jsonify({"message": "User not found"}), 404
+
+    
