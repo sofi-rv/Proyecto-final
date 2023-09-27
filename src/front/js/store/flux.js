@@ -20,7 +20,11 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       // Use getActions to call a function within a fuction
       excludeRoutes: (arr) => {
-        return arr.filter((route) => { return route == window.location.pathname })
+        return arr.filter((route) => {
+          console.log(window.location.pathname)
+          console.log(route)
+          return route == window.location.pathname
+        })
 
       },
 
