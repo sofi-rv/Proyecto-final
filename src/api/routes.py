@@ -21,7 +21,24 @@ smtp_port = os.getenv("SMTP_PORT")
 email_address = os.getenv("EMAIL_ADDRESS")
 email_password = os.getenv("EMAIL_PASSWORD")
 
+import secrets
+import string
+
 api = Blueprint('api', __name__)
+
+def generate_random_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    random_password = ''.join(secrets.choice(characters) for _ in range(length))
+    return random_password
+
+
+def send_password_reset_email(destinatario, random_password):
+    
+    asunto = "Password Reset"
+    cuerpo = f"Your new password: {random_password}"
+
+    
+    send_email(asunto, destinatario, cuerpo)
 
 #enviar correos
 def send_email(asunto, destinatario, body):
@@ -498,22 +515,25 @@ def endpoint_mail():
     else:
         return jsonify({"message":"error sending mail"}), 400
 
-# #Cambiar contraseña
-# @api.route('/password', methods=['PUT'])
-# def change_password(id):
-#     try:
-#         # print(id)
-#         body = request.get_json()
-#         search = User.query.filter_by(email = id).first()
-#         print(search.serialize())
-#         search.password = body["password"]
+#Cambiar contraseña
+@api.route("/password_recovery", methods=["POST"])
+def password_recovery():
+    body = request.get_json()
+    email = body["email"]
 
-# if body is None:
-#         raise APIException("Body está vacío", status_code=400)
-#         db.session.commit()
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+        
+        new_password = generate_random_password()
 
-#         return jsonify({"message":"se envio correctamente"}), 200
+        
+        user.password = current_app.bcrypt.generate_password_hash(new_password).decode('utf-8')
+        db.session.commit()
 
-#     except Exception as error:
-#         print(error)  
-#         return jsonify({"message":str(error)}), 500 
+        
+        send_password_reset_email(email, new_password)
+
+        return jsonify({"message": "Password reset email sent"}), 200
+    else:
+        return jsonify({"message": "User not found"}), 404
