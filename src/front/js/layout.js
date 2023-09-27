@@ -21,6 +21,7 @@ import { Maintenance } from "./pages/maintenance";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { UpdateCourse } from "./pages/updateCourse";
+import { ChangePassword } from "./pages/changePassword";
 
 import { PruebaEditar } from "./pages/pruebaEditar"; //eliminar despues
 import injectContext from "./store/appContext";
@@ -62,6 +63,7 @@ const Layout = () => {
             <Route element={<RegisterCourse />} path="/registerCourse/:id" />
             <Route element={<UserList />} path="/userList" />
             <Route element={<ApprovalReview />} path="/approvalReview" />
+            <Route element={<ChangePassword />} path="/changePassword" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />

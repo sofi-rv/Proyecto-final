@@ -111,6 +111,9 @@ export const PrincipalPage = () => {
                     </div>
                 </article>
                 <article className="mt-5 mx-4">
+                    <Link to="/userPage/:id" >
+                        Mi perfil
+                    </Link>
                     <h2 className="mb-4">¡Bienvenido a la agenda de capacitaciones V Bimestre 2023!</h2>
                     <p>En un mundo en constante evolución, la adquisición de nuevos conocimientos y habilidades se ha convertido en un pilar fundamental para el éxito tanto en el ámbito personal como profesional. En [Nombre de tu Empresa o Plataforma], estamos comprometidos con la excelencia en la educación y el desarrollo continuo de las personas.</p>
                     <div className="my-4">
@@ -164,14 +167,14 @@ export const PrincipalPage = () => {
                             <div className="carousel-inner">
                                 <div className="carousel-item active mb-5">
                                     <div className="d-flex justify-content-center">
-                                        <div className="d-flex">
+                                        <div className="my-carousel">
                                             {CoursesList && CoursesList.length > 0 ?
                                                 <>
                                                     {CoursesList.map((item, index) => {
 
                                                         return (
                                                             obtenerMes(item.start_date) % 2 == 0 && today_month <= obtenerMes(item.start_date) && obtenerMes(item.start_date) <= today_month + 1 &&
-                                                            <div key={index} className="card me-5" style={{ width: '18rem' }}>
+                                                            <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
                                                                 <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
                                                                 <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
                                                                     <h5 className="card-title">{item.name}</h5>

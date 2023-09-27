@@ -23,6 +23,8 @@ class CourseEnrollment(db.Model):
             "approval_doc": self.approval_doc,
             "course_name": Course.query.get(self.course_id).serialize()["name"],
             "course_code": Course.query.get(self.course_id).serialize()["code"],
+            "course_start_date": Course.query.get(self.course_id).serialize()["start_date"],
+            "course_finish_date": Course.query.get(self.course_id).serialize()["finish_date"],
             "user_email": User.query.get(self.user_id).serialize()["email"],
             "user_name": User.query.get(self.user_id).serialize()["name"],
             "user_lastname": User.query.get(self.user_id).serialize()["lastname"]

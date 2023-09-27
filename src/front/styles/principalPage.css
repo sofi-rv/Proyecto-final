@@ -37,7 +37,7 @@
   
   * {
     scrollbar-width: thin;
-    scrollbar-color: grey black;
+    scrollbar-color: rgb(255, 255, 255) black;
   }
   
   /* Works on Chrome, Edge, and Safari */
@@ -52,7 +52,7 @@
   *::-webkit-scrollbar-thumb {
     background-color: rgb(124, 176, 236);
     border-radius: 20px;
-    border: 6px solid rgb(226, 224, 224);
+    border: 6px solid rgb(243, 243, 243);
   }
 
   .card-style:hover {
@@ -64,8 +64,8 @@
 
   .card-style {
     /* border-radius: 10px; */
-    margin-left: 40px;
-    min-width: 270px;
+    margin-right: 20px;
+    min-width: 250px;
     margin-bottom: 20px;
     margin-top: 20px;
   }

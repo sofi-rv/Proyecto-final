@@ -114,13 +114,15 @@ export const ApprovalReview = () => {
 
                                 return (
                                     (item.approval_doc) !== "" && (item.condition) == "En curso" &&
-                                    <div key={index}>
+                                    <div className="p-3" key={index}>
                                         <div className="approvalReview_listItem d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h4>{item.user_name} {item.user_lastname}</h4>
-                                                <p>{item.id_number}</p>
-                                                <p>{item.course_name}</p> {/* agregar codigo de curso*/}
-                                                <Link to={item.approval_doc} className="form_link">
+                                                <p>{item.user_email}</p>
+                                                <br />
+                                                <p style={{ lineHeight: "5px" }}>{item.course_name}</p> {/* agregar codigo de curso*/}
+                                                <p>{item.course_code}</p>
+                                                <Link to={{ pathname: item.approval_doc }} className="form_link">
                                                     Link del comprobante enviado
                                                 </Link>
                                             </div>
