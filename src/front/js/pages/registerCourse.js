@@ -9,7 +9,6 @@ export const RegisterCourse = () => {
     const [userDetails, setUserDetails] = useState({});
     const [courseDetails, setCourseDetails] = useState({});
     const [currency, setCurrency] = useState({});
-    const [id_number, setIdNumber] = useState("");
     const { id } = useParams();
     let user_id = store.user.id;
     console.log(user_id);
@@ -66,22 +65,10 @@ export const RegisterCourse = () => {
 
     //Enviar matricula
     const enroll = async () => {
-        //Sección de verificación
-        if (id_number == "") {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "¡Por favor llene todos los campos!",
-                /* footer: '<a href="">Why do I have this issue?</a>' */
-                timer: 3500,
-            });
-            return;
-        }
         //Sección para enviar la data al backend
         let obj = {
             user_id: user_id,
             course_id: id,
-            id_number: id_number,
             condition: "En curso",
             approval_doc: ""
         };
@@ -103,7 +90,7 @@ export const RegisterCourse = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "¡Error al registrar!",
+                text: "¡Ya se encuentra matriculado!",
                 /* footer: '<a href="">Why do I have this issue?</a>' */
                 timer: 3500,
             });
@@ -114,7 +101,7 @@ export const RegisterCourse = () => {
 
 
     return store.user && store.user.role == "user" ? (
-        <div className="registerCourse_page">
+        <div className="registerCourse_page" style={{ color: "white" }}>
             <form method="post" className="registerCourse_form my-5">
                 {/* popover */}
                 <div class="help-tip">
@@ -134,16 +121,6 @@ export const RegisterCourse = () => {
                         {userDetails && <p className="mb-1">Nombre: {userDetails.name} {userDetails.lastname}</p>}
                         {userDetails && <p className="mb-1">Email institucional: {userDetails.email}</p>}
                     </div>
-                    <div className="d-flex justify-content-between align-items-center pb-4">
-                        <label className="me-3">No. Cédula:</label>
-                        <input type="text" className="registerCourse_input" onChange={(e) => {
-                            setIdNumber(e.target.value);
-                        }} />
-                    </div>
-                    {/* <div className="d-flex justify-content-between align-items-center pb-4">
-                        <label className="me-3">Pago de curso:</label>
-                        <input type="text" className="registerCourse_input" />
-                    </div> */}
                 </div>
                 <input type="button" value="Finalizar Mátricula" className="registerCourse_button my-4" onClick={enroll} />
             </form>

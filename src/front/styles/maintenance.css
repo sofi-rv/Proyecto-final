@@ -53,3 +53,21 @@
 .maintenance_courseEditButton:hover {
     color: white;
 }
+
+.button-hover-trash {
+    :hover.fa-trash {
+  
+      color: rgb(33, 91, 151) !important;
+  
+  
+    }
+}
+
+.button-hover-pen {
+    :hover.fa-pen {
+  
+      color: rgb(33, 91, 151) !important;
+  
+  
+    }
+}

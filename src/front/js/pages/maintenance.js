@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 export const Maintenance = () => {
     const { store, actions } = useContext(Context);
     const [courseList, setCourseList] = useState([]);
+    // const [courseCategory, setCourseCategory] = useState("");
     const [name, setName] = useState("");
     const [code, setCode] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("by-name");
     const [cost, setCost] = useState("");
     const [description, setDescription] = useState("");
     const [modality, setModality] = useState("");
@@ -18,13 +19,15 @@ export const Maintenance = () => {
     const [contents, setContents] = useState("");
     const [selectedCourseId, setSelectedCourseId] = useState(null);
     const [selectedCourse, setSelectedCourse] = useState(null);
+    const [courseSupplier, setCourseSupplier] = useState({});
     const ref = useRef(null);
 
     const [alertMessage, setAlert] = useState("");
     const [coursesList, setCourses] = useState([])
 
-    //función para traerse los cursos
+
     useEffect(() => {
+        //función para traerse los cursos
         const getData = async () => {
             let response = await actions.fetchPromise("/api/courses")
 
@@ -32,6 +35,7 @@ export const Maintenance = () => {
                 let responseJson = await response.json();
                 console.log(responseJson);
                 setCourseList(responseJson)
+                setCourses(responseJson)
                 setName(responseJson.name)
                 setCode(responseJson.code)
                 setCategory(responseJson.category)
@@ -48,7 +52,25 @@ export const Maintenance = () => {
 
         }
         getData()
+
+
+        getSupplier(selectedCourseId)
     }, [])
+
+    //función para traerse los proveedores
+    const getSupplier = async (id) => {
+        let response = await actions.fetchPromise(`/api/supplier/${id}`)
+
+        if (response.ok) {
+            let responseJson = await response.json();
+            console.log(responseJson);
+            setCourseSupplier(responseJson)
+        } else {
+            let responseJson = await response.json();
+            console.log(responseJson);
+        }
+
+    }
 
     //función para eliminar curso
     const deleteData = async (id) => {
@@ -115,10 +137,10 @@ export const Maintenance = () => {
 
     const handleSearch = (e) => {
         e.preventDefault()
-        let categoryOfSearch = document.querySelector('input[type=radio][name="category"]:checked').value
-        let textToSearch = e.target.search.value
+        // let categoryOfSearch = document.querySelector('input[type=radio][name="category"]:checked').value
+        let textToSearch = e.target.value
 
-        if (categoryOfSearch == "searchForCourseCode" && textToSearch.length < 6 && textToSearch.length > 0) {
+        if (category == "by-code" && textToSearch.length < 6 && textToSearch.length > 0) {
             setAlert(
                 <div className="alert alert-danger w-50 mx-auto mb-2" role="alert">
                     El código no es correcto.
@@ -130,7 +152,7 @@ export const Maintenance = () => {
             return
         }
 
-        if (categoryOfSearch != "" && textToSearch != "") {
+        if (textToSearch != "") {
             // @TODO Solicitar los datos de la base de datos aqui
             let courses = [
                 { "name": "Excel 1", "code": "000111", "supplier": "xxxxx", "modality": "Virtual" },
@@ -139,10 +161,11 @@ export const Maintenance = () => {
             ]
             let coursesFilter = []
 
-            if (categoryOfSearch == "searchForCourseName") {
+            if (category == "by-name") {
                 coursesFilter = courseList.filter((element) => {
                     return element.name.toLowerCase().includes(textToSearch.toLowerCase())
                 })
+                console.log(coursesFilter)
             } else {
                 coursesFilter = courseList.filter((element) => {
                     return element.code == textToSearch
@@ -167,17 +190,18 @@ export const Maintenance = () => {
                     Debe seleccionar una categoria e ingresar los datos de busqueda.
                 </div>
             )
-            setCourses([])
+            setCourses(courseList)
         }
     }
 
-    const handleCheckBoxClick = (e) => {
-        document.querySelector('input[type=radio][name=category]').forEach((element) => {
-            element.checked = false
-        })
-        e.target.check
-    }
+    // const handleCheckBoxClick = (e) => {
+    //     document.querySelector('input[type=radio][name=category]').forEach((element) => {
+    //         element.checked = false
+    //     })
+    //     e.target.check
+    // }
 
+    console.log(category)
     return store.user && store.user.role == "admin" ? (
         <div className="maintenance_page">
             <div className="maintenance_content">
@@ -186,18 +210,21 @@ export const Maintenance = () => {
                 <h3 className="ms-4 mb-4">Eliminar o editar cursos</h3>
 
                 <div className="maintenance_searchForm mx-4 mb-5">
-                    <form method="post" onSubmit={(e) => handleSearch(e)}>
-                        <label className="maintenance_searchForm_title maintenance_label me-3">Busqueda de cursos:</label>
-                        <label className="maintenance_label me-3">Por Nombre</label>
-                        <input type="radio" name="category" value={"searchForCourseName"} onClick={(e) => handleCheckBoxClick(e)} className="maintenance_input" />
-                        <label className="maintenance_label mx-3">Por Codigo</label>
-                        <input type="radio" name="category" value={"searchForCourseCode"} onClick={(e) => handleCheckBoxClick(e)} className="maintenance_input me-3" />
-                        <input type="text" name="search" required />
-                        <input type="submit" value="Buscar" />
+                    <form method="post" >
+                        <label className="maintenance_searchForm_title maintenance_label me-3 d-inline">Búsqueda de cursos:</label>
+                        <div className="d-inline" onChange={(e) => setCategory(e.target.value)}>
+                            <label className="maintenance_label me-3">Por Nombre</label>
+                            <input type="radio" name="category" value="by-name" defaultChecked className="maintenance_input" />
+                            <label className="maintenance_label mx-3">Por Codigo</label>
+                            <input type="radio" name="category" value="by-code" className="maintenance_input me-3" />
+                        </div>
+
+                        <input className="d-inline" type="text" name="search" required onChange={(e) => handleSearch(e)} />
+
                     </form>
                 </div>
 
-                <div className="maintenance_courseList mx-4 mb-4 border border-danger">
+                <div className="maintenance_courseList mx-4 mb-5 ">
                     {/* {coursesList.map((course, index) => {
                         return (
                             <div className="maintenance_courseElement" key={index}>
@@ -218,11 +245,14 @@ export const Maintenance = () => {
                         )
                     })} */}
 
-                    {courseList && courseList.length > 0 ?
+                    {coursesList && coursesList.length > 0 ?
                         <>
-                            {courseList.map((item, index) => {
+                            {coursesList.map((item, index) => {
+                                const buttonId = `verMasButton-${index}`;
+                                const modalId = `collapseExample-${index}`;
+
                                 return (
-                                    <ul key={index} className="list-group">
+                                    <ul key={index} className="list-group border border-secondary border-bottom-0">
                                         <li className="list-group-item">
 
                                             <div key={index}>
@@ -230,44 +260,57 @@ export const Maintenance = () => {
                                                     <div className="col-11">
                                                         <h4>{item.name}</h4>
 
-                                                        <p>
-                                                            <a className="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                        <div>
+                                                            <div>
+                                                                Código: {item.code}
+                                                            </div>
+
+                                                            <a className="btn btn-outline-primary mt-4 mb-2" style={{ borderRadius: "20px" }} data-bs-toggle="collapse" href={`#${modalId}`} role="button" aria-expanded="false" aria-controls={modalId} onClick={() => {
+                                                                setSelectedCourse(item);
+                                                                console.log(item.id)
+                                                                getSupplier(item.id)
+                                                            }}>
                                                                 Ver más
                                                             </a>
-                                                        </p>
-                                                        <div className="collapse" id="collapseExample">
+                                                        </div>
+                                                        <div className="collapse" id={modalId}>
                                                             <div className="card card-body">
-                                                                Descripción:{item.description}
+                                                                <div className="row">
+                                                                    <div className="col-6">
+                                                                        Categoría: {selectedCourse ? selectedCourse.category : ''} <br />
+                                                                        <br />
+                                                                        Costo: ${selectedCourse ? selectedCourse.cost : ''} <br />
+                                                                        <br />
+                                                                        Proveedor: {courseSupplier.supplier_name}<br />
+                                                                        <br />
+                                                                        Descripción: {selectedCourse ? selectedCourse.description : ''}
+                                                                    </div>
+                                                                    <div className="col-6">
+                                                                        Modalidad: {selectedCourse ? selectedCourse.modality : ''} <br />
+                                                                        <br />
+                                                                        Fecha de inicio: {selectedCourse ? selectedCourse.start_date : ''} <br />
+                                                                        <br />
+                                                                        Fecha de finalización: {selectedCourse ? selectedCourse.finish_date : ''} <br />
+                                                                        <br />
+                                                                        Contenidos: {selectedCourse ? selectedCourse.contents : ''}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-
-                                                        {/* <div className="row">
-                                                    <div className="col-4">
-                                                        Descripción:{item.description}
-                                                    </div>
-                                                    <div className="col-4">
-                                                        Contenidos:{item.contents}
-                                                    </div>
-                                                    <div className="col-4">
-                                                        Código de curso:{item.code} <br></br>
-                                                        Proveedor:{item.provider} <br></br>
-                                                        Modalidad:{item.modality} <br></br>
-                                                        Costo:{item.cost} <br></br>
-                                                        Fecha de inicio:{item.start_date} <br></br>
-                                                        Fecha de finalización:{item.start_date}
-                                                    </div>
-                                                </div> */}
                                                     </div>
                                                     <div className="col-1 mt-4">
-                                                        <button type="button" className="btn btn-primary" onClick={() => {
-                                                            deleteData(item.id);
-                                                            console.log(item.id)
-                                                        }}><i className="fa-solid fa-trash"></i></button>
+                                                        <div>
+                                                            <button type="button" className="btn btn-primary button-hover-trash" style={{ border: "none", backgroundColor: "white" }} onClick={() => {
+                                                                deleteData(item.id);
+                                                                location.reload();
+                                                            }}><i className="fa-solid fa-trash" style={{ color: "gray" }}></i></button>
+                                                        </div>
+
                                                         {/* Button trigger modal */}
-                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong" onClick={() => {
+                                                        <button type="button" className="btn btn-primary button-hover-pen mt-2" style={{ border: "none", backgroundColor: "white" }} data-bs-toggle="modal" data-bs-target="#exampleModalLong" onClick={() => {
                                                             setSelectedCourse(item);
                                                         }}>
-                                                            <i className="fa-solid fa-pen"></i>
+                                                            <i className="fa-solid fa-pen" style={{ color: "gray" }}></i>
                                                         </button>
                                                     </div>
                                                 </div>

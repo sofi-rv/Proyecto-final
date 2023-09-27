@@ -132,6 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(responseJson)
           setStore({ ...store, user: null });
           actions.deactivateLoginConfirmation()
+          localStorage.removeItem("token")
         } else {
           let responseJson = await response.json();
           console.log(responseJson)
