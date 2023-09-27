@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { matchRoutes, useLocation } from "react-router-dom"
 
 import "../../styles/footer.css";
 
@@ -9,21 +10,41 @@ export const Footer = () => {
 	const [exclude, setExclude] = useState(null)
 
 	const noFooter = [
-		"/",
-		"/register",
-		"/passwordRecover",
-		"/adminPrincipalPage"
+		{ path: "/" },
+		{ path: "/register" },
+		{ path: "/passwordRecover" },
+		{ path: "/adminPrincipalPage" },
+		{ path: "/addCourse" },
+		{ path: "/maintenance" },
+		{ path: "/approvalReview" },
+		{ path: "/userList" },
+		{ path: "/suppliers" },
+		{ path: "/principalPage" },
+		{ path: "/userPage" },
+		{ path: "/reglament" },
+		{ path: "/courseDetails" },
+		{ path: "/registerCourse" },
 	]
 
+	const useCurrentPath = () => {
+
+		const location = useLocation()
+		const route = matchRoutes(noFooter, location)
+
+		return route && route[0].pathname
+	}
+
+	const currentPath = useCurrentPath()
+	console.log(currentPath)
 	useEffect(() => {
+
 		const verify = () => {
-			setExclude(actions.excludeRoutes(noFooter))
+			setExclude(currentPath)
 		}
 		verify()
 	}, [])
-
 	return (
-		!exclude ?
+		!exclude || store.user ?
 			< footer className="footer mt-auto py-3 text-center bg-dark" >
 				<div className="d-flex justify-content-between align-items-center mx-5">
 					<div className="d-flex align-items-center me-4">

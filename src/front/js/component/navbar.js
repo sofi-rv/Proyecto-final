@@ -1,27 +1,50 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { matchRoutes, useLocation } from "react-router-dom"
 
-export const Navbar = (props) => {
+export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [exclude, setExclude] = useState(null)
 
   const noNavbar = [
-    "/",
-    "/register",
-    "/passwordRecover",
-    "/adminPrincipalPage"
+    { path: "/" },
+    { path: "/register" },
+    { path: "/passwordRecover" },
+    { path: "/adminPrincipalPage" },
+    { path: "/addCourse" },
+    { path: "/maintenance" },
+    { path: "/approvalReview" },
+    { path: "/userList" },
+    { path: "/suppliers" },
+    { path: "/principalPage" },
+    { path: "/userPage" },
+    { path: "/reglament" },
+    { path: "/courseDetails" },
+    { path: "/registerCourse" },
   ]
 
+  const useCurrentPath = () => {
+
+    const location = useLocation()
+    const route = matchRoutes(noNavbar, location)
+
+    return route && route[0].pathname
+  }
+
+  const currentPath = useCurrentPath()
+  console.log(currentPath)
   useEffect(() => {
+
     const verify = () => {
-      setExclude(actions.excludeRoutes(noNavbar))
+      setExclude(currentPath)
     }
     verify()
   }, [])
 
   return (
-    !exclude ?
+    !exclude || store.user ?
+
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
           <img src="https://cdn-icons-png.flaticon.com/512/3615/3615806.png" alt="logo" height="50px" width="50px" />
