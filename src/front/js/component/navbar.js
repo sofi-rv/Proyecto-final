@@ -41,14 +41,14 @@ export const Navbar = () => {
     }
     verify()
   }, [])
-
+  console.log(store.user)
   return (
     !exclude || store.user ?
 
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
           <img src="https://cdn-icons-png.flaticon.com/512/3615/3615806.png" alt="logo" height="50px" width="50px" />
-          <Link className="navbar-brand" to="/principalPage">Company</Link>
+          <Link className="navbar-brand" to="/">Company CR</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -60,14 +60,29 @@ export const Navbar = () => {
             </div>
             <div className="offcanvas-body bg-dark">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                {/* {store.user && store.user.role == "user" ?} */}
-                <li><Link className="nav-link active ms-2" aria-current="page" to="/userPage/:id" >
-                  Mi perfil
-                </Link></li>
-                <Link to="/reglament" className="nav-link active ms-2 mt-2">Normativa</Link> {/* revisar si quitar o no*/}
-                <li><button className="bg-dark border-0" onClick={() => actions.logout()}><Link className="nav-link active" aria-current="page" to="/" >
-                  Cerrar sesión
-                </Link></button></li>
+
+                {store.user?.role == "admin" &&
+                  <div>
+                    <li><Link className="nav-link active ms-2" aria-current="page" to="/changePassword" >
+                      Cambiar contraseña
+                    </Link></li>
+
+                    <li><button className="bg-dark border-0" onClick={() => actions.logout()}><Link className="nav-link active" aria-current="page" to="/" >
+                      Cerrar sesión
+                    </Link></button></li>
+                  </div>
+                }
+                {store.user?.role == "user" &&
+                  <div>
+                    <li><Link className="nav-link active ms-2" aria-current="page" to="/userPage/:id" >
+                      Mi perfil
+                    </Link></li>
+
+                    <li><button className="bg-dark border-0" onClick={() => actions.logout()}><Link className="nav-link active" aria-current="page" to="/" >
+                      Cerrar sesión
+                    </Link></button></li>
+                  </div>
+                }
               </ul>
             </div>
           </div>

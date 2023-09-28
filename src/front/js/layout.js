@@ -46,16 +46,13 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
-            <Route element={<Home />} path="/home" />
-            <Route element={<Login />} path="/" /> {/* resolver para que no salga navbar ni footer*/}
+            <Route element={<Home />} path="/" />
             <Route element={<PasswordRecover />} path="/passwordRecover" />
             <Route element={<Register />} path="/register" />
-            <Route element={<PruebaEditar />} path="/pruebaEditar" />
-            <Route element={<PrincipalPage />} path="/principalPage" />
-            <Route element={<AdminPrincipalPage />} path="/adminPrincipalPage" />
+            <Route element={<PruebaEditar />} path="/pruebaEditar" /> {/* borrar*/}
             <Route element={<AddCourse />} path="/addCourse" />
             <Route element={<Maintenance />} path="/maintenance" />
-            <Route element={<UpdateCourse />} path="/updateCourse" />
+            <Route element={<UpdateCourse />} path="/updateCourse" /> {/* borrar*/}
             <Route element={<Reglament />} path="/reglament" />
             <Route element={<UserPage />} path="/userPage/:id" />
             <Route element={<Suppliers />} path="/suppliers" />
