@@ -69,3 +69,15 @@
     margin-bottom: 20px;
     margin-top: 20px;
   }
+
+  .image-container {
+    width: 100%; /* Set the desired width of the container */
+    height: 200px; /* Set the desired height of the container */
+    overflow: hidden; /* Hide any overflowing image parts */
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This will make the image fit the dimensions while maintaining aspect ratio */
+  }
