@@ -49,7 +49,7 @@ export const Footer = () => {
 				<div className="d-flex justify-content-between align-items-center mx-5">
 					<div className="d-flex align-items-center me-4">
 						<img src="https://cdn-icons-png.flaticon.com/512/3615/3615806.png" alt="logo" height="50px" width="50px" className="me-1" />
-						<h5 className="footer_link me-4 ms-2">Company</h5>
+						<h5 className="footer_link me-4 ms-2">Company CR</h5>
 					</div>
 					<div className="d-flex align-items-center me-5">
 						<img src="https://www.freeiconspng.com/uploads/telephone-icon-blue-gradient-8.png" alt="logo" height="50px" width="50px" className="me-1" />
