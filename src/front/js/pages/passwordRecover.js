@@ -10,7 +10,8 @@ export const PasswordRecover = () => {
   const [email, setEmail] = useState("");
   let navigate = useNavigate(""); // useHistory("")
 
-  const resetPassword = async () => {
+  const resetPassword = async (e) => {
+    e.preventDefault()
     //Sección de verificación
     if (email == "") {
       Swal.fire({

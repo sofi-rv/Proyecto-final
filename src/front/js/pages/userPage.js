@@ -162,6 +162,7 @@ export const UserPage = () => {
                                                                     <div className="modal-body">
                                                                         Ingrese el link de su comprobante para realizar la solicitud de aprobación del curso
                                                                         <input
+                                                                            value={approvalDoc}
                                                                             type="text"
                                                                             className="addCourse_input"
                                                                             onChange={(e) => {

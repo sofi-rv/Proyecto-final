@@ -53,7 +53,7 @@ export const ChangePassword = () => {
         return;
     };
 
-    return store.user && store.user.role == "user" ? (
+    return store.user && store.user.role == "user" || "admin" ? (
         <div className="recover_page">
             <form className="recover_form">
                 <h3 className="recover_title mb-4">Cambiar Contraseña</h3>
@@ -75,7 +75,7 @@ export const ChangePassword = () => {
         :
         (
             <div className="alert alert-danger d-flex justify-content-center" role="alert">
-                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo usuarios. No tienes permitido entrar a esta página</b>
+                <i className="fa-solid fa-circle-exclamation mt-1 me-1"></i><b>Solo usuarios y administradores. No tienes permitido entrar a esta página</b>
             </div>
         )
 };
