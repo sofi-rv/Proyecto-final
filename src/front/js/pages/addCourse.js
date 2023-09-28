@@ -128,7 +128,9 @@ export const AddCourse = () => {
               >
                 <option value="">Elija una categoría</option>
                 <option value="Tecnología">Tecnología</option>
-                <option value="Humanístico">Humanístico</option>
+                <option value="Humanístico">Diseño</option>
+                <option value="Humanístico">Administración</option>
+                <option value="Humanístico">Idiomas</option>
               </select>
             </div>
             <div className="d-flex justify-content-between align-items-center pb-4">

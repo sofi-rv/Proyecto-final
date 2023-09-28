@@ -18,11 +18,21 @@ export const PrincipalPage = () => {
     }
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    const bimestre = ["I", "II", "II", "IV", "V", "VI"]
+    const imagen = ["https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://i.pinimg.com/280x280_RS/fe/c6/1d/fec61df2a13848ccc88693d913eb74d7.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg"]
 
     const d = new Date();
     console.log(d);
     const today_month = d.getMonth() + 1;
     console.log(today_month)
+
+    function getBimesterNumber(monthNumber) {
+        if (monthNumber >= 1 && monthNumber <= 12) {
+            return bimestre[Math.ceil(monthNumber / 2) - 1];
+        } else {
+            return "Invalid month number";
+        }
+    }
 
     useEffect(() => {
         //@TODO Estos datos deben venir de la base de datos
@@ -44,6 +54,7 @@ export const PrincipalPage = () => {
 
 
 
+
     // Esto almacena en dos arreglos diferentes dependiendo del mes del curso
     //     let septemberCoursesList = courseList.filter((element) => { return element.Mes == "Septiembre" })
     //     let octoberCoursesList = courseList.filter((element) => { return element.Mes == "Octubre" })
@@ -59,28 +70,28 @@ export const PrincipalPage = () => {
             setCoursesList(list)
         } else if (month == "Octubre" && septemberCourses.length) {
             let list = direction == "left" ? moveCarouselListLeft(octoberCourses) : moveCarouselListRight(octoberCourses)
-            setOctoberCourses(list)
+            setCoursesList(list)
         }
     }
 
-    const moveCarouselListLeft = (list) => {
+    const moveCarouselListLeft = (CoursesList) => {
         // Esto lo que hace es eliminar la primera carta del carousel y ponerla al final, para dar el efecto de que el carousel se movio a la izquierda
-        let tempElement = list[0]
-        list.splice(0, 1)
-        list.push(tempElement)
+        let tempElement = CoursesList[0]
+        CoursesList.splice(0, 1)
+        CoursesList.push(tempElement)
 
-        let listModified = list.map((element) => { return element })
+        let listModified = CoursesList.map((element) => { return element })
         return listModified
     }
 
 
-    const moveCarouselListRight = (list) => {
+    const moveCarouselListRight = (CoursesList) => {
         // Esto lo que hace es eliminar la ultima carta del carousel y ponerla al inicio, para dar el efecto de que el carousel se movio a la derecha
-        let tempElement = list[list.length - 1]
-        list.splice(list.length - 1, 1)
-        list.unshift(tempElement)
+        let tempElement = CoursesList[CoursesList.length - 1]
+        CoursesList.splice(CoursesList.length - 1, 1)
+        CoursesList.unshift(tempElement)
 
-        let listModified = list.map((element) => { return element })
+        let listModified = CoursesList.map((element) => { return element })
         return listModified
     }
 
@@ -111,10 +122,7 @@ export const PrincipalPage = () => {
                     </div>
                 </article>
                 <article className="mt-5 mx-4">
-                    <Link to="/userPage/:id" >
-                        Mi perfil
-                    </Link>
-                    <h2 className="mb-4">¡Bienvenido a la agenda de capacitaciones V Bimestre 2023!</h2>
+                    <h2 className="mb-4">¡Bienvenido a la agenda de capacitaciones {getBimesterNumber(today_month)} Bimestre 2023!</h2>
                     <p>En un mundo en constante evolución, la adquisición de nuevos conocimientos y habilidades se ha convertido en un pilar fundamental para el éxito tanto en el ámbito personal como profesional. En [Nombre de tu Empresa o Plataforma], estamos comprometidos con la excelencia en la educación y el desarrollo continuo de las personas.</p>
                     <div className="my-4">
                         <h4 className="my-4">Cursos disponibles {today_month % 2 == 0 ? meses[today_month - 2] : meses[today_month - 1]}</h4>
@@ -130,8 +138,21 @@ export const PrincipalPage = () => {
                                                         return (
                                                             obtenerMes(item.start_date) % 2 !== 0 && obtenerMes(item.start_date) >= today_month - 1 && obtenerMes(item.start_date) < today_month + 1 &&
                                                             <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
-                                                                <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
-                                                                <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
+                                                                <div class="image-container">
+                                                                    <img
+                                                                        src={
+                                                                            item.category === "Tecnología" ? imagen[0] :
+                                                                                item.category === "Diseño" ? imagen[1] :
+                                                                                    item.category === "Administración" ? imagen[2] :
+                                                                                        item.category === "Idiomas" ? imagen[3] :
+                                                                                            item.imageUrl
+                                                                        }
+                                                                        className="card-img-top"
+                                                                        alt="course_thumbnail"
+                                                                    />
+                                                                </div>
+
+                                                                <div className="card-body p-4" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
                                                                     <h5 className="card-title">{item.name}</h5>
 
                                                                     <p className="card-text">Modalidad: {item.modality}</p>
@@ -151,14 +172,14 @@ export const PrincipalPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="carousel-control-prev me-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" onClick={() => handleCarouselButtons("left", "Septiembre")}>
+                            {/* <button className="carousel-control-prev me-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" onClick={() => handleCarouselButtons("left", "Septiembre")}>
                                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button className="carousel-control-next ms-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next" onClick={() => handleCarouselButtons("right", "Septiembre")}>
                                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Next</span>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                     <div className="my-5">
@@ -175,8 +196,21 @@ export const PrincipalPage = () => {
                                                         return (
                                                             obtenerMes(item.start_date) % 2 == 0 && today_month <= obtenerMes(item.start_date) && obtenerMes(item.start_date) <= today_month + 1 &&
                                                             <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
-                                                                <img src={"https://domf5oio6qrcr.cloudfront.net/medialibrary/11537/4a78f148-d427-4209-8173-f33d04c44106.jpg"} className="card-img-top" alt="course_thumbnail" />
-                                                                <div className="card-body" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
+                                                                <div class="image-container">
+                                                                    <img
+                                                                        src={
+                                                                            item.category === "Tecnología" ? imagen[0] :
+                                                                                item.category === "Diseño" ? imagen[1] :
+                                                                                    item.category === "Administración" ? imagen[2] :
+                                                                                        item.category === "Idiomas" ? imagen[3] :
+                                                                                            item.imageUrl
+                                                                        }
+                                                                        className="card-img-top"
+                                                                        alt="course_thumbnail"
+                                                                    />
+                                                                </div>
+
+                                                                <div className="card-body p-4" style={{ backgroundColor: 'rgb(204, 204, 204)' }}>
                                                                     <h5 className="card-title">{item.name}</h5>
 
                                                                     <p className="card-text">Modalidad: {item.modality}</p>
@@ -195,14 +229,14 @@ export const PrincipalPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="carousel-control-prev me-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" onClick={() => handleCarouselButtons("left", "Octubre")}>
+                            {/* <button className="carousel-control-prev me-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" onClick={() => handleCarouselButtons("left", "Octubre")}>
                                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button className="carousel-control-next ms-3" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next" onClick={() => handleCarouselButtons("right", "Octubre")}>
                                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Next</span>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </article>
