@@ -122,9 +122,9 @@ export const ApprovalReview = () => {
                                                 <br />
                                                 <p style={{ lineHeight: "5px" }}>{item.course_name}</p> {/* agregar codigo de curso*/}
                                                 <p>{item.course_code}</p>
-                                                <Link to={{ pathname: item.approval_doc }} className="form_link">
+                                                <a href={item.approval_doc} target="_blank" className="form_link">
                                                     Link del comprobante enviado
-                                                </Link>
+                                                </a>
                                             </div>
                                             <div>
                                                 <button className="approvalReview_button mb-4" onClick={() => handleApproval(item.id, index)}>Aprobar</button>

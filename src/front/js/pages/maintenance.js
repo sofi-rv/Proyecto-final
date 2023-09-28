@@ -138,19 +138,8 @@ export const Maintenance = () => {
     const handleSearch = (e) => {
         e.preventDefault()
         // let categoryOfSearch = document.querySelector('input[type=radio][name="category"]:checked').value
+        let coursesFilter = []
         let textToSearch = e.target.value
-
-        if (category == "by-code" && textToSearch.length < 6 && textToSearch.length > 0) {
-            setAlert(
-                <div className="alert alert-danger w-50 mx-auto mb-2" role="alert">
-                    El código no es correcto.
-                </div>
-            )
-            setCourses(
-                []
-            )
-            return
-        }
 
         if (textToSearch != "") {
             // @TODO Solicitar los datos de la base de datos aqui
@@ -183,6 +172,29 @@ export const Maintenance = () => {
                     ""
                 )
             }
+
+            if (category == "by-code") {
+                coursesFilter = courseList.filter((element) => {
+                    return element.code.toLowerCase().includes(textToSearch.toLowerCase())
+                })
+                console.log(coursesFilter)
+            } else {
+                coursesFilter = courseList.filter((element) => {
+                    return element.code == textToSearch
+                })
+            } setCourses(coursesFilter)
+            if (coursesFilter.length == 0) {
+                setAlert(
+                    <div className="alert alert-danger w-50 mx-auto my-3" role="alert">
+                        No hay cursos por mostrar.
+                    </div>
+                )
+            } else {
+                setAlert(
+                    ""
+                )
+            }
+
         } else {
 
             setAlert(
