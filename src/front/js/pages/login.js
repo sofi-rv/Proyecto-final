@@ -45,9 +45,9 @@ export const Login = () => {
       // actions.userInfo(userInfo)
       actions.activateLoginConfirmation(userInfo);
       if (userInfo.role == "user") {
-        navigate("/principalPage"); // history.push("/")
+        navigate("/"); // history.push("/")
       } else if (userInfo.role == "admin") {
-        navigate("/adminPrincipalPage"); // history.push("/")
+        navigate("/"); // history.push("/")
       }
 
     } else {
