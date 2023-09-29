@@ -19,7 +19,7 @@ export const PrincipalPage = () => {
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     const bimestre = ["I", "II", "II", "IV", "V", "VI"]
-    const imagen = ["https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://i.pinimg.com/280x280_RS/fe/c6/1d/fec61df2a13848ccc88693d913eb74d7.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg"]
+    const imagen = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.headsem.com%2Fcursos-gratis-de-informatica%2F&psig=AOvVaw1M55exWrDkZv6kyS_YpYzp&ust=1696045094657000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOCelb3yzoEDFQAAAAAdAAAAABAJ", "https://i.pinimg.com/280x280_RS/fe/c6/1d/fec61df2a13848ccc88693d913eb74d7.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg"]
 
     const d = new Date();
     console.log(d);
