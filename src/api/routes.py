@@ -55,9 +55,6 @@ def send_email(asunto, destinatario, body):
     <html>
     <body>
     <div>
-    <h1>
-    Hola 
-    </h1>
     <p>
     Estás recibiendo este correo porque hiciste una solicitud de recuperación de contraseña para tu cuenta
     </p>
