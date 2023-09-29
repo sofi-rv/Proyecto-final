@@ -58,7 +58,7 @@ export const AddCourse = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate("/adminPrincipalPage"); // history.push("/")
+      navigate("/"); // history.push("/")
     } else {
       let responseJson = await response.json();
       console.log(responseJson);

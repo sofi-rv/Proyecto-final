@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
 import { Login } from "./login";
-import AdminPrincipalPage from "./adminPrincipalPage";
+import { AdminPrincipalPage } from "./adminPrincipalPage";
 import { PrincipalPage } from "./principalPage";
 
 export const Home = () => {
