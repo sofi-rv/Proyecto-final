@@ -110,7 +110,7 @@ export const RegisterCourse = () => {
 
                 </div>
 
-                <h3 className="text-center py-3">Formulario de Matrícula</h3>
+                <h3 className="text-center py-3">Registro de Matrícula</h3>
 
                 <div className="my-4">
                     {courseDetails && <p className="mb-1">Curso: {courseDetails.name}</p>}

@@ -11,7 +11,8 @@ export const ChangePassword = () => {
     let navigate = useNavigate(""); // useHistory("")
     let user_email = store.user ? store.user.email : "";
 
-    const resetPassword = async () => {
+    const resetPassword = async (e) => {
+        e.preventDefault()
         //Sección de verificación
         if (password == "") {
             Swal.fire({

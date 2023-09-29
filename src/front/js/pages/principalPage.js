@@ -12,14 +12,14 @@ export const PrincipalPage = () => {
 
     const obtenerMes = (fecha) => {
         const arrayFecha = fecha.split("-")
-        const traerMes = Number(arrayFecha[1]) //por qué -1??? 
+        const traerMes = Number(arrayFecha[1])
         console.log(traerMes)
         return traerMes
     }
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     const bimestre = ["I", "II", "II", "IV", "V", "VI"]
-    const imagen = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.headsem.com%2Fcursos-gratis-de-informatica%2F&psig=AOvVaw1M55exWrDkZv6kyS_YpYzp&ust=1696045094657000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOCelb3yzoEDFQAAAAAdAAAAABAJ", "https://i.pinimg.com/280x280_RS/fe/c6/1d/fec61df2a13848ccc88693d913eb74d7.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg", "https://www.shihoriobata.com/wp-content/uploads/2021/09/cute-panda-drawing.jpg"]
+    const imagen = ["https://img.freepik.com/free-vector/hand-coding-concept-illustration_114360-8113.jpg", "https://img.freepik.com/free-vector/designer-girl-concept-illustration_114360-4455.jpg", "https://img.freepik.com/vector-gratis/ilustracion-concepto-analisis-empresarial_114360-4224.jpg?w=826&t=st=1696020724~exp=1696021324~hmac=bc74a23861094c2ca3587873b3e34cec8f1e3bc4707fcbe05e0a9441aca40c23", "https://img.freepik.com/vector-gratis/ilustracion-concepto-traductor_114360-6334.jpg?w=826&t=st=1696020910~exp=1696021510~hmac=826e4f6ceb03752a44ee0d5e100eda3ef8628b32eb156ebcbd8585a2f8face9e"]
 
     const d = new Date();
     console.log(d);
@@ -138,7 +138,7 @@ export const PrincipalPage = () => {
                                                         return (
                                                             obtenerMes(item.start_date) % 2 !== 0 && obtenerMes(item.start_date) >= today_month - 1 && obtenerMes(item.start_date) < today_month + 1 &&
                                                             <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
-                                                                <div class="image-container">
+                                                                <div className="image-container">
                                                                     <img
                                                                         src={
                                                                             item.category === "Tecnología" ? imagen[0] :
@@ -196,7 +196,7 @@ export const PrincipalPage = () => {
                                                         return (
                                                             obtenerMes(item.start_date) % 2 == 0 && today_month <= obtenerMes(item.start_date) && obtenerMes(item.start_date) <= today_month + 1 &&
                                                             <div key={index} className="card me-5 card-style" style={{ width: '18rem' }}>
-                                                                <div class="image-container">
+                                                                <div className="image-container">
                                                                     <img
                                                                         src={
                                                                             item.category === "Tecnología" ? imagen[0] :
