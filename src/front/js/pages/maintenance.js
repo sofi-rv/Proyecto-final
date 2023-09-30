@@ -225,8 +225,8 @@ export const Maintenance = () => {
                     <form method="post" >
                         <label className="maintenance_searchForm_title maintenance_label me-3 d-inline">Búsqueda de cursos:</label>
                         <div className="d-inline" onChange={(e) => setCategory(e.target.value)}>
-                            <label className="maintenance_label me-3">Por Nombre</label>
-                            <input type="radio" name="category" value="by-name" defaultChecked className="maintenance_input" />
+                            {/* <label className="maintenance_label me-3">Por Nombre</label> */}
+                            {/* <input type="radio" name="category" value="by-name" defaultChecked className="maintenance_input" /> */}
                             <label className="maintenance_label mx-3">Por Codigo</label>
                             <input type="radio" name="category" value="by-code" className="maintenance_input me-3" />
                         </div>
@@ -374,8 +374,10 @@ export const Maintenance = () => {
 
                                                                     >
                                                                         <option value="">Elija una categoría</option>
-                                                                        <option value="true">Tecnología</option>
-                                                                        <option value="false">Humanístico</option>
+                                                                        <option value="Tecnología">Tecnología</option>
+                                                                        <option value="Diseño">Diseño</option>
+                                                                        <option value="Administración">Administración</option>
+                                                                        <option value="Idioma">Idioma</option>
                                                                     </select>
                                                                 </div>
                                                                 {/* <div className="d-flex justify-content-between align-items-center pb-4">
