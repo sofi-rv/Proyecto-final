@@ -1,0 +1,29 @@
+.userList_page {
+    /* height: 100vh; */
+    min-height: 100vh;
+}
+
+.userList_selector {
+    display: flex;
+    align-items: center;
+    background-color:  #88cdf0;
+    height: 5em;
+    padding: 0 2em;
+    margin-right: 40px;
+    border-radius: 15px;
+}
+
+.userList_users {
+    background-color: #2d9fd9;
+    padding: 1em;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.userList_usersInfo  {
+    border: 1px solid #2d9fd9;
+}
+
+.userList_usersInfo tbody {
+    border: 2px solid black;
+}

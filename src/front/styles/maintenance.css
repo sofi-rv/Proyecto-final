@@ -1,0 +1,74 @@
+.maintenance_page {
+    /* height: 100vh */
+    min-height: 100vh;
+}
+
+.maintenance_content {
+    margin-top: 2em;
+    margin-right: 3em;
+
+}
+
+.maintenance_searchForm {
+    border-radius: 15px;
+    background-color: #2F2ABF;
+    padding: 2em;
+    color: #E8E8E8;
+    /* height: 5em; */
+}
+
+.maintenance_searchForm_title {
+    font-weight: bold;
+}
+
+.maintenance_label, maintenance_input {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.maintenance_courseList {
+    background-color: rgb(204, 204, 204);
+    border-radius: 10px;
+}
+
+.maintenance_courseElement {
+    padding: 1.5em;
+}
+
+.maintenance_courseButton {
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 2.3em;
+    width: 10em;
+    background-color: #577EF2;
+    color: white;
+}
+
+.maintenance_courseEditButton {
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.maintenance_courseEditButton:hover {
+    color: white;
+}
+
+.button-hover-trash {
+    :hover.fa-trash {
+  
+      color: rgb(33, 91, 151) !important;
+  
+  
+    }
+}
+
+.button-hover-pen {
+    :hover.fa-pen {
+  
+      color: rgb(33, 91, 151) !important;
+  
+  
+    }
+}

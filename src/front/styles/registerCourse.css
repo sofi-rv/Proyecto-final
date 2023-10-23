@@ -1,0 +1,138 @@
+.registerCourse_page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+.registerCourse_form {
+    border-radius: 10px;
+    background-color: #262559;
+    display: flex;
+    flex-direction: column;
+    padding: 3em 15em;
+}
+
+.registerCourse_input {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: black;
+    height: 2.5em;
+    width: 20em;
+    padding-left: 10px;
+}
+
+.registerCourse_input:focus {
+    outline: none;
+    border: 1px solid white;
+    color: black;
+}
+
+.registerCourse_button {
+    border-radius: 20px;
+    padding: .5em 2em;
+    color: white;
+    background-color: #2d9fd9;
+}
+
+/*Esto es para el popover*/
+/* The icon */
+.help-tip{
+	position: absolute;
+	top: 33%;
+	left: 70%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+	text-align: center;
+	border: 2px solid rgb(225, 108, 55);
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 29px;
+	line-height: 32px;
+	cursor: default;
+}
+
+.help-tip:before{
+    content:'$';
+    font-family: sans-serif;
+    font-weight: normal;
+	margin-bottom: 10px;
+    color:rgb(225, 108, 55);
+}
+
+.help-tip:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+    -webkit-animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+/* The tooltip */
+.help-tip p {    
+	display: none;
+	font-family: sans-serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	background-color: #FFFFFF;
+	padding: 10px 14px;
+	width: 178px;
+	/* height: auto; */
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 5%);
+	border-radius: 3px;
+/* 	border: 1px solid #E0E0E0; */
+	box-shadow: 0 0px 20px 0 rgba(0,0,0,0.1);
+	color: #37393D;
+	font-size: 12px;
+	/* line-height: 18px; */
+	z-index: 99;
+}
+
+.help-tip p a {
+	color: #dce4ec;
+	text-decoration: none;
+}
+
+.help-tip p a:hover {
+	text-decoration: underline;
+}
+
+/* The pointer of the tooltip */
+.help-tip p:before { 
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-bottom-color:#FFFFFF;
+	top: -9px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+ /* Prevents the tooltip from being hidden */
+.help-tip p:after {
+	width: 10px;
+	height: auto;
+	content:'';
+	position: absolute;
+	top: -40px;
+	left: 0;
+}
+
+/* CSS animation */
+@-webkit-keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}

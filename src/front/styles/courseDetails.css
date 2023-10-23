@@ -1,0 +1,31 @@
+.courseDetails_page {
+    /* height: 100vh; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: auto;
+}
+
+.courseDetails_content {
+    border-radius: 10px;
+    padding: 4em 5em;
+    margin: 0 3em;
+    background-color: #88cdf0;
+}
+
+.courseDetails_button {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 10em;
+    background-color: #262559;
+    height: 3em;
+    width: 10em;
+    margin: 0 auto;
+}

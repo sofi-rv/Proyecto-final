@@ -1,0 +1,10 @@
+.footer {
+    position: relative;
+    width: 100%;
+ }
+
+
+.footer_link {
+    text-decoration: none;
+    color: white;
+}

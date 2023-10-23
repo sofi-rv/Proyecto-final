@@ -1,0 +1,15 @@
+.suppliers_page {
+    /* height: 100vh; */
+    min-height: 100vh;
+}
+
+.suppliers_list {
+    background-color: #2d9fd9;
+    padding: 2em;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-body{
+    background-color: #dddee0 !important;
+}

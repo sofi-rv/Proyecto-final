@@ -1,0 +1,83 @@
+.principalPage_carousel {
+    height: 40em;
+}
+
+.principalPage_carousel_img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.principalPage_course_carousel_cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.course_button {
+    display: block;
+    margin: 0 auto;
+    padding: .5em 4em;
+    border-radius: 10em;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.my-carousel {
+    display: flex;
+    overflow-x: scroll;
+    position: relative;
+  }
+  
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255, 255, 255) black;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(124, 176, 236);
+    border-radius: 20px;
+    border: 6px solid rgb(243, 243, 243);
+  }
+
+  .card-style:hover {
+    border-color: rgb(194, 195, 197);
+    box-shadow: 0 0 20px rgb(194, 195, 197);
+    transform: translate3D(0, -1px, 0) scale(1.03);
+    transition: all .4s ease;
+  }
+
+  .card-style {
+    /* border-radius: 10px; */
+    margin-right: 20px;
+    min-width: 250px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .image-container {
+    width: 100%; /* Set the desired width of the container */
+    height: 200px; /* Set the desired height of the container */
+    overflow: hidden; /* Hide any overflowing image parts */
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This will make the image fit the dimensions while maintaining aspect ratio */
+  }
